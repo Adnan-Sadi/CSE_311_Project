@@ -1,0 +1,17 @@
+form{
+    max-width: 450px;
+    margin: 20px auto;
+    padding: 20px;
+}
+.btn{
+    background: black;
+    
+}
+.wrapper{
+width:200px;
+padding:20px;
+height: 150px;
+}
+body{
+    font-size: 1.2em;
+}
