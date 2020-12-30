@@ -1,0 +1,196 @@
+html{
+   height: 100%;
+}
+
+img{
+	height: 100%;
+	width: 100%;
+}
+a , li{
+	text-decoration: none !important;
+}
+
+body{
+	/*background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );*/
+	background-color:white;
+	min-height: 100vh;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	
+}
+
+/*homepage*/
+
+/*header*/
+#header-nav{
+	
+	background-color: #191970;
+	color:white;
+	position: relative;
+	height: 100px;
+	margin-bottom: 30px;
+}
+
+#header-nav a{
+	color: white;
+}
+
+#logo{
+	font-size: 2em;
+	position: absolute;
+	top: 20px;
+	left: 200px;
+}
+#header-nav ul{
+	list-style: none;
+	position: absolute;
+	top:30px;
+	right:900px;
+}
+
+#header-nav li{
+	list-style-type: none;
+	font-size: 1.2em;
+	display: inline;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+#header-nav .searchBar{
+	position: absolute;
+	top:30px;
+	right: 100px;
+}
+
+#header-nav input{
+	width: 300px;
+	height: 30px;
+}
+#header-nav button{
+	height: 30px;
+}
+/*header ends*/
+
+/*footer*/
+.footer-panel{
+	
+	height: 100px;
+	background-color: #191970;
+	border-top: 0;
+	margin-top: auto;
+}
+/*footer ends*/
+
+
+/*homepage ends*/
+
+/*Signup Page*/
+#signup-panel{
+	position: relative;
+	text-align: center;
+}
+
+
+#signup-panel input{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 400px;
+	padding: 12px 20px 12px 20px;
+	box-sizing: border-box;
+	
+}
+
+
+#signup-panel input:focus{
+	outline: none;
+}
+
+#signup-panel button{
+	
+	font-weight: 500;
+	font-size: 1.2em;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 200px;
+}
+
+/*Signup Page ends*/
+
+/*Club Page */
+
+
+/*Club Page Ends */
+
+/*Member Page*/
+
+#exc_body{
+	margin-top: 20px;
+	font-size: 1.4em;
+	font-weight: 500;
+	border-bottom: 1px groove gray;
+	
+}
+
+#people_tile{
+	margin-top: 50px;
+	position: relative;
+	width: 100%;
+	height:300px;
+	overflow: hidden;	
+}
+
+#people_tile span{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  background-color: #000;
+  color: #fff;
+  opacity: .5;
+  
+}
+
+#all_mem{
+	margin-top: 60px;
+	font-size: 1.4em;
+	font-weight: 500;
+	border-bottom: 1px groove gray;
+}
+
+#member-nav{
+	list-style: none;
+
+}
+
+
+#member-nav li{
+	margin-top: 5px;
+	list-style-type: none;
+	font-size: 1.2em;
+	text-align: center;
+	border: 3px outset gray;
+	background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+}
+#member-nav a{
+	color: indigo;
+	font-weight: 600;
+}
+
+#panel1, #flip1,#panel2, #flip2,#panel3, #flip3 {
+  padding: 5px;
+  text-align: center;
+  border: solid 1px #c3c3c3;
+}
+
+#panel1,#panel2,#panel3 {
+  display: none;
+}
+
+/*Member Page Ends*/
+
+
+

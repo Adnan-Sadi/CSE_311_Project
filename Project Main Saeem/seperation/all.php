@@ -55,14 +55,6 @@
         width: 300px;
         height: 70%;
     }
-    .contact-logo{
-    float: right;
-    margin-right: 200px;
-    padding-left: 50px;
-    padding-right: 50px;
-    font-size: 50px;
-    border: 10px solid black;
-  }
     #members-List {
         text-align: center;
         margin: 150px;
