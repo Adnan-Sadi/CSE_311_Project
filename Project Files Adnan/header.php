@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
 </head>
 <body>
   <header> <!--header Starts-->
@@ -28,6 +29,12 @@
 					 echo "<li><a href='profile.php'>Profile Page</a></li>";
 					 echo "<li><a href='includes/logout_inc.php'>Log out</a></li>";
 				 }
+
+				else if (isset($_SESSION["email"])) {
+					 echo "<li><a href='profile.php'>Google Page</a></li>";
+					 echo "<li><a href='includes/logout_inc.php'>Log out</a></li>";
+				 }
+
 
 				 else{
 					echo "<li><a href='signup.php'>Sign Up</a></li>";

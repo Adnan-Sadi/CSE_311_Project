@@ -98,9 +98,7 @@ body{
 	width: 400px;
 	padding: 12px 20px 12px 20px;
 	box-sizing: border-box;
-	border: 5px solid;
-	border-image-slice: 1;
-	border-image-source: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+	
 }
 
 
@@ -109,7 +107,7 @@ body{
 }
 
 #signup-panel button{
-	background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+	
 	font-weight: 500;
 	font-size: 1.2em;
 	margin-top: 10px;
@@ -126,7 +124,7 @@ body{
 
 /*Member Page*/
 
-#exc_body, #all_mem{
+#exc_body{
 	margin-top: 20px;
 	font-size: 1.4em;
 	font-weight: 500;
@@ -156,10 +154,18 @@ body{
   
 }
 
+#all_mem{
+	margin-top: 60px;
+	font-size: 1.4em;
+	font-weight: 500;
+	border-bottom: 1px groove gray;
+}
+
 #member-nav{
 	list-style: none;
 
 }
+
 
 #member-nav li{
 	margin-top: 5px;
@@ -177,7 +183,6 @@ body{
 #panel1, #flip1,#panel2, #flip2,#panel3, #flip3 {
   padding: 5px;
   text-align: center;
-  background-color: #e5eecc;
   border: solid 1px #c3c3c3;
 }
 

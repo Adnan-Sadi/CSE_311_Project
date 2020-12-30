@@ -13,9 +13,12 @@
   require_once 'includes/db_inc.php';
 
   $postID = mysqli_real_escape_string($conn,$_GET['id']);
-  $sql = "SELECT Name,Id,Dept_name,CGPA FROM club_members WHERE Club_id = '$postID'";
+  $sql = "SELECT Name,Id,Dept_name,Position FROM club_members WHERE Club_id = '$postID'";
 
   $result = mysqli_query($conn,$sql);
+
+  $_SESSION["mem_rows"] = mysqli_num_rows($result);
+  $_SESSION["club_number"] = $postID;
 
   if(mysqli_num_rows($result)>0){
     
@@ -52,112 +55,75 @@
         </section>
 
         <section>
-            <div id="all_mem" class="text-left">All Members</div>
+            <div id="all_mem" class="text-left">All Members</div><br/><br/> 
+              
+              <div align="right">
+                <button type="button" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-info btn-md">Add</button>
+              </div><br/>
 
-            <ul id="member-nav">
+              <div id="userModal" class="modal fade">
+                <div class="modal-dialog">
+                   <form method="post" id="user_form" enctype="multipart/form-data">
+                    <div class="modal-content">
 
-                <li id="flip1">Executive Members</li>
-                <div id="panel1"> 
-                   <table class="table table-striped table-dark">
-                       <thead>
-                          <tr>
-                           <th scope="col">#</th>
-                           <th scope="col">Name</th>
-                           <th scope="col">Id</th>
-                           <th scope="col">Department</th>
-                           <th scope="col">CGPA</th>
-                          </tr>
-                        </thead>
-                             
-                        <tbody>
-                                                             
-                                <?php
-                                $i= 0;
-                                while ($memData = mysqli_fetch_assoc($result)) {
-                                      echo "<tr>";
-                                      echo "<th scope=\"row\">" . ($i + 1) . "</th>";
-                                      echo "<td>" . $memData["Name"] . "</td>" ;
-                                      echo "<td>" . $memData["Id"] . "</td>";
-                                      echo "<td>" . $memData["Dept_name"] . "</td>";
-                                      echo "<td>" . $memData["CGPA"] . "</td>";
-                                      $i++;
-                                      echo "</tr>";
-                                } 
-                                ?>
-                              
-                        </tbody>
-                   </table>                 
-                </div> 
-                <li id="flip2">Sub Committee and Officers</li>
-                <div id="panel2">
-                   <table class="table table-striped table-dark">
-                       <thead>
-                          <tr>
-                           <th scope="col">#</th>
-                           <th scope="col">Name</th>
-                           <th scope="col">Id</th>
-                           <th scope="col">Department</th>
-                           <th scope="col">CGPA</th>
-                          </tr>
-                        </thead>
-                             
-                        <tbody>
-                                                             
-                                <?php
-                                $i= 0;
-                                mysqli_data_seek($result, 0);
-                                while ($memData = mysqli_fetch_assoc($result)) {
-                                      echo "<tr>";
-                                      echo "<th scope=\"row\">" . ($i + 1) . "</th>";
-                                      echo "<td>" . $memData["Name"] . "</td>" ;
-                                      echo "<td>" . $memData["Id"] . "</td>";
-                                      echo "<td>" . $memData["Dept_name"] . "</td>";
-                                      echo "<td>" . $memData["CGPA"] . "</td>";
-                                      $i++;
-                                      echo "</tr>";
-                                } 
-                                ?>
-                              
-                        </tbody>
-                   </table>
-                 </div>
-                <li id="flip3">Recruits</li>
-                <div id="panel3"> 
+                     <div class="modal-header">
+                      <h4 class="modal-title" align="center">Add User</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     </div>
 
-                        <table class="table table-striped table-dark">
-                       <thead>
-                          <tr>
-                           <th scope="col">#</th>
-                           <th scope="col">Name</th>
-                           <th scope="col">Id</th>
-                           <th scope="col">Department</th>
-                           <th scope="col">CGPA</th>
-                          </tr>
-                        </thead>
-                             
-                        <tbody>
-                                                             
-                                <?php
-                                $i= 0;
-                                mysqli_data_seek($result, 0);
-                                while ($memData = mysqli_fetch_assoc($result)) {
-                                      echo "<tr>";
-                                      echo "<th scope=\"row\">" . ($i + 1) . "</th>";
-                                      echo "<td>" . $memData["Name"] . "</td>" ;
-                                      echo "<td>" . $memData["Id"] . "</td>";
-                                      echo "<td>" . $memData["Dept_name"] . "</td>";
-                                      echo "<td>" . $memData["CGPA"] . "</td>";
-                                      $i++;
-                                      echo "</tr>";
-                                } 
-                                ?>
-                              
-                        </tbody>
-                   </table>
+                     <div class="modal-body">
+
+                        <label>Name</label><br>
+                        <input type="text" name="name" id="name" class="form-control"><br>
+                        <label>Student Id</label><br>
+                        <input type="text" name="id" id="id" class="form-control"><br>
+                        <label>Department</label><br>
+                        <input type="text" name="dept_name" id="dept_name" class="form-control"><br>
+                        <label>Email</label><br>
+ 		                    <input type="text" name="email" id="email" class="form-control"><br>
+                        <label>Phone Number</label><br>
+ 		                    <input type="text" name="phone" id="phone" class="form-control"><br>
+                        <label>Position</label><br>
+ 		                    <input type="text" name="position" id="position" class="form-control"><br>
+                        <label>Semester Joined</label><br>
+                        <input type="text" name="sem_joined" id="sem_joined" class="form-control"><br>
                 
+                     </div>
+
+                     <div class="modal-footer">
+                        <input type="hidden" name="user_id" id="user_id" >
+                        <input type="hidden" name="operation" id="operation" value="Add">
+                        <input type="submit" name="action" id="action" class="btn btn-success" value="Add" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                     </div>
+
+                    </div>
+                  
+                   </form>
                 </div>
-            </ul>
-        </section>
+              </div>
+
+                
+                <div class="table-responsive"> 
+                   <table id="member_table" class="table table-bordered table-striped ">
+                       <thead>
+                          <tr>
+                           <th width="20%">Name</th>
+                           <th width="20%">Id</th>
+                           <th width="20%">Department</th>
+                           <th width="20%">Position</th>
+                           <th width="10%">Edit</th>
+                           <th width="10%">Delete</th>
+                          </tr>
+                        </thead>
+                   </table>                                
+                
+                </div> 
+
+                
+
+            
+        </section><br><br>
 
      </div>
 

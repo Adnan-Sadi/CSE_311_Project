@@ -135,7 +135,81 @@ function loginUser($conn,$username,$pwd){
     }
 }
 
+function googleUserExists($conn,$email){
+       $sql = "SELECT Email FROM google_users WHERE Email = '$email'";
+
+       $result = mysqli_query($conn,$sql);
+
+  if(mysqli_num_rows($result)>0){
+    $check = false;
+    return $check;
+  }
+  else{
+    $check = true;
+    return $check;
+  }
+}
+
+function createGoogleUser($conn,$First_name,$Last_name,$Email){
+    $sql = "INSERT INTO google_users(First_name,Last_name,Email) VALUES ('$First_name','$Last_name','$Email');";
+
+    mysqli_query($conn,$sql);
+}
+
 //signup Functions Ends
+
+
+//Add New Member functions
+function AddNewMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$sem_joined){
+
+    $sql = "INSERT INTO club_members(Name,Id,Dept_name,Club_id,Email,PhoneNum,Position,Semester_joined) VALUES (?,?,?,?,?,?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt,$sql)) {
+         echo  "Error! Please insert appropiate values.";
+         exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sisissss" ,$name,$stdId,$dept,$clubId,$email,$phone,$position,$sem_joined);
+
+    if(mysqli_stmt_execute($stmt)){
+        echo "Data inserted";
+    }
+    else{
+        echo  "Error! Please insert appropiate values.";
+    }
+
+    mysqli_stmt_close($stmt);
+    exit();
+}
+
+//Update a already existing member info
+function UpdateMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$sem_joined,$mem_id){
+    $sql = "UPDATE club_members 
+            SET Name = ?, Id=?, Dept_name=?,Email=?, PhoneNum=?, Position=?, Semester_joined=?
+            WHERE Club_id = ? AND Id = ? ;";
+
+    $stmt = mysqli_stmt_init($conn);
+    
+    if (!mysqli_stmt_prepare($stmt,$sql)) {
+         echo  "Error! Statement Failed.";
+         exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sisssssii" ,$name,$stdId,$dept,$email,$phone,$position,$sem_joined,$clubId,$mem_id);
+
+    if(mysqli_stmt_execute($stmt)){
+        echo "Data Updated";
+    }
+    else{
+        echo  "Error! Please insert appropiate values.";
+    }
+
+    mysqli_stmt_close($stmt);
+    exit();
+
+
+}
 
 
 
