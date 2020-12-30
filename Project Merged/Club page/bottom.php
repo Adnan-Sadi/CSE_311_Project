@@ -30,6 +30,7 @@
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<div id="bottom">
 <div style="  background-color: lightblue;">
   <h1 style="float: left; margin-left:35%; padding-top:1%">
     &copy; Tornado Developer
@@ -39,4 +40,5 @@
      <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
      <a href=""><i class="fa fa-link" aria-hidden="true"></i></a>
     </div>
+</div>
 </div>

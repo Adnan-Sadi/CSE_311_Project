@@ -98,7 +98,7 @@ $("#nextRecentEventAd").click();
 </script>
 <div class="container">
     <div class="center" >
-            <button id="getAllAventAd" class="btn btn-outline-danger"  style="width:50%;height:70px;margin:0px"><h1><a href="../seperation/Views/events.php">All Events</a></h1></button>
+            <button id="getAllAventAd" class="btn btn-outline-danger"  style="width:50%;height:70px;margin:0px"><h1><a href="events.php">All Events</a></h1></button>
     </div>
 </div>
 <h1>Recent</h1>

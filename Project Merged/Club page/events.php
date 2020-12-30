@@ -4,16 +4,17 @@
  <!DOCTYPE html>
  <html lang="en">
  <head>
- <script src="../../jquery-3.5.1.js"></script>
-    <script src="../bootstrap-4.5.0-dist/js/bootstrap.bundle.js"></script>
-    <script src="../bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../bootstrap-4.5.0-dist/css/bootstrap.css">
+ <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>All Events</title>
  </head>
  <body>
-    <div id="AllEvents" class="container">
+     <div>
+     <div id="AllEvents" class="container"  style="margin-bottom:50px;">
         <h1 style="text-align:center">All Events</h1>
         <div class="table-responsive">
             <table class="table-borderless">
@@ -34,9 +35,10 @@
             North South University Young Entrepreneurs Society, NSU YES! is initiating its seventh edition of Masters of Ideation in 2020 by adapting to the new normal.
 
             This time, we are proud and delighted to have Perfetti Van Melle as our Title Sponsor for this event.
-         </p>
-
-     </div>
+        </p>
+        
+    </div>
+    <div  style="margin-bottom:50px;">
      <div style="float:left">
 
         <video width="320" height="240" controls>
@@ -45,22 +47,26 @@
             Your browser does not support the video tag.
         </video>
     </div>
-    <div style="float:right">
-
-        
-        <img src="./images/eventLogo.png" alt="not found">
-        <!-- <img src="/Project Main Saeem/seperation/images/eventLogo.png" alt="not found">
-        <img src="/Project Main Saeem/seperation/images/eventLogo.png" alt="not found"> -->
+        <div style="float:right">            
+            <img src="./images/eventLogo.png" alt="not found">
+            <!-- <img src="/Project Main Saeem/seperation/images/eventLogo.png" alt="not found">
+            <img src="/Project Main Saeem/seperation/images/eventLogo.png" alt="not found"> -->
+        </div>
     </div>
-    
- </div>
- </body>
+</div>
+    <div>
+        <div id="bottom1" style="clear:both" >
+        </div>
+    </div>
+     </div>
+  
+</body>
  </html>
  
 <script>
             $.ajax({
                 type: 'POST',
-                url: '../database/getAllEvents.php',
+                url: './database/getAllEvents.php',
                 dataType: 'json',
                 cache: false,
                 success: function(result) {
@@ -91,6 +97,9 @@
             }
         }
         function createAdInAllEvent(dataArray,count,row){
-            $("#AllEventTableRow"+row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=../seperation/images/Hossain.jpeg  alt="Event photo not found"> <h5 class="card-title">'+ dataArray[count]['name'] +'</h5> <p class="card-text">'+ dataArray[count]["Dated"]+'</p><p class="card-text">'+ dataArray[count]["Description"]+'</p><button onClick="eShowMore()" class="btn" style="color:red;text-decoration: underline;">Read More..</button></div></td>');
+            $("#AllEventTableRow"+row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./images/Hossain.jpeg  alt="Event photo not found"> <h5 class="card-title">'+ dataArray[count]['name'] +'</h5> <p class="card-text">'+ dataArray[count]["Dated"]+'</p><p class="card-text">'+ dataArray[count]["Description"]+'</p><button onClick="eShowMore()" class="btn" style="color:red;text-decoration: underline;">Read More..</button></div></td>');
         }
+        $(function() {
+            $("#bottom1").load("bottom.php");
+        });
 </script>
