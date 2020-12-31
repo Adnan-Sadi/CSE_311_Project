@@ -8,6 +8,7 @@ img{
 }
 a , li{
 	text-decoration: none !important;
+
 }
 
 body{
@@ -20,67 +21,181 @@ body{
 	
 }
 
-/*homepage*/
 
-/*header*/
-#header-nav{
+
+
+.section {
+    /*for all section padding same*/
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.section h2.section-head {
+    /*for sub heading align center*/
+    color: #000;
+    text-align: center;
+}
+
+.section h2.section-head:after {
+    /*for sub heading after under-line */
+    background: #e74c3c;
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    margin: 20px auto;
+}
+
+
+/*end of common work*/
+
+#header {
+    color: #fff;
+    background: #e74c3c;
+}
+
+#logo {
+	font-size: 2rem;
 	
-	background-color: #191970;
-	color:white;
-	position: relative;
-	height: 100px;
-	margin-bottom: 30px;
+    /* making font size 2.5 to 2*/
+    padding-top: 5px;
 }
 
-#header-nav a{
-	color: white;
-}
-
-#logo{
-	font-size: 2em;
-	position: absolute;
-	top: 20px;
-	left: 200px;
-}
-#header-nav ul{
+#menu {
 	list-style: none;
-	position: absolute;
-	top:30px;
-	right:900px;
+    /*for removing bolets*/
+    margin: 0;
+	padding: 0;
+	position: relative;
 }
 
-#header-nav li{
-	list-style-type: none;
-	font-size: 1.2em;
-	display: inline;
-	margin-right: 10px;
+#menu li {
+	display: inline-block;
 	margin-left: 10px;
+	margin-right: 10px;
+    /*for showing all lists in one line*/
 }
 
-#header-nav .searchBar{
+#menu li a {
+    color: #fff;
+    /*making all blue writings white*/
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: block;
+}
+
+#menu li a:hover {
+    background: #f39c12;
+    /*making hover a block with background color*/
+}
+
+#search {
+    
+	padding-bottom: 15px;
 	position: absolute;
-	top:30px;
-	right: 100px;
+	top:5px;
+	right: 60px;
 }
 
-#header-nav input{
-	width: 300px;
-	height: 30px;
+#search button {
+	position: absolute;
+	top:5px;
+	right:26px;
 }
-#header-nav button{
-	height: 30px;
-}
-/*header ends*/
 
-/*footer*/
-.footer-panel{
-	
-	height: 100px;
-	background-color: #191970;
-	border-top: 0;
-	margin-top: auto;
+
+/*end of header css*/
+
+#banner {
+    background: url("../images/nsu.jpg") no-repeat 0 0;
+    background-size: cover;
+    /*make the pic always like the coloumn*/
 }
-/*footer ends*/
+
+.banner-title {
+    padding-top: 5rem;
+}
+
+.banner-title h1 {
+    background: rgba(255, 255, 255, 0.8);
+    display: inline-block;
+    padding: 10px;
+    margin: 0;
+}
+
+.banner-title p.lead {
+    color: white;
+    background: rgba(231, 76, 60, 0.7);
+    padding: 10px;
+}
+
+
+/* end of banner css*/
+
+.club-box {
+    text-align: center;
+}
+
+.club-box i.fa {
+    color: #e74c3c;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+
+/* end of club boxes css*/
+
+#superiors {
+    color: #000;
+    padding: 5px 0;
+    position: relative;
+}
+
+.superior img {
+    border-radius: 50px;
+    /* make the img round*/
+}
+
+#footer {
+    color: #fff;
+    background: #e74c3c;
+}
+
+#showing {
+    text-align: right;
+    /*for showing all cards*/
+}
+
+.showing i.fa {
+    color: #e74c3c;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+#search {
+    padding: 10px;
+}
+
+#botton {
+    text-shadow: #fff;
+}
+
+
+/*sticks on the bottom*/
+
+.footer-panel {
+    height: 100px;
+    background-color: #191970;
+    border-top: 0;
+    margin-top: auto;
+}
+
+.logo {
+    width: 150px;
+    height: 100px;
+    margin: 20px
+}
+
 
 
 /*homepage ends*/

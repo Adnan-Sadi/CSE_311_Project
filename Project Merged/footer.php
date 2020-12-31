@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>All NSU Clubs</title>
-    <link rel="stylesheet" href="bootstrap.css" />
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
-    <link rel="stylesheet" href="style2.css" />
+ 
 </head>
 <style>
     #footer {
@@ -47,6 +47,11 @@
             <a href=""><i class="fa fa-link" aria-hidden="true"></i></a>
             </div>
     </div>
+
+    	<script src="js/jquery-3.5.1.min.js"></script>
+	    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
+	    <script src="js/script.js"></script>
 </body>
 
 </html>

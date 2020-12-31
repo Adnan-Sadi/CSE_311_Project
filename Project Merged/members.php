@@ -2,7 +2,7 @@
   include_once 'header.php';
 
   function redirect(){
-       header("location: coordinator.php");
+       header("location: index.php");
        exit();
   }
 
