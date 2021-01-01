@@ -45,7 +45,7 @@
             while ($memData2 = mysqli_fetch_assoc($result2) ) {
 
               echo "<div class=\"col-md-4\">".
-              "<div id=\"people_tile\"><img src=\"" . $memData2["image"] . "\" alt=\"\"><span>".$memData2['name']."<br>".$memData2['title']."</span></div> 
+              "<div id=\"people_tile\"><img id=\"mem_img\" src=\"" . $memData2["image"] . "\" alt=\"\"><span>".$memData2['name']."<br>".$memData2['title']."</span></div> 
               </div>";  
             }
             

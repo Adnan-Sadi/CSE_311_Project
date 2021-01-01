@@ -2,10 +2,7 @@ html{
    height: 100%;
 }
 
-img{
-	height: 100%;
-	width: 100%;
-}
+
 a , li{
 	text-decoration: none !important;
 
@@ -264,6 +261,11 @@ body{
 	width: 100%;
 	height:300px;
 	overflow: hidden;	
+}
+
+#mem_img{
+	height: 100%;
+	width: 100%;
 }
 
 #people_tile span{
