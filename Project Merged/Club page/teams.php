@@ -72,7 +72,7 @@
     <h1 style="text-align: center; margin-bottom: 60px;" class="hover-line">Our Teams</h1>
     <ul>
         <li>
-          <a href="../members.php?id=1"  <button id="OPL" class="btn  btn-success  ">All Members</button></a>
+          <a href="../members.php?id=1"  <button id="OPL" class="btn  btn-success  ">Members</button></a>
         </li>
     </ul>
 

@@ -17,7 +17,9 @@
         font-size:50px;
         width:100px;
     }
-    .eventAdvertisement{width: 400px;height: 500px;
+    .eventAdvertisement{
+        width: 400px;
+        height: 300px;
     }
 
 </style>

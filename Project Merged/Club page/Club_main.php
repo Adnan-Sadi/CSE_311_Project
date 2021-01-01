@@ -25,15 +25,7 @@
   <!-- <link rel="stylesheet" href="	https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> -->
 </head>
 <style>
-    body {
-        margin: 0%;
-    }
-    
-    #nav {
-        /* position: fixed; */
-        top: 0%;
-        width: 100%;
-    }
+   
    #left-element,#right-element{
     padding: 100px;
     border-bottom:.7px solid black;
@@ -63,7 +55,6 @@
 <body>
 
     <div id="nav"></div>
-
     <div id="main"></div>
     <div id="allEvents" >
         <div id="left-element"></div>
@@ -71,7 +62,6 @@
     </div>
     <div id="ex"></div>
     <div id="teams"> </div>
-    <div id="members-List"> </div>
     <footer>
         <div id="bottom">
         </div>
@@ -109,7 +99,7 @@
         $(function() {
             $("#ex").load("executive-body.php");
         });
-       
+    
         $(function() {
             $("#teams").load("teams.php");
         });

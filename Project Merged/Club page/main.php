@@ -3,37 +3,44 @@
 
 <style>
     #main {
-        margin: 5%;
+        margin: 0.1%;
+        padding: 40px;
         text-align: center;
+        border: 2px solid black;
     }
 
     #club-links {
-        margin-top: 50px;
-        margin-right: 150px;
-        border-color: cyan;
+        margin-top: 5px;
+        margin-right: 50px;
+        border-color: #75d977;
     }
 
     .logo {
-        width: 150px;
-        height: 100px;
+        width: 200px;
+        height: 130px;
         margin: 20px
     }
     #main a{
         margin: 15px;
+    }
+    #main :hover{
+        background-color: #75d977;
     }
     #main a:hover{
         color: black;
         
     }
 </style>
-
-<img class="logo" src="./images/acm.png" alt="Logo">
-<div class="contact-logo" id="club-links">
+<div style="border: 2px inset white; padding:2%;background: #9395db">
+    <img class="logo" src="./images/acm.png" alt="Logo">
+    <div class="contact-logo" id="club-links"></div>
 </div>
-<h1 id="mainClubShortName" style="color: lightcoral;" ></h1>
-<p id="mainHeading" style="font-size: large;" ></p>
-<img id="mainHeadImg" src="./images/friends-week.jpg" alt="Club HOME" style="width: 90%; height:400px; margin:20px">
-<hr>
+<div style="padding:20px;padding-top:30px;">
+    <h1 id="mainClubShortName" style="color: lightcoral;" ></h1>
+    <p id="mainHeading" style="font-size: large;" ></p>
+    <img id="mainHeadImg" src="./images/friends-week.jpg" alt="Club HOME" style="width: 90%; height:400px; margin:20px">
+    <hr>
+</div>
 <script>
     
 $(document).ready( function() {

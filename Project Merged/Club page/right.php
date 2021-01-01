@@ -20,7 +20,7 @@
 <div> 
     <form >
       <input class="form-control  float-left" style="width:70%; margin-bottom:32px" type="search" placeholder="Search by event name" aria-label="Search">
-      <button class="btn btn-outline-success float-right" type="submit" style="width:20%;height:80%; font-size:large ; margin-top:0px; margin-right:50px">Search</button>
+      <button class="btn btn-outline-success float-right" type="submit" style="width:20%;height:80%; font-size:large ; margin-top:0px; margin-right:0px">Search</button>
     </form>
 </div>
 <h1>Upcomming</h1>
