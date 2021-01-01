@@ -141,7 +141,15 @@ body{
     font-size: 40px;
     margin-bottom: 15px;
 }
+.club-box #c_name {
+    font-size: 1.5em;
+    font-weight: 500;
+    color:#000;
+}
 
+.club-box #c_name:hover {
+    color: blue;
+}
 
 /* end of club boxes css*/
 
@@ -199,6 +207,9 @@ body{
 
 
 /*homepage ends*/
+
+
+
 
 /*Signup Page*/
 #signup-panel{

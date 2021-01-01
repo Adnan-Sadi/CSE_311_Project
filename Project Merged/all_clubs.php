@@ -21,8 +21,8 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <a href="Club page/Club_main.php">club name</a>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -32,8 +32,9 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
+                    
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -43,8 +44,9 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
+                    
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -54,8 +56,9 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
+
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -65,8 +68,8 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -76,8 +79,8 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -87,8 +90,8 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -98,8 +101,8 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -109,8 +112,8 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -120,8 +123,8 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -131,8 +134,8 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -142,8 +145,8 @@
             </div>
             <div class="col-md-3">
                 <div class="club-box">
-                    <i class="fa fa-toggle-down"></i>
-                    <h3>club name</h3>
+                    <i class="fa fa-toggle-down"></i><br>
+                    <a id="c_name" href="Club page/Club_main.php">club name</a>
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to

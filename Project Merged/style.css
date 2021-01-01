@@ -73,7 +73,7 @@ a:hover {
 /*end of header css*/
 
 #banner {
-    background: url("../images/nsu.jpg") no-repeat 0 0;
+    background: url("images/nsu.jpg") no-repeat 0 0;
     background-size: cover;
     /*make the pic always like the coloumn*/
 }
