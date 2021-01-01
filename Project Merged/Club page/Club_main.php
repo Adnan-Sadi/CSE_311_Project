@@ -109,9 +109,7 @@
         $(function() {
             $("#ex").load("executive-body.php");
         });
-        $(function() {
-            $("#members-List").load("members-List.php");
-        });
+       
         $(function() {
             $("#teams").load("teams.php");
         });
