@@ -36,22 +36,20 @@
   }
   
 </style>
-<body>
-    <div id="footer" class = "footer-panel">
-        <h1 style="float: left; margin-left:35%; padding-top:1%">
-            &copy; Tornado Developer
-        </h1>
-        <div class="contact-logo"  >
-            <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-link" aria-hidden="true"></i></a>
+  <body>
+      <div id="footer" class = "footer-panel">
+          <h1 style="float: left; margin-left:35%; padding-top:1%">
+              &copy; Tornado Developer
+          </h1>
+            <div class="contact-logo"                     >
+                <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-link" aria-hidden="true"></i></a>
             </div>
-    </div>
-
-    	<script src="js/jquery-3.5.1.min.js"></script>
-	    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-	    <script src="js/bootstrap.min.js"></script>
-	    <script src="js/script.js"></script>
-</body>
-
+      </div>
+        <script src="js/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+  </body>
 </html>
