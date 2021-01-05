@@ -1,0 +1,109 @@
+Users Table
+
+CREATE TABLE USERS(
+  uid INT(6) PRIMARY KEY AUTO_INCREMENT,
+  UserName VARCHAR(30) NOT NULL UNIQUE,
+  First_Name VARCHAR(30),
+  Last_Name VARCHAR(30) NOT NULL,
+  Email VARCHAR(64) NOT NULL UNIQUE,
+  Alt_Email VARCHAR(64),
+  Password VARCHAR(128) NOT NULL,
+  Image VARCHAR(255),
+  Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+);
+
+
+Google_Users Table
+
+CREATE TABLE Google_Users(
+  G_uid INT(6) PRIMARY KEY AUTO_INCREMENT,
+  First_Name VARCHAR(30),
+  Last_Name VARCHAR(30) NOT NULL,
+  Email VARCHAR(64) NOT NULL,
+  Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+All_Users Table
+
+CREATE TABLE All_Users(
+ UserId INT(6) PRIMARY KEY AUTO_INCREMENT,
+ Email VARCHAR(64) NOT NULL
+);
+
+
+
+Clubs Table
+
+CREATE TABLE Clubs (
+  ClubId INT(3) PRIMARY KEY AUTO_INCREMENT,
+  Club_Name VARCHAR(80) NOT NULL,
+  Description VARCHAR(1024) 
+);
+
+
+
+Departments Table
+
+CREATE TABLE Departments(
+ Dept_Id INT(3) PRIMARY KEY AUTO_INCREMENT,
+ Dept_Name VARCHAR(64) NOT NULL UNIQUE
+);
+
+
+
+Members Table
+
+CREATE TABLE Members(
+  m_id INT(6) AUTO_INCREMENT PRIMARY KEY,
+  Name VARCHAR(64) NOT NULL,
+  NsuId INT(11),
+  ClubId INT(3),
+  Dept_Id INT(3),
+  Email VARCHAR(64),
+  PhoneNum VARCHAR(15),
+  Position VARCHAR(30),
+  Date_Joined DATE,
+  Added_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT UC_Member UNIQUE(NsuId,ClubId),
+  FOREIGN KEY(ClubId) REFERENCES clubs(ClubId) 
+                 ON DELETE SET NULL 
+                 ON UPDATE CASCADE,
+  FOREIGN KEY(Dept_Id) REFERENCES departments(Dept_Id)
+)
+
+
+
+Executive_Members Table
+
+CREATE TABLE Executive_Members(
+ m_id INT(6),
+ Photo VARCHAR(255),
+ FOREIGN KEY(m_id) REFERENCES members(m_id)
+);
+
+
+
+Members_Archive Table
+
+CREATE TABLE Members_Archive(
+  m_id INT(6) AUTO_INCREMENT PRIMARY KEY,
+  Name VARCHAR(64) NOT NULL,
+  NsuId INT(11),
+  ClubId INT(3),
+  Dept_Id INT(3),
+  Email VARCHAR(64),
+  PhoneNum VARCHAR(15),
+  Position VARCHAR(30),
+  Date_Joined DATE,
+  Deleted_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT UC_Member UNIQUE(NsuId,ClubId),
+  FOREIGN KEY(ClubId) REFERENCES clubs(ClubId) 
+                 ON DELETE SET NULL 
+                 ON UPDATE CASCADE,
+  FOREIGN KEY(Dept_Id) REFERENCES departments(Dept_Id)
+)
+
+
+
+
