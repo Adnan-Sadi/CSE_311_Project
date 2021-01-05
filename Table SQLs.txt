@@ -70,7 +70,10 @@ CREATE TABLE Members(
                  ON DELETE SET NULL 
                  ON UPDATE CASCADE,
   FOREIGN KEY(Dept_Id) REFERENCES departments(Dept_Id)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE
 )
+
 
 
 
@@ -105,5 +108,123 @@ CREATE TABLE Members_Archive(
 )
 
 
+Departments:
+
+CREATE TABLE departments(
+    Departments INT(3) PRIMARY KEY,
+    Dept_Name VARCHAR(64))
+
+ManagesClub:
+
+CREATE TABLE ManagesClub(
+  Man_id INT(6) AUTO_INCREMENT PRIMARY KEY,
+  UserId INT(6),
+  ClubId INT(3),
+  CONSTRAINT Unic_Man UNIQUE(userId,ClubId),
+  FOREIGN KEY(UserId) REFERENCES all_Users(userId)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE,
+  FOREIGN KEY(ClubId) REFERENCES clubs(ClubId) 
+                 ON DELETE CASCADE
+                 ON UPDATE CASCADE
+);
+
+FollowClubs:
+
+CREATE TABLE FollowClubs(
+  Follower_id INT(6) AUTO_INCREMENT PRIMARY KEY,
+  UserId INT(6),
+  ClubId INT(3),
+  CONSTRAINT Unic_Follower UNIQUE(userId,ClubId),
+  FOREIGN KEY(UserId) REFERENCES all_Users(userId)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE,
+  FOREIGN KEY(ClubId) REFERENCES clubs(ClubId) 
+                 ON DELETE CASCADE
+                 ON UPDATE CASCADE
+);
+
+Goingtoevents :
+
+CREATE TABLE Goingtoevents(
+  Man_id INT(6) AUTO_INCREMENT PRIMARY KEY,
+  UserId INT(6),
+  EventId VARCHAR(16),
+  CONSTRAINT Unic_Man UNIQUE(userId,EventId),
+  FOREIGN KEY(UserId) REFERENCES all_Users(userId)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE,
+  FOREIGN KEY(EventId) REFERENCES Events(EventId) 
+                 ON DELETE CASCADE
+                 ON UPDATE CASCADE
+	);
 
 
+Events:
+
+CREATE TABLE Events(
+  Eventid VARCHAR(16) PRIMARY KEY,
+  ClubId INT(3),
+  EventName VARCHAR(128) NOT NULL,
+  EventDescription VARCHAR(512),
+  Date DATE NOT NULL,
+  FOREIGN KEY(ClubId) REFERENCES clubs(ClubId) 
+                 ON DELETE CASCADE
+                 ON UPDATE CASCADE
+);
+
+EventPhotos :
+
+
+CREATE TABLE EventPhotos(
+  PhotoId INT(10) PRIMARY KEY,
+  EventID VARCHAR(16) NOT NULL,
+  Path VARCHAR(128) NOT NULL,
+  Uploaded_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  Title VARCHAR(128) NOT NULL,
+  FOREIGN KEY(EventID) REFERENCES Events(EventId) 
+                 ON DELETE CASCADE
+                 ON UPDATE CASCADE
+);
+
+EventVideo :
+
+
+CREATE TABLE EventVideos(
+  VideoId INT(10) PRIMARY KEY,
+  EventID VARCHAR(16) NOT NULL,
+  Path VARCHAR(128) NOT NULL,
+  Uploaded_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  Title VARCHAR(128) NOT NULL,
+  FOREIGN KEY(EventID) REFERENCES Events(EventId) 
+                 ON DELETE CASCADE
+                 ON UPDATE CASCADE
+);
+
+
+Photos_Archive:
+
+CREATE TABLE Photos_Archive(
+  Serial INT PRIMARY KEY,
+  PhotoId INT(10) NOT NULL,
+  EventID VARCHAR(16)NOT NULL,
+  Path VARCHAR(128) NOT NULL,
+  Uploaded_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  Title VARCHAR(128) NOT NULL,
+  Deleted_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT Unic_Photo UNIQUE(PhotoId,EventID)
+);
+
+Videos_Archive:
+
+
+CREATE TABLE Videos_Archive(
+  Serial INT PRIMARY KEY,
+  VideoId INT(10) NOT NULL,
+  EventID VARCHAR(16)NOT NULL,
+  Path VARCHAR(128) NOT NULL,
+  Uploaded_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  Title VARCHAR(128) NOT NULL,
+  Deleted_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT Unic_Photo UNIQUE(VideoId,EventID)
+);
