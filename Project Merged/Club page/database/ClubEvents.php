@@ -1,31 +1,29 @@
 <?php
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "myDB";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-$Myarray = array();
-$Timing = $_POST['timing'];
-$sql = "SELECT * FROM clubevents where dated ".$Timing." '" .date("Y-m-d"). "'  order by dated DESC";
+require './accessDatabase.php';
+$Myarray = [];
+$data = [];
+$sql = "SELECT * FROM clubevents WHERE Dated  > \"" .date("Y-m-d"). "\" order by Dated DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-    $Myarray[ ]= $row;
+    array_push($data,$row);
   }
-} else {
-  echo "0 results";
-}
+} 
+array_push($Myarray, $data);
+$data = [];
+$sql = "SELECT * FROM clubevents WHERE Dated < \"" .date("Y-d-m"). "\" order by Dated DESC";
+$result = $conn->query($sql);
 
-
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    array_push($data,$row);
+  }
+} 
+$Myarray[1]= $data;
+// echo "</br>";
 echo json_encode($Myarray);
 $conn->close();
  ?>

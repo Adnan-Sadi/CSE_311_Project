@@ -1,112 +1,116 @@
 <!DOCTYPE html>
 <style>
-     #left-element {
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        height: 100px;
+        width: 100px;
+        background-color: #9ff7b3;
+    }
+
+    a {
+        color: red;
+    }
+
+    img {
+        height: 150px;
+    }
+
+    #left-element {
         text-align: center;
         float: left;
         width: 50%;
         border-right: .5px solid black;
     }
-    #RecentEventsAdBoard{
+
+    #RecentEventsAdBoard {
         text-align: center;
         background-color: rgb(176, 243, 176);
     }
-   
-    #left-element button{
-        margin:15px;
-        text-align:center;
-        font-size:50px;
-        width:100px;
+
+    #left-element button {
+        margin: 15px;
+        text-align: center;
+        font-size: 50px;
+        width: 100px;
     }
-    .eventAdvertisement{
+
+    .eventAdvertisement {
         width: 400px;
         height: 300px;
     }
-
 </style>
 <script>
-$("#nextRecentEventAd").click();
-    var adchangecount=0;
-    var sendDataReq = "<";
-    var recentEventArray=[];
-    var upcomingEventArray=[];
-    function adChange(EventsTiming,val){
-        console.log(val);
-        console.log('val',val);
-        if(val == "next"){
-            adchangecount++;
-        }
-        else if(val == "previous"){
-            adchangecount--;
-        }
-
-        $(document).ready( function() {
-        if(EventsTiming=='UpcomingEvents')
-        {
-            sendDataReq = '>=';
-        }
-        else{
-            sendDataReq = '<';
-        }
-        var  eventAdID = 0;
-        eventAd();
-
-        function eventAd(){
-            $.ajax({
-                type: 'POST',
-                url: './database/clubEvents.php',
-                data: {timing:sendDataReq},
-                dataType: 'json',
-                cache: false,
-                success: function(result) {
-                    if(result.length <= adchangecount)
-                    {
-                        adchangecount=0;
-                    }
-                    else if(adchangecount<0){
-                        adchangecount=result.length-1;
-                    }
-                    if(EventsTiming=='RecentEvents')
-                    {
-                        recentEventArray = result;
-                    designEventsAd(recentEventArray,adchangecount,EventsTiming);
-                    }
-                    else{
-                        upcomingEventArray = result;
-                    designEventsAd(upcomingEventArray,adchangecount,EventsTiming);
-                    }
-                },
-                error: function(){
-        window.alert("Wrong query 'queryDB.php': " + query);
-                }
-            });
-
-
-        }
-        function designEventsAd(eventArray,eventAdID,EventsTiming){
-        $("#"+EventsTiming+"AdBoard").html(' <div id= '+EventsTiming+'-ad'+ eventAdID +' class="card"></div>');
-        $("#"+EventsTiming+"-ad"+eventAdID).append(' <div class= card-body id='+EventsTiming+'c'+ eventAdID +' > </div>');
-        $("#"+EventsTiming+"c"+eventAdID).append('<img class= eventAdvertisement src="./images/unnamed.jpg" alt="Event Page Missing">');
-        $("#"+EventsTiming+"c"+eventAdID).append(' <h5 class=card-title>'+eventArray[eventAdID]['name']+'</h5>');
-        $("#"+EventsTiming+"c"+eventAdID).append(' <h5 class=card-title>'+eventArray[eventAdID]['Dated']+'</h5>');
-        $("#"+EventsTiming+"c"+eventAdID).append(' <p class=card-text>'+eventArray[eventAdID]['Description']+'</p>');
-        eventAdID++;
-        console.log(EventsTiming);
-        }
-
-
+    function eventAd() {
+        $.ajax({
+            type: 'POST',
+            url: './database/ClubEvents.php',
+            dataType: 'json',
+            cache: false,
+            success: function(result) {
+                console.log("Left", result);
+            },
+            error: function() {
+                window.alert("Wrong query 'queryDB.php': ");
+            }
         });
-}
 
+
+    }
+
+    function designEventAds(result) {
+
+    }
+
+    function designEventsAd() {
+        var 
+        $("#insertEventsAdHere").append('div class = "carousel-item" ><img  style=margin: 50px; src=./images/friends-week copy 2.jpg alt=Event Page Missing ><div class=carousel-caption d-none d-md-block></div><h5>Last slide label</h5><p>First slide label</br></p><p>.</p></div>');
+    }
+
+    designEventsAd();
+    // $("#nextRecentEventAd").click();
+    // $("#nextRecentEventAd").click();
 </script>
-<div class="container">
-    <div class="center" >
-            <button id="getAllAventAd" class="btn btn-outline-danger"  style="width:50%;height:70px;margin:0px"><h1><a href="events.php">All Events</a></h1></button>
-    </div>
-</div>
 <h1>Recent</h1>
-<div id="RecentEventsAdBoard"></div>
-<div>
-    <button class="btn btn-danger"  value="next" onClick="adChange('RecentEvents',this.value)"><i class="fas fa-arrow-left"></i></button>
-    <button class="btn btn-success"  id="nextRecentEventAd" value="previous" onclick="adChange('RecentEvents',this.value)"><i class="fas fa-arrow-right"></i></button>
+    <div class="container">
+        <!-- <div class="center" > -->
+        <div class="bd-example">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="insertEventsAdHere">
+                    <div class="carousel-item active">
+                        <img style="margin: 50px;" src="./images/friends-week copy 2.jpg" alt="Event Page Missing">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                        <h5>First slide label</h5>
 
-</div>
+                        <p>First slide label</br></p>
+                        <p>.</p>
+                    </div>
+                    <!-- <div class="carousel-item ">
+                        <img style="margin: 50px;" src="./images/friends-week copy 2.jpg" alt="Event Page Missing">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                        <h5>First slide label</h5>
+
+                        <p>First slide label</br></p>
+                        <p>.</p>
+                    </div> -->
+                </div>
+                <!-- <div class="carousel-item">
+            <img style="margin: 100px;" src="./images/friends-week copy 2.jpg" alt="Event Page Missing">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+            <h5>Second slide label</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        </div> -->
+                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>

@@ -27,8 +27,8 @@
 <div>
     <div id="UpcomingEventsAdBoard"></div>
     <div id="ok">
-        <button class="btn btn-danger" value="next" onclick="adChange('UpcomingEvents',this.value)"><i class="fas fa-arrow-left"></i></button>
-        <button class="btn btn-success"  id="nextUpcomingEventAd" value="previous" onclick="adChange('UpcomingEvents',this.value)"><i class="fas fa-arrow-right"></i></button>
+        <!-- <button class="btn btn-danger" value="next" onclick="adChange('UpcomingEvents',this.value)"><i class="fas fa-arrow-left"></i></button>
+        <button class="btn btn-success"  id="nextUpcomingEventAd" value="previous" onclick="adChange('UpcomingEvents',this.value)"><i class="fas fa-arrow-right"></i></button> -->
     </div>
 </div>
 <script>

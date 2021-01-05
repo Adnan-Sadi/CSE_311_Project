@@ -40,5 +40,6 @@
       <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
      <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
      <a href=""><i class="fa fa-link" aria-hidden="true"></i></a>
+     <i class="fa fa-git" aria-hidden="true"></i>
     </div>
 </div>
