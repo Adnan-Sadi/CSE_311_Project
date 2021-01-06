@@ -59,7 +59,7 @@ session_start();
     </div>
 
     <div id="div1" style="width:90px; height:60px; display:none; background-color:beige; "></div>
-    <script>
+   <!-- <script>
         $(function() {
             $("input").on("keypress", function() {
                 var insearch = $("item").val();
@@ -75,7 +75,7 @@ session_start();
                     })
             });
         });
-    </script>
+    </script> -->
 </body>
 
 </html>

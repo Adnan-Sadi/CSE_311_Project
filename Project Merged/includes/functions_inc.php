@@ -1,10 +1,10 @@
 <?php
 
 //signup Functions
-function emptyInputSignup($name,$email,$username,$pwd,$pwdRepeat){
+function emptyInputSignup($lname,$email,$username,$pwd,$pwdRepeat){
     $result;
     
-    if(empty($name) || empty($email) || empty($username) || empty($pwd) || empty($pwdRepeat) ){
+    if(empty($lname) || empty($email) || empty($username) || empty($pwd) || empty($pwdRepeat) ){
         $result = true;
     }
     else{
@@ -54,8 +54,8 @@ function pwdMatch($pwd,$pwdRepeat){
 }
 
 function uidExists($conn,$username,$email){
-
-    $sql= "SELECT * FROM users WHERE usersUid = ? OR usersEmail = ?;" ;
+    
+    $sql= "SELECT * FROM users WHERE UserName = ? OR Email = ?;" ;
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt,$sql)) {
         header("location: ../signup.php?error=stmtfailed");
@@ -78,18 +78,23 @@ function uidExists($conn,$username,$email){
     mysqli_stmt_close($stmt);
 }
 
-function createUser($conn,$name,$email,$username,$pwd){
+function createUser($conn,$fname,$lname,$email,$username,$pwd){
+    
+    if(empty($fname)){
+      $fname = NULL;
+    }
 
-    $sql= "INSERT INTO users(usersName,usersEmail,usersUid,usersPwd) values(?,?,?,?);" ;
+    $sql= "INSERT INTO users(UserName,First_Name,Last_Name,Email,Password) values(?,?,?,?,?);" ;
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt,$sql)) {
         header("location: ../signup.php?error=stmtfailed");
          exit();
     }
 
+    //encrypting the password
     $hashedPwd = password_hash($pwd,PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssss" ,$name,$email,$username,$hashedPwd);
+    mysqli_stmt_bind_param($stmt, "sssss" ,$username,$fname,$lname,$email,$hashedPwd);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
@@ -119,7 +124,7 @@ function loginUser($conn,$username,$pwd){
         exit();
     }
 
-    $pwdHashed = $uidExists["usersPwd"];
+    $pwdHashed = $uidExists["Password"];
     $checkPwd  = password_verify($pwd, $pwdHashed);
 
     if($checkPwd === false){
@@ -128,13 +133,14 @@ function loginUser($conn,$username,$pwd){
     }
     else if($checkPwd === true){
         session_start();
-        $_SESSION["userid"] = $uidExists ["usersId"];
-        $_SESSION["useruid"] = $uidExists ["usersUid"];
+        $_SESSION["userid"] = $uidExists ["uid"];
+        $_SESSION["useruid"] = $uidExists ["UserName"];
         header("location: ../index.php");
         exit();
     }
 }
 
+//google signup functions
 function googleUserExists($conn,$email){
        $sql = "SELECT Email FROM google_users WHERE Email = '$email'";
 

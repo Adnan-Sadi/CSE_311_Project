@@ -6,9 +6,10 @@
  	<section id="signup-panel">
  		<h2>Sign Up</h2>
  		<form action="includes/signup_inc.php" method="post">
- 		 <input type="text" name="name" placeholder="Full name...."><br>
+ 		 <input type="text" name="fname" placeholder="First name...."><br>
+		 <input type="text" name="lname" placeholder="Last name(Can't be empty!)...."><br>
  		 <input type="text" name="email" placeholder="Email...."><br>
- 		 <input type="text" name="userid" placeholder="Username...."><br>
+ 		 <input type="text" name="userid" placeholder="Username(Can't Contain special characters)...."><br>
  		 <input type="password" name="pwd" placeholder="Password...."><br>
  		 <input type="password" name="pwdrepeat" placeholder="Repeat Password...."><br>
  		 <button type="submit" name="submit" class="btn btn-primary">Sign up</button><br>
@@ -17,7 +18,7 @@
 		<?php
         if(isset($_GET["error"])){
 		if($_GET["error"] == "emptyinput"){
-			echo "<p> Fill in all fields!</p>";
+			echo "<p> Fill in all necessary fields!</p>";
 		}
 
 		else if($_GET["error"] == "invaliduid"){

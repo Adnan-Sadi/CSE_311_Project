@@ -13,7 +13,7 @@
   require_once 'includes/db_inc.php';
 
   $postID = mysqli_real_escape_string($conn,$_GET['id']);
-  $sql = "SELECT Name,Id,Dept_name,Position FROM club_members WHERE Club_id = '$postID'";
+  $sql = "SELECT Name,NsuId,Dept_Id,Position FROM members WHERE ClubId = '$postID'";
 
   $result = mysqli_query($conn,$sql);
 

@@ -2,7 +2,8 @@
 
 if(isset($_POST["submit"])){
       
-     $name = $_POST["name"];
+     $fname = $_POST["fname"];
+     $lname = $_POST["lname"];
      $email = $_POST["email"];
      $username = $_POST["userid"];
      $pwd = $_POST["pwd"];
@@ -10,32 +11,33 @@ if(isset($_POST["submit"])){
 
      require_once 'db_inc.php';
      require_once 'functions_inc.php';
-
-     if (emptyInputSignup($name,$email,$username,$pwd,$pwdRepeat) !== false) {
+     //checks if any field is empty
+     if (emptyInputSignup($lname,$email,$username,$pwd,$pwdRepeat) !== false) {
          header("location: ../signup.php?error=emptyinput");
          exit();
      }
-
-      if (invalidUid($username) !== false) {
+     //Checks if username is valid
+     if (invalidUid($username) !== false) {
          header("location: ../signup.php?error=invaliduid");
          exit();
      }
-      if (invalidEmail($email) !== false) {
+     //Checks if email is valid
+     if (invalidEmail($email) !== false) {
          header("location: ../signup.php?error=invalidemail");
          exit();
      }
-
+     //Matches password
      if (pwdMatch($pwd,$pwdRepeat) !== false) {
          header("location: ../signup.php?error=pwdsdontmatch");
          exit();
      }
-
+     //check if user with the same name or email exists
      if (uidExists($conn,$username,$email) !== false) {
          header("location: ../signup.php?error=usernametaken");
          exit();
      }
 
-     createUser($conn,$name,$email,$username,$pwd);
+     createUser($conn,$fname,$lname,$email,$username,$pwd);
 
 }
 else {
