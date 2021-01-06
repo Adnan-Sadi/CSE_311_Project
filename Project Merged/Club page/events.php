@@ -1,5 +1,7 @@
  <style>
-
+     #eventsBottom :hover{
+         background-color: white;
+     }
  </style>
  <!DOCTYPE html>
  <html lang="en">
@@ -57,7 +59,7 @@
              </div>
          </div>
          <div style="clear:both;margin-top:20px">
-             <div id="eventsBottom" style="clear:both;margin-top:20px">
+             <div id="eventsBottom" >
              </div>
          </div>
      </div>
@@ -67,7 +69,6 @@
  </html>
 
  <script>
-     
      $.ajax({
          type: 'POST',
          url: './database/getAllEvents.php',
@@ -76,7 +77,7 @@
          success: function(result) {
              var count = 0;
              designEventsAd(result, count);
-            //  console.log(result);
+             console.log(result);
          },
          error: function(xhr, status, error) {
              var err = eval("(" + xhr.responseText + ")");
@@ -104,12 +105,12 @@
      }
 
      function createAdInAllEvent(dataArray, count, row) {
-         $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./images/Hossain.jpeg  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['name'] + '</h5> <p class="card-text">' + dataArray[count]["Dated"] + '</p><p class="card-text">' + dataArray[count]["Description"] + '</p><button onClick="eShowMore()" class="btn" style="color:red;text-decoration: underline;">Read More..</button></div></td>');
+         $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./images/Hossain.jpeg  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['name'] + '</h5> <p class="card-text">' + dataArray[count]["Dated"] + '</p><p class="card-text">' + dataArray[count]["Description"].substring(0, 150) + '<button onClick="eShowMore()" class="btn" style="color:red;text-decoration: underline;">Read More..</button></p></div></td>');
      }
      $(function() {
-         $("#eventsBottom").load("bottom.php");
+         $("#eventsNav").load("nav.php");
      });
      $(function() {
-         $("#eventsNav").load("nav.php");
+         $("#eventsBottom").load("bottom.php");
      });
  </script>

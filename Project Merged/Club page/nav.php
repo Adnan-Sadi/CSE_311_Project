@@ -15,26 +15,26 @@
                 </div>
                 <div id="un" class="col-md-5">
                     <ul id="menu" class="float-md-right">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="about_us.php">About Us</a></li>
-                        <li><a href="all_clubs.php">Clubs</a></li>
+                        <li><a href="../index.php">Home</a></li>
+                        <li><a href="../about_us.php">About Us</a></li>
+                        <li><a href="../all_clubs.php">Clubs</a></li>
 
                              <?php
 
 				             if (isset($_SESSION["useruid"])) {
-				            	 echo "<li><a href='profile.php'>Profile Page</a></li>";
-				            	 echo "<li><a href='includes/logout_inc.php'>Log out</a></li>";
+				            	 echo "<li><a href='../profile.php'>Profile Page</a></li>";
+				            	 echo "<li><a href='../includes/logout_inc.php'>Log out</a></li>";
 				             }
 
 				             else if (isset($_SESSION["email"])) {
-				             	 echo "<li><a href='profile.php'>Google Page</a></li>";
-				             	 echo "<li><a href='includes/logout_inc.php'>Log out</a></li>";
+				             	 echo "<li><a href='../profile.php'>Google Page</a></li>";
+				             	 echo "<li><a href='../includes/logout_inc.php'>Log out</a></li>";
 				              }
 
 
 				             else{
-				            	echo "<li><a href='signup.php'>Sign Up</a></li>";
-				            	echo "<li><a href='login.php'>Log In</a></li>"; 
+				            	echo "<li><a href='../signup.php'>Sign Up</a></li>";
+				            	echo "<li><a href='../login.php'>Log In</a></li>"; 
 				             }
 				            ?>                  
                     </ul>
@@ -57,7 +57,7 @@
                 var insearch = $("item").val();
                 $.ajax({
                         method: "post",
-                        url: "index.php",
+                        url: "../index.php",
                         data: {
                             name: insearch
                         }

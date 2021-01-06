@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<style>
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        padding: 20px;
+        /* margin-left: 20px; */
+    }
+
+    #EventsAds {
+        /* margin: 10px; */
+        border: 10px solid black;
+        background-color: #d7d7d7;
+    }
+
+    /* #EventsAds  div {
+        width: 100;
+    } */
+    #EventsAds img {
+        height: 100%;
+        width: 100%;
+        /* border: 5px solid black; */
+    }
+
+    #EventsAds h3 {
+        color: lightcoral;
+        text-decoration: underline;
+    }
+
+    #EventAdLeft {
+        text-align: center;
+        float: left;
+        width: 45%;
+        margin: 10px;
+        /* padding-right:70px; */
+        /* border-right: .5px solid black; */
+        padding: 4%;
+    }
+
+    #EventAdRight {
+        text-align: center;
+        float: right;
+        width: 45%;
+        margin: 10px;
+        /* border-right: .5px solid black; */
+        padding: 4%;
+    }
+
+    /* #left-element button {
+
+        text-align: center;
+        font-size: 50px;
+        width: 100px;
+    } */
+    /* 
+    .eventAdvertisement {
+        width: 400px;
+        height: 300px;
+    } */
+    /* #right-element {
+        float: right;
+        border-left: .5px solid black;
+        width: 50%;
+        text-align: center;
+    } */
+
+    /* #right-element button {
+        margin: 15px;
+        text-align: center;
+        font-size: 50px;
+        width: 100px;
+    } */
+
+    /* #UpcomingEventsAdBoard {
+        text-align: center;
+        background-color: rgb(176, 243, 176);
+    } */
+</style>
+
+<div id="EventAdLeft">
+    <button class="btn btn-link btn-outline-danger "><a href="./events.php"> All Events </a></button>
+    <h1> Recent Events </h1>
+    <div id="carouselExampleCaptions0" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" id="EventAdInsertHere0">
+            <div class="carousel-item active">
+                <img id="FirstAdLeftImg" src="./images/acm.png" class="d-block w-100" alt="Image Missing">
+                <div class="carousel-caption ">
+                </div>
+                <h3 id="EventAdTitleFirstLeft">Title</h3>
+                <p id="EventAdDateFirstLeft">Date</p>
+                <p>.</p>
+            </div>
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions0" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions0" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<div id="EventAdRight">
+    <form class="form-inline d-flex justify-content-center md-form form-sm mt-0" style="margin-bottom: 20px">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Events by Title" aria-label="Search">
+    </form>
+    <h2>Upcoming Events...</h2>
+    <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" id="EventAdInsertHere1">
+            <div class="carousel-item active">
+                <img id="FirstAdRightImg" src="./images/acm.png" class="d-block w-100" alt="Image Missing">
+                <div class="carousel-caption ">
+                </div>
+                <h3 id="EventAdTitleFirstRight">Title</h3>
+                <p id="EventAdDateFirstRight">Date</p>
+                <p>.</p>
+            </div>
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions1" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- <div class="center" > -->
+<!-- <div class="container"> -->
+
+
+<!-- <div id="right-element">
+        
+        <h1>Upcomming</h1>
+        <div>
+            <div id="UpcomingEventsAdBoard"></div>
+            <div id="ok">
+
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<script>
+    $.ajax({
+        type: 'POST',
+        url: './database/ClubEvents.php',
+        dataType: 'json',
+        cache: false,
+        success: function(result) {
+            $("#FirstAdLeftImg").attr("src", './images/' + result[1][0]["EventHeadImg"]);
+            $("#EventAdTitleFirstLeft").text(result[1][0]["name"])
+            $("#EventAdDateFirstLeft").text(result[1][0]["Dated"])
+            $("#FirstAdRightImg").attr("src", './images/' + result[0][0]["EventHeadImg"]);
+            $("#EventAdTitleFirstRight").text(result[0][0]["name"])
+            $("#EventAdDateFirstRight").text(result[0][0]["Dated"])
+            designEventAds(result);
+        },
+        error: function() {
+            window.alert("Wrong query 'queryDB.php': ");
+        }
+    });
+
+
+    function designEventAds(result) {
+
+        for (var i = 1; i < result.length; i++) {
+            $("#EventAdInsertHere0").append('<div class = carousel-item active ><img  class="d-block w-100" src= ./images/' + result[0][i]["EventHeadImg"] + ' alt=Event Page Missing ><div class=carousel-caption d-none d-md-block></div><h3>' + result[0][i]["name"] + '</h3><p>' + result[0][i]["Dated"] + '</p><p>.</p></div>');
+            // alert("Ok")
+        }
+        for (var i = 1; i < result.length; i++) {
+            $("#EventAdInsertHere1").append('<div class = carousel-item active ><img  class="d-block w-100" src= ./images/' + result[1][i]["EventHeadImg"] + ' alt=Event Page Missing ><div class=carousel-caption d-none d-md-block></div><h3>' + result[1][i]["name"] + '</h3><p>' + result[1][i]["Dated"] + '</p><p>.</p></div>');
+            // alert("Ok")
+        }
+
+    }
+
+    function designEventsAd() {
+
+        // $("#insertEventsAdHere").append('<div class = carousel-item ><img  style=margin: 50px; src= ./images/' + ' alt=Event Page Missing ><div class=carousel-caption d-none d-md-block></div><h5>Last slide label</h5><p>First LAST slide label</br></p><p>.</p></div>');
+    }
+
+
+    // $("#nextRecentEventAd").click();
+    // $("#nextRecentEventAd").click();
+</script>

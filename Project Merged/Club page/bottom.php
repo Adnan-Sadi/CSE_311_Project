@@ -16,6 +16,7 @@
     #bottom  a:hover{
       color: cyan;
     }
+    
     .contact-logo{
     float: right;
     margin-right: 50px;
@@ -24,7 +25,9 @@
     font-size: 50px;
     border: 10px inset #4B57B8;
   }
-  
+  #LinkBoardBottom :hover {
+    background-color: #4B57B8;
+  }
 
 </style>
 
@@ -32,14 +35,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <div id="bottom1">
   <div>
-    <h1 style="float: left; margin-left:35%; padding-top:1%">
+    <h1 style="float: left; margin-left:5%; padding-top:1%">
       &copy; Tornado Developer
     </h1>
   </div>
-  <div class="contact-logo"  >
+  <div id="LinkBoardBottom">
+    <div class="contact-logo "  >
       <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
-     <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
-     <a href=""><i class="fa fa-link" aria-hidden="true"></i></a>
-     <i class="fa fa-git" aria-hidden="true"></i>
+      <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+      <a href=""><i class="fa fa-link" aria-hidden="true"></i></a>
+      <a href=""><i class="fa fa-github" aria-hidden="true"></i></a>
     </div>
+  </div>
 </div>

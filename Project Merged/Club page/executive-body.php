@@ -1,6 +1,6 @@
 
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<style>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script> -->
+<!-- <style>
      #ex {
         overflow: auto;
         clear: both;
@@ -26,9 +26,9 @@
         height:350px;
         transition: 2s;
     }
-</style>
+</style> -->
 
-
+<!-- 
 <script>
 
 $(document).ready( function() {
@@ -55,4 +55,4 @@ $(document).ready( function() {
         }
     }
 
-</script>
+</script> -->

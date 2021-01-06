@@ -26,11 +26,7 @@
 </head>
 <style>
    
-   #left-element,#right-element{
-    padding: 100px;
-    border-bottom:.7px solid black;
-    margin-bottom:100px;
-   }
+
     .card img:hover{
         width: 350px;
         height: 450px;
@@ -56,9 +52,8 @@
 
     <div id="nav"></div>
     <div id="main"></div>
-    <div id="allEvents" >
-        <div id="left-element"></div>
-        <div id="right-element"></div>
+    <div id="EventsAds" >
+
     </div>
     <div id="ex"></div>
     <div id="teams"> </div>
@@ -88,10 +83,7 @@
             $("#main").load("main.php");
         });
         $(function() {
-            $("#left-element").load("left.php");
-        });
-        $(function() {
-            $("#right-element").load("right.php");
+            $("#EventsAds").load("EventsAd.php");
         });
         $(function() {
             $("#bottom").load("bottom.php");

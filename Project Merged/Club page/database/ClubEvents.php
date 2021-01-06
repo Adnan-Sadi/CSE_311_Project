@@ -13,7 +13,7 @@ if ($result->num_rows > 0) {
 } 
 array_push($Myarray, $data);
 $data = [];
-$sql = "SELECT * FROM clubevents WHERE Dated < \"" .date("Y-d-m"). "\" order by Dated DESC";
+$sql = "SELECT name,Dated,EventHeadImg FROM clubevents WHERE Dated < \"" .date("Y-d-m"). "\" order by Dated DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

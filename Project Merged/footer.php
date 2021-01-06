@@ -38,7 +38,7 @@
 </style>
   <body>
       <div id="footer" class = "footer-panel">
-          <h1 style="float: left; margin-left:35%; padding-top:1%">
+          <h1 style="float: left; margin-left:5%; padding-top:1%">
               &copy; Tornado Developer
           </h1>
             <div class="contact-logo"                     >
