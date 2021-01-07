@@ -164,51 +164,79 @@ function createGoogleUser($conn,$First_name,$Last_name,$Email){
 
 //signup Functions Ends
 
+//Member Page functions Starts
 
 //Add New Member functions
-function AddNewMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$sem_joined){
+function AddNewMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$date_joined){
 
-    $sql = "INSERT INTO club_members(Name,Id,Dept_name,Club_id,Email,PhoneNum,Position,Semester_joined) VALUES (?,?,?,?,?,?,?,?);";
+    $sql = "INSERT INTO members(Name,NsuId,ClubId,Dept_Id,Email,PhoneNum,Position,Date_joined) VALUES (?,?,?,?,?,?,?,?);";
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt,$sql)) {
-         echo  "Error! Please insert appropiate values.";
+         echo  "Error! statement Failed." . mysqli_error($conn);
          exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "sisissss" ,$name,$stdId,$dept,$clubId,$email,$phone,$position,$sem_joined);
+    mysqli_stmt_bind_param($stmt, "siiissss" ,$name,$stdId,$clubId,$dept,$email,$phone,$position,$date_joined);
 
     if(mysqli_stmt_execute($stmt)){
         echo "Data inserted";
     }
     else{
-        echo  "Error! Please insert appropiate values.";
+        echo  "Error! Please insert appropiate values.". mysqli_error($conn);
     }
 
     mysqli_stmt_close($stmt);
-    exit();
+    
+}
+//Add new Exec Member
+function AddNewExecMember($conn,$stdId,$clubId,$image){
+
+    $sql = "SELECT m_id FROM members WHERE NsuId = '$stdId' AND ClubId='$clubId';";
+    $result = mysqli_query($conn,$sql);
+
+    if(!empty($result)){
+       echo "Success.";
+    }
+    else{
+        echo "Error1!" . mysqli_error($conn);
+    }
+    $data = mysqli_fetch_assoc($result);
+     
+    $m_id = $data["m_id"];
+
+    $sql = "INSERT INTO executive_members(m_id,Photo) VALUES ('$m_id','$image');";
+    $result=mysqli_query($conn,$sql);
+    if(!empty($result)){
+        echo "Image Inserted.";
+    }
+    else{
+        echo "Error2!" . mysqli_error($conn);
+    }
+    
+
 }
 
 //Update a already existing member info
-function UpdateMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$sem_joined,$mem_id){
-    $sql = "UPDATE club_members 
-            SET Name = ?, Id=?, Dept_name=?,Email=?, PhoneNum=?, Position=?, Semester_joined=?
-            WHERE Club_id = ? AND Id = ? ;";
+function UpdateMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$date_joined,$mem_id){
+    $sql = "UPDATE members 
+            SET Name = ?, NsuId=?, Dept_id=?,Email=?, PhoneNum=?, Position=?, Date_joined=?
+            WHERE ClubId = ? AND NsuId = ? ;";
 
     $stmt = mysqli_stmt_init($conn);
     
     if (!mysqli_stmt_prepare($stmt,$sql)) {
-         echo  "Error! Statement Failed.";
+         echo  "Error! Statement Failed." . mysqli_error($conn);
          exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "sisssssii" ,$name,$stdId,$dept,$email,$phone,$position,$sem_joined,$clubId,$mem_id);
+    mysqli_stmt_bind_param($stmt, "siissssii" ,$name,$stdId,$dept,$email,$phone,$position,$date_joined,$clubId,$mem_id);
 
     if(mysqli_stmt_execute($stmt)){
         echo "Data Updated";
     }
     else{
-        echo  "Error! Please insert appropiate values.";
+        echo  "Error! Please insert appropiate values." . mysqli_error($conn);
     }
 
     mysqli_stmt_close($stmt);
@@ -216,6 +244,22 @@ function UpdateMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$
 
 
 }
+
+//For uploading executive member image
+function upload_mem_image(){
+          
+       if(isset($_FILES["mem_image"]))
+       {
+        $extension = explode('.', $_FILES['mem_image']['name']);//breaks the image name into an array
+        $new_name = rand() . '.' . $extension[1];//generates a new name for the image
+        $destination = '../images/Executive_Members/' . $new_name;
+        move_uploaded_file($_FILES['mem_image']['tmp_name'], $destination);//moving file to destination folder
+        return $new_name;
+       }
+}
+
+
+//Member Page functions Ends
 
 
 

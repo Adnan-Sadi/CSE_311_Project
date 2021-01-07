@@ -248,7 +248,8 @@ body{
 /*Member Page*/
 
 #exc_body{
-	margin-top: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 	font-size: 1.4em;
 	font-weight: 500;
 	border-bottom: 1px groove gray;

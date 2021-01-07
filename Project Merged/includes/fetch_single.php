@@ -6,9 +6,9 @@ session_start();
 
 if(isset($_POST["user_id"])){
     
-    $sql = "SELECT Name,Id,Dept_name,Email,PhoneNum,Position,Semester_joined
-            FROM club_members 
-            WHERE Club_id = ". $_SESSION["club_number"] ." AND Id = ". $_POST["user_id"] . " LIMIT 1;";
+    $sql = "SELECT Name,NsuId,Dept_id,Email,PhoneNum,Position,Date_Joined
+            FROM members 
+            WHERE ClubId = ". $_SESSION["club_number"] ." AND NsuId = ". $_POST["user_id"] . " LIMIT 1;";
 
     $stmt = mysqli_query($conn,$sql);
 

@@ -9,8 +9,8 @@ if(isset($_POST["user_id"])){
     $clubNum = $_SESSION["club_number"];
     $memId = $_POST["user_id"];
 
-    $sql = "DELETE FROM club_members
-            WHERE id=? AND Club_id =?";
+    $sql = "DELETE FROM members
+            WHERE Nsuid=? AND ClubId =?";
     
     $stmt = mysqli_stmt_init($conn);
 

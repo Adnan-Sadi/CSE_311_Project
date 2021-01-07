@@ -29,14 +29,14 @@ $(document).ready(function(){
     event.preventDefault();
     var memName = $('#name').val();
     var stdId = $('#id').val();
-    var dept = $('#dept_name').val();
+    var dept = $('#dept_id').val();
     var memEmail = $('#email').val();
     var memPhone = $('#phone').val();
     var memPosition = $('#position').val();
-    var semJoined = $('#sem_joined').val();
+    var dateJoined = $('#date_joined').val();
     
     //check if any field is empty
-    if (memName != '' && stdId != '' && dept != '' && memEmail != '' && memPhone != '' && memPosition != '' && semJoined != '') {
+    if (memName != '' && stdId != '' && dept != '' && memEmail != '' && memPhone != '' && memPosition != '' && dateJoined != '') {
       $.ajax({
         url: "./includes/member_inc.php",
         method: 'POST',
@@ -48,6 +48,47 @@ $(document).ready(function(){
           $('#user_form')[0].reset();
           $('#userModal').modal('hide');
           dataTable.ajax.reload(); //reloading member table
+        }
+      });
+    }
+    else {
+      alert("All Fields are Required");
+    }
+  });
+
+
+  $(document).on('submit', '#exec_user_form', function (event) {
+    event.preventDefault();
+    var memName = $('#name2').val();
+    var stdId = $('#id2').val();
+    var dept = $('#dept_id2').val();
+    var memEmail = $('#email2').val();
+    var memPhone = $('#phone2').val();
+    var memPosition = $('#position2').val();
+    var dateJoined = $('#date_joined2').val();
+    var extension = $('#mem_image').val().split('.').pop().toLowerCase();
+
+    if (extension != '') {
+      //returns false if invalid image file is uploaded
+      if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+        alert("Invalid Image File");
+        $('#mem_image').val('');
+        return false;
+      }
+    } 
+
+    //check if any field is empty
+    if (memName != '' && stdId != '' && dept != '' && memEmail != '' && memPhone != '' && memPosition != '' && dateJoined != '') {
+      $.ajax({
+        url: "./includes/member_inc.php",
+        method: 'POST',
+        data: new FormData(this),
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          alert(data);
+          $('#exec_user_form')[0].reset();
+          $('#execUserModal').modal('hide');
         }
       });
     }
@@ -68,12 +109,12 @@ $(document).ready(function(){
         //updating modal attribute values
         $('#userModal').modal('show');
         $('#name').val(data.Name);
-        $('#id').val(data.Id);
-        $('#dept_name').val(data.Dept_name);
+        $('#id').val(data.NsuId);
+        $('#dept_id').val(data.Dept_id);
         $('#email').val(data.Email);
         $('#phone').val(data.PhoneNum);
         $('#position').val(data.Position);
-        $('#sem_joined').val(data.Semester_joined);
+        $('#date_joined').val(data.Date_Joined);
         $('.modal-title').text("Edit User");
         $('#user_id').val(user_id);
         $('#action').val("Edit");

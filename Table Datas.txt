@@ -1,0 +1,35 @@
+Departments Table
+
+INSERT INTO departments(Dept_Id,Dept_Name) VALUES 
+(1,'Accounting & Finance'),
+(2,'Marketing & International Business'),
+(3,'Management'),
+(4,'Economics'),
+(5,'Electrical and Computer Engineering'),
+(6,'Architecture'),
+(7,'Civil and Environmental Engineering'),
+(8,'Mathematics & Physics'),
+(9,'English & Modern Languages'),
+(10,'Political Science & Sociology'),
+(11,'History & Philosophy'),
+(12,'Law'),
+(13,'Biochemistry and Microbiology'),
+(14,'Public Health'),
+(15,'Pharmaceutical Sciences'),
+(16,'Environmental Science and Management');
+
+
+Members Table
+
+INSERT INTO members(Name,NsuId,ClubId,Dept_Id,Email,PhoneNum,Position,Date_Joined) VALUES 
+('Smith','1712349503','1','2','smith@yahoo.com','0183293294','General Member','2018-06-17'),
+('Monica','1675649503','1','5','monica@hotmail.com','0195193294','Senior Member','2017-01-18'),
+('Sheldon','1812349765','1','7','Cooper@yahoo.com','0173293001','General Member','2018-09-08'),
+('Max','1932989587','1','1','Max@gmail.com','01687193294','Probationary Member','2020-01-28'),
+('Chloe','2012349503','1','3','Chloe@gmail.com','0171193294','Senior Member','2018-06-18'),
+('Micheal','1732630503','1','10','Micheal@yahoo.com','0168888294','Probationary Member','2017-11-11'),
+('John','1512349789','1','2','John@hotmail.com','0183290001','Senior Member','2015-09-27'),
+('Rachel','1912871833','1','7','green@yahoo.com','0183777294','Senior Member','2019-06-01'),
+('Rick','1932333503','1','8','rick@hotmail.com','0193242197','General Member','2019-10-17'),
+('Kaley','1732388703','1','12','Kaley@gmail.com','0172093200','Probationary Member','2018-01-21'),
+('Yennefer','1632499703','1','15','Yenn@gmail.com','0162093200','Senior Member','2018-06-11');

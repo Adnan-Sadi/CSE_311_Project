@@ -1,0 +1,42 @@
+                                                ----------------------TRIGGERS------------------------
+
+* Triggers for new users created
+
+DELIMITER $$
+
+CREATE TRIGGER after_users_inserted
+AFTER INSERT ON users
+FOR EACH ROW
+
+BEGIN
+IF NOT EXISTs(SELECT 1 FROM all_users WHERE UserEmail = new.Email) THEN
+   INSERT INTO all_users(UserEmail) VALUES (New.Email);
+END IF;
+END$$
+
+CREATE TRIGGER after_G_users_inserted
+AFTER INSERT ON google_users
+FOR EACH ROW
+
+BEGIN
+IF NOT EXISTs(SELECT 1 FROM all_users WHERE UserEmail = new.Email) THEN
+   INSERT INTO all_users(UserEmail) VALUES (New.Email);
+END IF;
+END$$
+
+DELIMITER ;
+
+
+*Trigger for members Deleted
+DELIMITER $$
+
+CREATE TRIGGER before_members_delete
+BEFORE DELETE ON members
+FOR EACH ROW
+
+BEGIN
+  INSERT INTO members_archive(Name,NsuId,ClubId,Dept_Id,Email,PhoneNum,Position,Date_Joined) VALUES
+  (OLD.Name,OLD.NsuId,OLD.ClubId,OLD.Dept_Id,OLD.Email,OLD.PhoneNum,OLD.Position,OLD.Date_Joined);
+END$$
+
+DELIMITER ;

@@ -83,6 +83,8 @@ CREATE TABLE Executive_Members(
  m_id INT(6),
  Photo VARCHAR(255),
  FOREIGN KEY(m_id) REFERENCES members(m_id)
+          ON DELETE CASCADE 
+          ON UPDATE CASCADE
 );
 
 
@@ -229,32 +231,3 @@ CREATE TABLE Videos_Archive(
   CONSTRAINT Unic_Photo UNIQUE(VideoId,EventID)
 );
 
-
-
-                                                ----------------------TRIGGERS------------------------
-
-* Triggers for new users created
-
-DELIMITER $$
-
-CREATE TRIGGER after_users_inserted
-AFTER INSERT ON users
-FOR EACH ROW
-
-BEGIN
-IF NOT EXISTs(SELECT 1 FROM all_users WHERE UserEmail = new.Email) THEN
-   INSERT INTO all_users(UserEmail) VALUES (New.Email);
-END IF;
-END$$
-
-CREATE TRIGGER after_G_users_inserted
-AFTER INSERT ON google_users
-FOR EACH ROW
-
-BEGIN
-IF NOT EXISTs(SELECT 1 FROM all_users WHERE UserEmail = new.Email) THEN
-   INSERT INTO all_users(UserEmail) VALUES (New.Email);
-END IF;
-END$$
-
-DELIMITER ;
