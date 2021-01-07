@@ -28,36 +28,7 @@
                  </table>
              </div>
          </div>
-         <div id="fullEvent" class="container">
-             <Button onclick="eShowMore()" class="btn btn-block btn-danger"><b> Back</b></Button>
-             <div class="container-center">
-                 <img src="/Project Main Saeem/seperation/images/eventLogo.png" alt="not found">
-                 <p>
-                     For the first time in its 25 year-long legacy, NSU YES! will be hosting its strategic business case-solving competition online. The arena is set for Masters of Ideation, the battle for supremacy.
-
-                     One of the most prestigious case solving competitions is back for opportunities of cognitive and analytical thinking. Masters of Ideation is all set to kick-start a brand new expedition with an aim to create a stimulating experience for the business competition. Undergraduate students all across the nation will join their intellect to come out victorious in the ultimate business battle.
-
-                     North South University Young Entrepreneurs Society, NSU YES! is initiating its seventh edition of Masters of Ideation in 2020 by adapting to the new normal.
-
-                     This time, we are proud and delighted to have Perfetti Van Melle as our Title Sponsor for this event.
-                 </p>
-             </div>
-             <div style="margin:50px 0px 400px 0px;">
-                 <div style="float:left">
-
-                     <video width="320" height="240" controls>
-                         <source src="movie.mp4" type="video/mp4">
-                         <source src="movie.ogg" type="video/ogg">
-                         Your browser does not support the video tag.
-                     </video>
-                 </div>
-                 <div style="float:right">
-                     <img src="./images/eventLogo.png" alt="not found">
-                     <!-- <img src="/Project Main Saeem/seperation/images/eventLogo.png" alt="not found">
-                <img src="/Project Main Saeem/seperation/images/eventLogo.png" alt="not found"> -->
-                 </div>
-             </div>
-         </div>
+         
          <div style="clear:both;margin-top:20px">
              <div id="eventsBottom" >
              </div>
@@ -84,11 +55,11 @@
              alert(err.Message)
          }
      });
-     $('#fullEvent').hide();
+    //  $('#fullEvent').hide();
 
-     function eShowMore() {
-         $('#AllEvents , #fullEvent').toggle();
-     };
+    //  function eShowMore() {
+    //      $('#AllEvents , #fullEvent').toggle();
+    //  };
 
      function designEventsAd(dataArray, count) {
          var j = -1;
@@ -105,7 +76,7 @@
      }
 
      function createAdInAllEvent(dataArray, count, row) {
-         $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./images/Hossain.jpeg  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['name'] + '</h5> <p class="card-text">' + dataArray[count]["Dated"] + '</p><p class="card-text">' + dataArray[count]["Description"].substring(0, 150) + '<button onClick="eShowMore()" class="btn" style="color:red;text-decoration: underline;">Read More..</button></p></div></td>');
+         $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./images/Hossain.jpeg  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['name'] + '</h5> <p class="card-text">' + dataArray[count]["Dated"] + '</p><p class="card-text">' + dataArray[count]["Description"].substring(0, 150) + '<button class="btn" style="color:red;text-decoration: underline;"><a href="./FullEvent.php">Read More..</a></button></p></div></td>');
      }
      $(function() {
          $("#eventsNav").load("nav.php");

@@ -2,7 +2,7 @@
 require './accessDatabase.php';
 $Myarray = [];
 $data = [];
-$sql = "SELECT * FROM clubevents WHERE Dated  > \"" .date("Y-m-d"). "\" order by Dated DESC";
+$sql = "SELECT name,Dated,EventHeadImg FROM clubevents WHERE Dated  > \"" .date("Y-m-d"). "\" order by Dated DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -22,7 +22,7 @@ if ($result->num_rows > 0) {
     array_push($data,$row);
   }
 } 
-$Myarray[1]= $data;
+array_push($Myarray, $data);
 // echo "</br>";
 echo json_encode($Myarray);
 $conn->close();
