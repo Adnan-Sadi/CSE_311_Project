@@ -6,6 +6,8 @@ $username = "root";
 $password = "";
 $dbname = "myDB";
 
+$ok =  $_POST["visitingClubName"];
+// echo "$ok";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -27,5 +29,6 @@ if ($result->num_rows > 0) {
 
 
 echo json_encode($Myarray);
+// echo "$ok";
 $conn->close();
 ?>
