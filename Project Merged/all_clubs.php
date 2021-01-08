@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +26,7 @@
             <div class="col-md-3">
                 <div class="club-box">
                     <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
+                    <a id="c_name1" value="ACMS" href="Club page/Club_main.php">ACM</a>
                     <p>
                         The royal family of the dynasty begins to decay, corruption
                         becomes rampant in the imperial court, and the empire begins to
@@ -33,7 +37,7 @@
             <div class="col-md-3">
                 <div class="club-box">
                     <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
+                    <a id="c_name2" href="Club page/Club_main.php">club name</a>
                     
                     <p>
                         The royal family of the dynasty begins to decay, corruption
@@ -45,7 +49,7 @@
             <div class="col-md-3">
                 <div class="club-box">
                     <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
+                    <a id="c_name3" href="Club page/Club_main.php">club name</a>
                     
                     <p>
                         The royal family of the dynasty begins to decay, corruption
@@ -162,3 +166,10 @@
 </body>
 
 </html>
+<script>
+$("#c_name1").click(function(){
+    console.log($("#c_name1").val);
+    // alert("100%");
+    <?php $_SESSION["visitingClubName"] = "ACM" ?>
+})
+</script>

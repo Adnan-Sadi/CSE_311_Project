@@ -1,3 +1,8 @@
+<!-- <?php
+//  $session_start();
+
+?> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +17,7 @@
 <body>
 <div id="fullEventNav"></div>
 <div id="fullEvent" class="container">
-             <Button onclick="eShowMore()" class="btn btn-block btn-danger"><b> Back</b></Button>
+             <!-- <Button onclick="eShowMore()" class="btn btn-block btn-danger"><b> Back</b></Button> -->
              <div class="container-center">
                  <img src="/Project Main Saeem/seperation/images/eventLogo.png" alt="not found">
                  <p>
@@ -46,6 +51,10 @@
 </html>
 
 <script>
+
+console.log(<?php echo $_SESSION["visitingClubName"] ?>);
+console.log("<?php echo $_SESSION["visitingClubName"] ?>");
+alert("OK");
      $.ajax({
          type: 'POST',
          url: './database/getAllEvents.php',

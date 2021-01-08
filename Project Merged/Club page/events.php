@@ -1,9 +1,14 @@
+<?php
+// session_start();
+// echo $_SESSION["clubName"];
+?> 
+ 
+ <!DOCTYPE html>
  <style>
      #eventsBottom :hover{
          background-color: white;
      }
  </style>
- <!DOCTYPE html>
  <html lang="en">
 
  <head>
@@ -42,6 +47,7 @@
  <script>
      $.ajax({
          type: 'POST',
+         data: { visitingClubName : '<?php echo "ACM" ?>' },
          url: './database/getAllEvents.php',
          dataType: 'json',
          cache: false,
