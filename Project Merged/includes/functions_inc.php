@@ -142,7 +142,8 @@ function loginUser($conn,$username,$pwd){
 
 //google signup functions
 function googleUserExists($conn,$email){
-       $sql = "SELECT Email FROM google_users WHERE Email = '$email'";
+       $sql = "SELECT Email FROM google_users 
+               WHERE Email = '$email'";
 
        $result = mysqli_query($conn,$sql);
 
@@ -189,14 +190,15 @@ function AddNewMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$
     mysqli_stmt_close($stmt);
     
 }
-//Add new Exec Member
+//Add new Executive Member
 function AddNewExecMember($conn,$stdId,$clubId,$image){
 
-    $sql = "SELECT m_id FROM members WHERE NsuId = '$stdId' AND ClubId='$clubId';";
+    $sql = "SELECT m_id FROM members 
+            WHERE NsuId = '$stdId' AND ClubId='$clubId';";
     $result = mysqli_query($conn,$sql);
 
     if(!empty($result)){
-       echo "Success.";
+       echo "";
     }
     else{
         echo "Error1!" . mysqli_error($conn);
@@ -208,7 +210,7 @@ function AddNewExecMember($conn,$stdId,$clubId,$image){
     $sql = "INSERT INTO executive_members(m_id,Photo) VALUES ('$m_id','$image');";
     $result=mysqli_query($conn,$sql);
     if(!empty($result)){
-        echo "Image Inserted.";
+        echo "";
     }
     else{
         echo "Error2!" . mysqli_error($conn);
@@ -240,8 +242,19 @@ function UpdateMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$
     }
 
     mysqli_stmt_close($stmt);
-    exit();
 
+}
+
+//Update Executive Member
+function UpdateExecMember($conn,$stdId,$clubId,$image){
+     
+    $sql = "UPDATE executive_members 
+            SET Photo = '$image' 
+            WHERE m_id= (SELECT m_id 
+                         FROM members 
+                         WHERE NsuId = '$stdId' AND ClubId='$clubId')";
+    
+    mysqli_query($conn,$sql);
 
 }
 

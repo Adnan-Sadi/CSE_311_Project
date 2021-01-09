@@ -10,17 +10,32 @@ $(document).ready(function(){
       type: "POST"
     },
     "columnDefs": [{
-      "targets": [ 0,1,2,3, 4, 5],
+      "targets": [ 5,6],//stops ordering on column 5 and 6
       "orderable": false,
     },],
+    "language": {
+      "searchPlaceholder": "Name,Id,Department Or Position",//placeholder for search field
+    },
 
+    initComplete: function () {
+      $('.dataTables_filter input[type="search"]').css({ 'width': '300px', 'display': 'inline-block' }); //changing search box css
+    },
   });
-
+    
+    
     $('#add_button').click(function () {
     $('#user_form')[0].reset();
     $('.modal-title').text("Add User");
     $('#action').val("Add");
     $('#operation').val("Add");
+  });
+
+  $('#add_button2').click(function () {
+    $('#exec_user_form')[0].reset();
+    $('.modal-title').text("Add User");
+    $('#action2').val("Add_exc");
+    $('#operation2').val("Add_exc");
+    $('#mem_uploaded_image').html('');
   });
 
 
@@ -56,7 +71,7 @@ $(document).ready(function(){
     }
   });
 
-
+  //for adding executive_member
   $(document).on('submit', '#exec_user_form', function (event) {
     event.preventDefault();
     var memName = $('#name2').val();
@@ -119,6 +134,32 @@ $(document).ready(function(){
         $('#user_id').val(user_id);
         $('#action').val("Edit");
         $('#operation').val("Edit");
+      }
+    })
+  });
+
+  $(document).on('click', '.update2', function () {
+    var user_id2 = $(this).attr("id");
+    $.ajax({
+      url: "./includes/fetch_single.php",
+      method: "POST",
+      data: { user_id2: user_id2 },
+      dataType: "json",
+      success: function (data) {
+        //updating modal attribute values
+        $('#execUserModal').modal('show');
+        $('#name2').val(data.Name);
+        $('#id2').val(data.NsuId);
+        $('#dept_id2').val(data.Dept_id);
+        $('#email2').val(data.Email);
+        $('#phone2').val(data.PhoneNum);
+        $('#position2').val(data.Position);
+        $('#date_joined2').val(data.Date_Joined);
+        $('.modal-title').text("Edit User");
+        $('#user_id2').val(user_id2);
+        $('#mem_uploaded_image').html(data.mem_image)
+        $('#action2').val("Edit");
+        $('#operation2').val("Edit");
       }
     })
   });

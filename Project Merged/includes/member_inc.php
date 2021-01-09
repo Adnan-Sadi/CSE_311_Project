@@ -52,6 +52,25 @@ if(isset($_POST["operation"])){
        AddNewMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$date_joined);
        AddNewExecMember($conn,$stdId,$clubId,$image);
     }
+
+      if($_POST["operation2"] == "Edit"){
+
+        $mem_id = $_POST["user_id2"];  
+        $image = '';
+
+          if($_FILES["mem_image"]["name"] != '')
+          {
+           $image = upload_mem_image();
+          }
+          else{
+            $image = $_POST["hidden_user_image"];
+          }
+
+          UpdateMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$date_joined,$mem_id);
+          UpdateExecMember($conn,$stdId,$clubId,$image);
+       
+    }
+
   }
 
 ?>

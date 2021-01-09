@@ -278,8 +278,9 @@ body{
   font-size: 1.3em;
   text-transform: uppercase;
   background-color: #000;
-  color: #fff;
-  opacity: .5;
+  color	:#F0FFFF;
+  font-weight: 500;
+
   
 }
 

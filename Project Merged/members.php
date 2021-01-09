@@ -87,7 +87,7 @@
                         <input type="text" name="date_joined2" id="date_joined2" class="form-control" placeholder="yyyy-mm-dd"><br>
                         <label>Select Member Image</label><br>
                         <input type="file" name="mem_image" id="mem_image">
-                        <span id="uploaded_image"></span>
+                        <span id="mem_uploaded_image"></span>
                 
                      </div>
 
@@ -108,13 +108,23 @@
             <div class="row">
 
             <?php 
-            $result2 = mysqli_query($conn, "SELECT name,title,image FROM executive_members WHERE club_id = '$postID'");
+            $result2 = mysqli_query($conn, "SELECT name,NsuId,Position,Photo 
+                                            FROM executive_members Natural JOIN members 
+                                            WHERE clubId = '$postID'"); // Use of Natural join
 
             while ($memData2 = mysqli_fetch_assoc($result2) ) {
 
-              echo "<div class=\"col-md-4\">".
-              "<div id=\"people_tile\"><img id=\"mem_img\" src=\"" . $memData2["image"] . "\" alt=\"\"><span>".$memData2['name']."<br>".$memData2['title']."</span></div> 
-              </div>";  
+              echo "<div class='col-md-4'>".
+              "<div id='people_tile'>
+              <img id='mem_img' src='images/Executive_Members/" . $memData2["Photo"] . "' alt=''>
+              <span>".$memData2['name']."<br>".$memData2['Position']."</span>
+              </div>
+              <div align=right>
+              <button type = 'button' name ='update2' id='".$memData2["NsuId"]."' class='btn btn-warning btn-xs update2'>Update</button>
+              <button type = 'button' name ='delete2' id='".$memData2["NsuId"]."' class='btn btn-danger btn-xs delete'>Delete</button></div>   
+              </div>
+           
+              ";         
             }
             
             ?>
@@ -124,10 +134,11 @@
 
         <section>
             <div id="all_mem" class="text-left">All Members</div><br/><br/> 
-              
-              <div align="right">
-                <button type="button" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-info btn-md">Add</button>
-              </div><br/>
+ 
+                    <div align="right">
+                       <button type="button" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-info btn-md">Add</button><br>
+                    </div>
+                  
 
               <div id="userModal" class="modal fade">
                 <div class="modal-dialog">
@@ -194,9 +205,10 @@
                        <thead>
                           <tr>
                            <th width="20%">Name</th>
-                           <th width="20%">Id</th>
+                           <th width="10%">Id</th>
                            <th width="20%">Department</th>
-                           <th width="20%">Position</th>
+                           <th width="15%">Position</th>
+                           <th width="15%">Joined On</th>
                            <th width="10%">Edit</th>
                            <th width="10%">Delete</th>
                           </tr>
