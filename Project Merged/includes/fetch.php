@@ -12,7 +12,7 @@ $query .= "SELECT Name,NsuId,Dept_Name,
             FROM members m 
             INNER JOIN departments d
             ON m.dept_id = d.dept_id
-            WHERE ClubId ='$clubNum' "; //using correlated subquery 
+            WHERE ClubId ='$clubNum' "; //using INNER JOIN
 
 //taking values from search box inside the table
 if(isset($_POST["search"]["value"])){
@@ -47,7 +47,7 @@ $filtered_rows = mysqli_num_rows($stmt);//getting number of rows returned
 while($row=mysqli_fetch_assoc($stmt)){
     $sub_array = array();
 
-    $sub_array[] = $row["Name"];
+    $sub_array[] = "<a href='Full_mem_info.php?NsuId=". $row["NsuId"] ."' id='".$row["NsuId"]."'>".$row["Name"]."</a>";
     $sub_array[] = $row["NsuId"];
     $sub_array[] = $row["Dept_Name"];
     $sub_array[] = $row["Position"];

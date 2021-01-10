@@ -20,13 +20,6 @@
   $_SESSION["mem_rows"] = mysqli_num_rows($result);
   $_SESSION["club_number"] = $postID;
 
-  if(mysqli_num_rows($result)>0){
-    
-  }
-  else{
-    redirect();
-  }
-
 
 ?>
 
@@ -115,7 +108,7 @@
             while ($memData2 = mysqli_fetch_assoc($result2) ) {
 
               echo "<div class='col-md-4'>".
-              "<div id='people_tile'>
+              "<div id='people_tile' onclick = 'location.href=\"Full_mem_info.php?NsuId=".$memData2["NsuId"]."\";'>
               <img id='mem_img' src='images/Executive_Members/" . $memData2["Photo"] . "' alt=''>
               <span>".$memData2['name']."<br>".$memData2['Position']."</span>
               </div>
