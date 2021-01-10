@@ -346,5 +346,17 @@ body{
 
 /*Member Page Ends*/
 
+/*All_club page starts*/
+
+#club_name:hover{
+  color:blue;
+}
+
+.media-body{
+  height: 100px;
+  overflow: auto; 
+}
+
+
 
 

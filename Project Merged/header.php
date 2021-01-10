@@ -58,24 +58,7 @@ session_start();
         </div>
     </div>
 
-    <div id="div1" style="width:90px; height:60px; display:none; background-color:beige; "></div>
-   <!-- <script>
-        $(function() {
-            $("input").on("keypress", function() {
-                var insearch = $("item").val();
-                $.ajax({
-                        method: "post",
-                        url: "index.php",
-                        data: {
-                            name: insearch
-                        }
-                    })
-                    .done(function(data) {
-                        $("#div1").html(data);
-                    })
-            });
-        });
-    </script> -->
+
 </body>
 
 </html>

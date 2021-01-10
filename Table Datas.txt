@@ -33,3 +33,15 @@ INSERT INTO members(Name,NsuId,ClubId,Dept_Id,Email,PhoneNum,Position,Date_Joine
 ('Rick','1932333503','1','8','rick@hotmail.com','0193242197','General Member','2019-10-17'),
 ('Kaley','1732388703','1','12','Kaley@gmail.com','0172093200','Probationary Member','2018-01-21'),
 ('Yennefer','1632499703','1','15','Yenn@gmail.com','0162093200','Senior Member','2018-06-11');
+
+
+Clubs Table
+
+INSERT INTO clubs(Club_Name,Description,Club_logo,Club_fname) VALUES 
+('SS','Some Paragraph','nsu_ss_logo.jpg','Shangskritik Shangathan'),
+('CEC','Some Paragraph','nsu_cec_logo.jpg','Computer & Engineering Club'),
+('AC','Some Paragraph','nsu_nusac_logo.png','Athletics Club'),
+('CDC','Some Paragraph','nsu_cdc_logo.jpg','Cine and Drama Club'),
+('SSC','Some Paragraph','nsu_ssc_logo.jpg','Social Services Club'),
+('IEEE','Some Paragraph','nsu_ieee_logo.jpg','Institute of Electrical and Electronics Engineers'),
+('DC','Some Paragraph','nsu_dc_logo.png','Debate Club')
