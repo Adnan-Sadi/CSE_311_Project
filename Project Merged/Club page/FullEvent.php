@@ -54,7 +54,7 @@
 
 console.log(<?php echo $_SESSION["visitingClubName"] ?>);
 console.log("<?php echo $_SESSION["visitingClubName"] ?>");
-alert("OK");
+// alert("OK"); 
      $.ajax({
          type: 'POST',
          url: './database/getAllEvents.php',
@@ -67,7 +67,7 @@ alert("OK");
          },
          error: function(xhr, status, error) {
              var err = eval("(" + xhr.responseText + ")");
-             alert(err.Message)
+            //  alert(err.Message)
          }
      });
     //  $('#fullEvent').hide();

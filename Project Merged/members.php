@@ -1,10 +1,10 @@
 <?php 
   include_once 'header.php';
 
-  function redirect(){
-       header("location: index.php");
-       exit();
-  }
+  // function redirect(){
+  //      header("location: index.php");
+  //      exit();
+  // }
 
   if(!isset($_GET['id'])){
     redirect();

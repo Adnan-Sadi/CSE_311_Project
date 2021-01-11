@@ -1,5 +1,5 @@
 <?php 
-session_start();
+// session_start();
 ?>
 
 <!DOCTYPE html>
@@ -167,9 +167,9 @@ session_start();
 
 </html>
 <script>
-$("#c_name1").click(function(){
-    console.log($("#c_name1").val);
-    // alert("100%");
-    <?php $_SESSION["visitingClubName"] = "ACM" ?>
-})
+// $("#c_name1").click(function(){
+//     console.log($("#c_name1").val);
+//     // alert("100%");
+    // <?php $_SESSION["visitingClubName"] = "ACM" ?>
+// })
 </script>
