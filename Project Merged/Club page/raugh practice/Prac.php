@@ -1,28 +1,20 @@
-<?php
-// Start the session
-session_start();
-?>
 <!DOCTYPE html>
-<html>
-<script src="../../js/jquery-3.5.1.min.js"></script>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
 <body>
-
-<?php
-// Set session variables
-$_SESSION["favcolor"] = "green";
-$_SESSION["favanimal"] = "cat";
-$_SESSION["clubName"] = "ACM";
-echo "Session variables are set.";
-?>
-<button id="ok"><a href="FullEvent"></a></button>
-
+   <form action="" method="POST">
+   <input name="OK" type="text">
+   <button name="but" type="submit" >button</button>
+   </form>
 </body>
 </html>
-<script>
-$("#ok").click(function(){
-   <?php 
-      $_SESSION["clubName"]=
-      ?>
+
+<?php
+if(isset($_POST['but'])){
+   echo "Go for it";
 }
-);
-</script>
+?>

@@ -170,6 +170,8 @@ CREATE TABLE Events(
   EventName VARCHAR(128) NOT NULL,
   EventDescription VARCHAR(512),
   Date DATE NOT NULL,
+  eventDP INT(10),
+  FOREIGN KEY (eventDP) REFERENCES eventphotos(PhotoId)
   FOREIGN KEY(ClubId) REFERENCES clubs(ClubId) 
                  ON DELETE CASCADE
                  ON UPDATE CASCADE
@@ -230,3 +232,12 @@ CREATE TABLE Videos_Archive(
   CONSTRAINT Unic_Photo UNIQUE(VideoId,EventID)
 );
 
+Club_Links :
+
+CREATE TABLE Club_Links(
+    id INT(3),
+    link VARCHAR(128) NOT NULL,
+    CONSTRAINT unic_link UNIQUE(id,link),
+	FOREIGN KEY(id) REFERENCES clubs(ClubId) 
+                 ON DELETE CASCADE 
+                 ON UPDATE CASCADE);

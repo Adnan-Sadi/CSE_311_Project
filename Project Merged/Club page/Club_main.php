@@ -19,15 +19,7 @@ session_start();
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="/seperation/fontawesome-free-5.15.1-web/css/all.css" >
-    <link href="/seperation/fontawesome-free-5.15.1-web/css/fontawesome.css" rel="stylesheet">
-    <link href="/seperation/fontawesome-free-5.15.1-web/css/brands.css" rel="stylesheet">
-    <link href="/seperation/fontawesome-free-5.15.1-web/css/solid.css" rel="stylesheet">
-    <script defer src="/seperation/fontawesome-free-5.15.1-web/js/all.js"></script> 
-    <!-- <script defer src="/seperation/fontawesome-free-5.15.1-web/js/brands.js"></script>
-  <script defer src="/seperation/fontawesome-free-5.15.1-web/js/solid.js"></script>
-  <script defer src="/seperation/fontawesome-free-5.15.1-web/js/fontawesome.js"></script> --> 
-  <!-- <link rel="stylesheet" href="	https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <style>
    
@@ -69,7 +61,6 @@ session_start();
    
     <script>
 
-alert("OK");
 //         function onSignIn(googleUser) {
 //   var profile = googleUser.getBasicProfile();
 //   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.

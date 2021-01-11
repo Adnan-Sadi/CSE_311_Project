@@ -1,29 +1,15 @@
 <?php
 require './accessDatabase.php';
-$Myarray = [];
-$data = [];
-$sql = "SELECT name,Dated,EventHeadImg FROM clubevents WHERE Dated  > \"" .date("Y-m-d"). "\" order by Dated DESC";
-$result = $conn->query($sql);
+$Myarray =  array();
+$sql = "SELECT EventName as 'name', Date  FROM events WHERE  Date  >= \"" .date("Y-m-d"). "\" order by Date DESC";
+// echo ($sql);
 
-if ($result->num_rows > 0) {
-  // output data of each row
-  while($row = $result->fetch_assoc()) {
-    array_push($data,$row);
-  }
-} 
-array_push($Myarray, $data);
-$data = [];
-$sql = "SELECT name,Dated,EventHeadImg FROM clubevents WHERE Dated < \"" .date("Y-d-m"). "\" order by Dated DESC";
-$result = $conn->query($sql);
+array_push($Myarray, inQuery($sql,$dbname = "nsu_clubs"));
+// $data = [];
+$sql = "SELECT EventName as 'name', Date  FROM events WHERE Date  < \"" .date("Y-m-d"). "\" order by Date DESC";
 
-if ($result->num_rows > 0) {
-  // output data of each row
-  while($row = $result->fetch_assoc()) {
-    array_push($data,$row);
-  }
-} 
-array_push($Myarray, $data);
+array_push($Myarray, inQuery($sql,$dbname = "nsu_clubs"));
 // echo "</br>";
 echo json_encode($Myarray);
-$conn->close();
+// $conn->close();
  ?>
