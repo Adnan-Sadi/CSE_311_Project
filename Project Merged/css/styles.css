@@ -322,6 +322,8 @@ body{
 
 #mem_info{
     list-style-type: none;
+    width:700px;
+    margin: 0 auto;
     
 }
 #mem_info li{

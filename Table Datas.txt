@@ -34,6 +34,30 @@ INSERT INTO members(Name,NsuId,ClubId,Dept_Id,Email,PhoneNum,Position,Date_Joine
 ('Kaley','1732388703','1','12','Kaley@gmail.com','0172093200','Probationary Member','2018-01-21'),
 ('Yennefer','1632499703','1','15','Yenn@gmail.com','0162093200','Senior Member','2018-06-11');
 
+INSERT INTO members(Name,NsuId,ClubId,Dept_Id,Email,PhoneNum,Position,Date_Joined) VALUES 
+('Willie Ford','1813131710','2','2','Ford@yahoo.com','01819247366','General Member','2018-06-17'),
+('Carla Gross','1920431890','2','2','Carla @hotmail.com','01919252714','Senior Member','2017-01-18'),
+('Shawna Zimmerman','1815869278','2','1','Zimmerman@yahoo.com','01711402772','General Member','2018-09-08'),
+('Rose Mcdonald','1737486756','2','1','Mcdonald@gmail.com','01715765210','Probationary Member','2020-01-28'),
+('Elisa Nunez','1729450734','2','9','Nunez@gmail.com','01716091800','Senior Member','2018-06-18'),
+('Tami Summers','1610547112','2','10','Summers@yahoo.com','01819221547','Probationary Member','2017-11-11'),
+('Camille James','1923340990','2','1','James@hotmail.com','01911568083','Senior Member','2015-09-27'),
+('Evelyn Crawford','1934851278','2','1','Crawford@yahoo.com','01911815618','Senior Member','2019-06-01'),
+('Ebony Reed','1822947756','2','5','Ebony@hotmail.com','01817031515','General Member','2019-10-17'),
+('Deborah Joseph','1714241834','2','13','Deborah @gmail.com','01611966414','Probationary Member','2018-01-21'),
+
+('Lindsey Campbell','1816869012','9','1','Lindsey@gmail.com','01819843847','Senior Member','2018-06-11'),
+('Calvin Lane','1813131710','3','9','lane@yahoo.com','01711901456','General Member','2018-06-11'),
+('Alonzo Wilkerson','1920431890','3','2','Alonzo@hotmail.com','01819146262','Senior Member','2017-01-14'),
+('Rene Ellis','1815869278','3','5','Ellisn@yahoo.com','01611484384','General Member','2018-09-01'),
+('Michele Carson','1737486756','3','9','Carson@gmail.com','01819251431','Probationary Member','2020-01-20'),
+('Becky Conner','1729450734','3','9','Becky@gmail.com','01711643745','Senior Member','2018-06-18'),
+('Donald Burns','1610547112','3','10','Burns@yahoo.com','01911004592','Probationary Member','2017-11-19'),
+('Camille James','1923340990','3','1','James1@hotmail.com','01819239065','Senior Member','2015-09-17'),
+('Justin Leonard','1934851278','3','1','Leonard@yahoo.com','01615436278','Senior Member','2019-06-11'),
+('Guadalupe Powell','1822947756','3','5','Guadalupe@hotmail.com','01917270447','General Member','2019-10-07'),
+('Hazel Cohen','1714241834','3','13','Cohen@gmail.com','01611949570','Probationary Member','2018-01-21');
+
 
 Clubs Table
 
