@@ -41,7 +41,7 @@ $(document).ready(function(){
 
   //when a new member is being added
   $(document).on('submit', '#user_form', function (event) {
-    event.preventDefault();
+    event.preventDefault();//stops the summission of form
     var memName = $('#name').val();
     var stdId = $('#id').val();
     var dept = $('#dept_id').val();
@@ -55,7 +55,7 @@ $(document).ready(function(){
       $.ajax({
         url: "./includes/member_inc.php",
         method: 'POST',
-        data: new FormData(this),
+        data: new FormData(this),//passing form data through ajax
         contentType: false,
         processData: false,
         success: function (data) {
@@ -73,7 +73,7 @@ $(document).ready(function(){
 
   //for adding executive_member
   $(document).on('submit', '#exec_user_form', function (event) {
-    event.preventDefault();
+    event.preventDefault();//stops the summission of form
     var memName = $('#name2').val();
     var stdId = $('#id2').val();
     var dept = $('#dept_id2').val();
@@ -97,7 +97,7 @@ $(document).ready(function(){
       $.ajax({
         url: "./includes/member_inc.php",
         method: 'POST',
-        data: new FormData(this),
+        data: new FormData(this),//passing form data through ajax
         contentType: false,
         processData: false,
         success: function (data) {
@@ -183,6 +183,82 @@ $(document).ready(function(){
     }
   });
   
+  //following a club
+  $(document).on('click', '.follow_club', function () {
+    var club_id = $(this).attr("id");
+    $.ajax({
+      url: "./includes/follow_club.php",
+      method: "POST",
+      data: { club_id: club_id },
+      success: function (data) {
+         
+         window.location.reload();//reloads page
+      }
+    })
+  });
+
+  //unfollowing a club
+  $(document).on('click', '.unfollow_club', function () {
+    var club_id = $(this).attr("id");
+    $.ajax({
+      url: "./includes/unfollow_club.php",
+      method: "POST",
+      data: { club_id: club_id },
+      success: function (data) {
+        
+        window.location.reload();//reloads page
+      }
+    })
+  });
+  
+  //Filling the modal fields with existing values
+  //for editing user info
+  $(document).on('click', '.edit_button', function () {
+    var user_id = $(this).attr("id");
+    $.ajax({
+      url: "./includes/fetch_single_user.php",
+      method: "POST",
+      data: { user_id: user_id },
+      dataType: "json",
+      success: function (data) {
+        //updating modal attribute values
+        $('#Edit_User_Modal').modal('show');
+        $('#fname').val(data.First_Name);
+        $('#lname').val(data.Last_Name);
+        $('#alt_email').val(data.Alt_Email);
+      }
+    })
+  });
+  
+
+  $(document).on('submit', '#edit_user_form', function (event) {
+    event.preventDefault();//stops the summission of form
+
+    var lname = $('#lname').val();
+    var username = $('#username').val();
+    
+
+
+    //check if any field is empty
+    if (lname != '' && username != '') {
+      $.ajax({
+        url: "./includes/update_user_info.php",
+        method: 'POST',
+        data: new FormData(this),//passing form data through ajax
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          alert(data);
+          $('#edit_user_form')[0].reset();
+          $('#Edit_User_Modal').modal('hide');
+          window.location.reload();//reloads page
+        }
+      });
+    }
+    else {
+      alert("Please fill all necessary fields.");
+    }
+  });
 
 
 });

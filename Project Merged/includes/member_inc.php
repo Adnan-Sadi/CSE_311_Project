@@ -30,7 +30,7 @@ if(isset($_POST["operation"])){
   if(isset($_POST["operation2"])){
 
 
-    $name       = $_POST["name2"];
+      $name       = $_POST["name2"];
       $stdId      = $_POST["id2"];
       $clubId     = $_SESSION["club_number"];
       $dept       = $_POST["dept_id2"];
