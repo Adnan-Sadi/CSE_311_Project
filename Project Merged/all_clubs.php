@@ -76,7 +76,7 @@
          <li class='media'>
          <img class='mr-3' src='images/".$row["Club_logo"]."' alt='Generic placeholder image' width='64' height='64'>
          <div class='media-body'>
-         <h5 class='mt-0 mb-1 mr-2 float-left' id='club_name' onclick='location.href=\"Club page/Club_main.php?shortname=".$row["Club_Name"]."\";'>".$row["Club_fname"]."</h5>
+         <h5 class='mt-0 mb-1 mr-2 float-left' id='club_name' onclick='location.href=\"Club page/Club_main.php?Id=".$row["ClubId"]."\";'>".$row["Club_fname"]."</h5>
          
          <button type='button' class='btn btn-outline-danger btn-sm unfollow_club' id='".$row["ClubId"]."'>Unfollow</button><br>
          ".$row["Description"]."
@@ -91,7 +91,7 @@
          <li class='media'>
          <img class='mr-3' src='images/".$row["Club_logo"]."' alt='Generic placeholder image' width='64' height='64'>
          <div class='media-body'>
-         <h5 class='mt-0 mb-1 mr-2 float-left' id='club_name' onclick='location.href=\"Club page/Club_main.php?shortname=".$row["Club_Name"]."\";'>".$row["Club_fname"]."</h5>
+         <h5 class='mt-0 mb-1 mr-2 float-left' id='club_name' onclick='location.href=\"Club page/Club_main.php?Id=".$row["ClubId"]."\";'>".$row["Club_fname"]."</h5>
          
          <button type='button' class='btn btn-outline-success btn-sm follow_club' id='".$row["ClubId"]."'>Follow</button><br>
          ".$row["Description"]."
@@ -110,7 +110,7 @@
          <li class='media'>
          <img class='mr-3' src='images/".$row["Club_logo"]."' alt='Generic placeholder image' width='64' height='64'>
          <div class='media-body'>
-         <h5 class='mt-0 mb-1 mr-2' id='club_name' onclick='location.href=\"Club page/Club_main.php?shortname=".$row["Club_Name"]."\";'>".$row["Club_fname"]."</h5>
+         <h5 class='mt-0 mb-1 mr-2' id='club_name' onclick='location.href=\"Club page/Club_main.php?Id=".$row["ClubId"]."\";'>".$row["Club_fname"]."</h5>
          
          ".$row["Description"]."
          </div>
