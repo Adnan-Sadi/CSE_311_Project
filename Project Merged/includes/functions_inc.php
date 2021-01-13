@@ -78,13 +78,26 @@ function uidExists($conn,$username,$email){
     mysqli_stmt_close($stmt);
 }
 
-function createUser($conn,$fname,$lname,$email,$username,$pwd){
+//For uploading user image
+function upload_user_image(){
+          
+       if(isset($_FILES["user_image"]))
+       {
+        $extension = explode('.', $_FILES['user_image']['name']);//breaks the image name into an array
+        $new_name = rand() . '.' . $extension[1];//generates a new name for the image
+        $destination = '../images/Profile_Pictures/' . $new_name;
+        move_uploaded_file($_FILES['user_image']['tmp_name'], $destination);//moving file to destination folder
+        return $new_name;
+       }
+}
+
+function createUser($conn,$fname,$lname,$email,$username,$pwd,$image){
     
     if(empty($fname)){
       $fname = NULL;
     }
 
-    $sql= "INSERT INTO users(UserName,First_Name,Last_Name,Email,Password) values(?,?,?,?,?);" ;
+    $sql= "INSERT INTO users(UserName,First_Name,Last_Name,Email,Password,Image) values(?,?,?,?,?,?);" ;
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt,$sql)) {
         header("location: ../signup.php?error=stmtfailed");
@@ -94,7 +107,7 @@ function createUser($conn,$fname,$lname,$email,$username,$pwd){
     //encrypting the password
     $hashedPwd = password_hash($pwd,PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "sssss" ,$username,$fname,$lname,$email,$hashedPwd);
+    mysqli_stmt_bind_param($stmt, "ssssss" ,$username,$fname,$lname,$email,$hashedPwd,$image);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
@@ -133,7 +146,7 @@ function loginUser($conn,$username,$pwd){
     }
     else if($checkPwd === true){
         session_start();
-        $_SESSION["userid"] = $uidExists ["uid"];
+        $_SESSION["userEmail"] = $uidExists ["Email"];
         $_SESSION["useruid"] = $uidExists ["UserName"];
         header("location: ../index.php");
         exit();
@@ -162,6 +175,8 @@ function createGoogleUser($conn,$First_name,$Last_name,$Email){
 
     mysqli_query($conn,$sql);
 }
+
+
 
 //signup Functions Ends
 

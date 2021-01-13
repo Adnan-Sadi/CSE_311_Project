@@ -359,6 +359,20 @@ body{
   overflow: auto; 
 }
 
+/*All_club page ends*/
+
+/*Profile page starts*/
+
+#profile_image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  border: 1px solid gray;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
 
 
 

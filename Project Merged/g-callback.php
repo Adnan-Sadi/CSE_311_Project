@@ -25,7 +25,7 @@ $userData = $oAuth->userinfo_v2_me->get();
 $First_name = $userData['givenName'];
 $Last_name = $userData['familyName'];
 $Email = $userData['email'];
-$_SESSION["email"] = $userData['email'];
+$_SESSION["userEmail"] = $userData['email'];
 
 if(googleUserExists($conn,$Email) !== false){
     createGoogleUser($conn,$First_name,$Last_name,$Email);

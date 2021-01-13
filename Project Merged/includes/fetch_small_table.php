@@ -8,7 +8,7 @@ $output= array();
 $column = array('Name', 'NsuId','Dept_Name','Position', 'Date_Joined');
 $clubNum = $_SESSION["club_number"];
 $query .= "SELECT Name,NsuId,Dept_Name,
-            Position,Date_Joined,Added_On 
+            Position,Date_Joined 
             FROM members m 
             INNER JOIN departments d
             ON m.dept_id = d.dept_id
@@ -28,7 +28,7 @@ if(isset($_POST["order"])){
     $query .= 'ORDER BY '.$column[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].' '; //$_POST['order']['0']['column'] returns column number starting from 0...n
 }
 else{
-    $query .= 'ORDER BY Added_On DESC ';
+    $query .= 'ORDER BY Name ASC ';
 }
 
 //selecting table length
@@ -47,13 +47,12 @@ $filtered_rows = mysqli_num_rows($stmt);//getting number of rows returned
 while($row=mysqli_fetch_assoc($stmt)){
     $sub_array = array();
 
-    $sub_array[] = "<a href='Full_mem_info.php?NsuId=". $row["NsuId"] ."' id='".$row["NsuId"]."'>".$row["Name"]."</a>";
+    $sub_array[] = $row["Name"];
     $sub_array[] = $row["NsuId"];
     $sub_array[] = $row["Dept_Name"];
     $sub_array[] = $row["Position"];
     $sub_array[] = $row["Date_Joined"];
-    $sub_array[] = "<button type = 'button' name ='update' id='".$row["NsuId"]."' class='btn btn-warning btn-xs update'>Update</button>";
-    $sub_array[] = "<button type = 'button' name ='delete' id='".$row["NsuId"]."' class='btn btn-danger btn-xs delete'>Delete</button>";
+
 
     $data[] = $sub_array;
 

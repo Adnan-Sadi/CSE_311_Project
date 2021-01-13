@@ -37,7 +37,8 @@
                            ORDER BY mem_num ASC;";//left join is used to include all clubs in case a club has no members inserted yet
             }
             else{
-                $sql = '';
+                header("location: all_clubs.php");
+                exit();
             }
 
          $result = mysqli_query($conn,$sql);
@@ -62,6 +63,12 @@
         if(isset($_POST["filter2"])){
          
             $dept_id = $_POST["sort_dept"];
+
+            if($dept_id == 0){
+                header("location: all_clubs.php");
+                exit();
+            }
+
             $sql = "SELECT Club_Name,Description,Club_logo,Club_fname,COUNT(m_id) AS mem_num
                     FROM members m NATURAL JOIN clubs
                     WHERE Dept_Id = $dept_id

@@ -1,4 +1,6 @@
 <?php 
+require_once 'db_inc.php';
+require_once 'functions_inc.php';
 
 if(isset($_POST["submit"])){
       
@@ -8,14 +10,26 @@ if(isset($_POST["submit"])){
      $username = $_POST["userid"];
      $pwd = $_POST["pwd"];
      $pwdRepeat = $_POST["pwdrepeat"];
+     $path = $_FILES["user_image"]["name"];
+     $extension = strtolower(pathinfo($path,PATHINFO_EXTENSION));
+     $image = '';
+     
+     if($extension == 'gif' || $extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){      
+         $image = upload_user_image();
+     }
+     else{
+         header("location: ../signup.php?error=invlaidimage&extentsion=$extension");
+         exit();
+     }
+     
 
-     require_once 'db_inc.php';
-     require_once 'functions_inc.php';
+
      //checks if any field is empty
      if (emptyInputSignup($lname,$email,$username,$pwd,$pwdRepeat) !== false) {
          header("location: ../signup.php?error=emptyinput");
          exit();
      }
+
      //Checks if username is valid
      if (invalidUid($username) !== false) {
          header("location: ../signup.php?error=invaliduid");
@@ -37,7 +51,7 @@ if(isset($_POST["submit"])){
          exit();
      }
 
-     createUser($conn,$fname,$lname,$email,$username,$pwd);
+     createUser($conn,$fname,$lname,$email,$username,$pwd,$image);
 
 }
 else {
