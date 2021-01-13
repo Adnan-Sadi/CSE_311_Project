@@ -94,6 +94,39 @@
          }
 
         }
+
+        if(isset($_POST["submit_search"])){
+         
+            $search = $_POST["search"];
+
+            if($search == ''){
+                header("location: index.php?error");
+                exit();
+            }
+
+            $sql = "SELECT * 
+                    FROM clubs
+                    WHERE Club_Name LIKE '%$search%' OR
+                    Club_fname LIKE '%$search%';";
+
+         $result = mysqli_query($conn,$sql);
+         
+         while($row = mysqli_fetch_assoc($result)){
+
+            echo "
+         
+         <li class='media'>
+         <img class='mr-3' src='images/".$row["Club_logo"]."' alt='Generic placeholder image' width='64' height='64'>
+         <div class='media-body'>
+         <h5 class='mt-0 mb-1' id='club_name' onclick='location.href=\"Club page/Club_main.php?shortname=".$row["Club_Name"]."\";'>".$row["Club_fname"]."</h5>
+         ".$row["Description"]."
+         </div>
+         </li><br><br>
+            
+            ";
+         }
+
+        }
  
 
         ?>
