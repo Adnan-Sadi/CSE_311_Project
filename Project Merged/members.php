@@ -25,15 +25,19 @@
 
      <div class="container">
 
-        <h2 class="text-center">Our Members</h2>
+        <br><h2 class="text-center">Our Members</h2>
 
         <section>
             <div id="exc_body" class="text-left">Executive Body</div>
+            <?php
+             
+             if(isset($_SESSION["userEmail"])){
+             echo "<div align='right'>
+                <button type='button' id='add_button2' data-toggle='modal' data-target='#execUserModal' class='btn btn-info btn-md'>Add</button>
+              </div><br/>"; 
+             }
 
-              <div align="right">
-                <button type="button" id="add_button2" data-toggle="modal" data-target="#execUserModal" class="btn btn-info btn-md">Add</button>
-              </div><br/>
-               
+             ?>
               <!-- Modal for Adding Executive member -->
               <div id="execUserModal" class="modal fade">
                 <div class="modal-dialog">
@@ -41,7 +45,7 @@
                     <div class="modal-content">
 
                      <div class="modal-header">
-                      <h4 class="modal-title" align="center">Add User</h4>
+                      <h4 class="modal-title" align="center">Add Executive Member</h4>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                      </div>
 
@@ -111,13 +115,17 @@
               "<div id='people_tile' onclick = 'location.href=\"Full_mem_info.php?NsuId=".$memData2["NsuId"]."\";'>
               <img id='mem_img' src='images/Executive_Members/" . $memData2["Photo"] . "' alt=''>
               <span>".$memData2['name']."<br>".$memData2['Position']."</span>
-              </div>
-              <div align=right>
+              </div>";
+
+              if(isset($_SESSION["userEmail"])){
+              echo "<div align=right>   
               <button type = 'button' name ='update2' id='".$memData2["NsuId"]."' class='btn btn-warning btn-xs update2'>Update</button>
-              <button type = 'button' name ='delete2' id='".$memData2["NsuId"]."' class='btn btn-danger btn-xs delete'>Delete</button></div>   
-              </div>
+              <button type = 'button' name ='delete2' id='".$memData2["NsuId"]."' class='btn btn-danger btn-xs delete'>Delete</button></div>";
+              }
+
+             echo "</div>";
            
-              ";         
+                       
             }
             
             ?>
@@ -127,19 +135,20 @@
 
         <section>
             <div id="all_mem" class="text-left">All Members</div><br/><br/> 
- 
-                    <div align="right">
-                       <button type="button" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-info btn-md">Add</button><br>
-                    </div>
-                  
-
+                 <?php 
+                  if(isset($_SESSION["userEmail"])){
+                    echo "<div align='right'>
+                       <button type='button' id='add_button' data-toggle='modal' data-target='#userModal' class='btn btn-info btn-md'>Add</button><br>
+                    </div>";
+                  }
+                 ?>
               <div id="userModal" class="modal fade">
                 <div class="modal-dialog">
                    <form method="post" id="user_form" enctype="multipart/form-data">
                     <div class="modal-content">
 
                      <div class="modal-header">
-                      <h4 class="modal-title" align="center">Add User</h4>
+                      <h4 class="modal-title" align="center">Add Member</h4>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                      </div>
 
@@ -193,21 +202,41 @@
               </div>
 
                 
-                <div class="table-responsive"> 
-                   <table id="member_table" class="table table-bordered table-striped ">
+                <div class="table-responsive">
+                   <?php
+                   if(isset($_SESSION["userEmail"])){ 
+                    echo "
+                    <table id='member_table' class='table table-bordered table-striped'>
                        <thead>
                           <tr>
-                           <th width="20%">Name</th>
-                           <th width="10%">Id</th>
-                           <th width="20%">Department</th>
-                           <th width="15%">Position</th>
-                           <th width="15%">Joined On</th>
-                           <th width="10%">Edit</th>
-                           <th width="10%">Delete</th>
+                           <th width='20%'>Name</th>
+                           <th width='10%'>Id</th>
+                           <th width='20%'>Department</th>
+                           <th width='15%'>Position</th>
+                           <th width='15%'>Joined On</th>
+                           <th width='10%'>Edit</th>
+                           <th width='10%'>Delete</th>
                           </tr>
                         </thead>
-                   </table>                                
-                
+                   </table>
+                   ";
+                   }
+                   else{
+                    echo "
+                    <table id='member_table_small' class='table table-bordered table-striped'>
+                       <thead>
+                          <tr>
+                           <th width='20%'>Name</th>
+                           <th width='10%'>Id</th>
+                           <th width='30%'>Department</th>
+                           <th width='25%'>Position</th>
+                           <th width='15%'>Joined On</th>
+                          </tr>
+                        </thead>
+                   </table>
+                   "; 
+                   }                                
+                  ?>
                 </div> 
 
                 

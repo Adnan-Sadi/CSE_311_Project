@@ -55,9 +55,10 @@
 
         <ul class="list-unstyled">
 
-        <?php 
-         $userEmail = $_SESSION["userEmail"];
-         
+        <?php
+        if(isset($_SESSION["userEmail"])){
+           $userEmail = $_SESSION["userEmail"];
+
          while($row = mysqli_fetch_assoc($result)){
 
          $clubId = $row["ClubId"];
@@ -100,6 +101,25 @@
          }
 
          }
+        }
+        else{
+         
+         while($row = mysqli_fetch_assoc($result)){
+         echo "
+         
+         <li class='media'>
+         <img class='mr-3' src='images/".$row["Club_logo"]."' alt='Generic placeholder image' width='64' height='64'>
+         <div class='media-body'>
+         <h5 class='mt-0 mb-1 mr-2' id='club_name' onclick='location.href=\"Club page/Club_main.php?shortname=".$row["Club_Name"]."\";'>".$row["Club_fname"]."</h5>
+         
+         ".$row["Description"]."
+         </div>
+         </li><br><br>            
+            ";
+        }
+      } 
+         
+         
         ?>
         
         </ul>  

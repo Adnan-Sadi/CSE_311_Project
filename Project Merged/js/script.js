@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  //creating the member table
+  //creating editable member table
   var dataTable = $('#member_table').DataTable({
     "processing": true,
     "serverSide": true,
@@ -21,18 +21,37 @@ $(document).ready(function(){
       $('.dataTables_filter input[type="search"]').css({ 'width': '300px', 'display': 'inline-block' }); //changing search box css
     },
   });
+
+  //creating non-editable member table
+  var dataTable = $('#member_table_small').DataTable({
+    "processing": true,
+    "serverSide": true,
+    "order": [],
+    "ajax": {
+      url: "./includes/fetch_small_table.php",
+      type: "POST"
+    },
+
+    "language": {
+      "searchPlaceholder": "Name,Id,Department Or Position",//placeholder for search field
+    },
+
+    initComplete: function () {
+      $('.dataTables_filter input[type="search"]').css({ 'width': '300px', 'display': 'inline-block' }); //changing search box css
+    },
+  });
     
     
     $('#add_button').click(function () {
     $('#user_form')[0].reset();
-    $('.modal-title').text("Add User");
+    $('.modal-title').text("Add Member");
     $('#action').val("Add");
     $('#operation').val("Add");
   });
 
   $('#add_button2').click(function () {
     $('#exec_user_form')[0].reset();
-    $('.modal-title').text("Add User");
+    $('.modal-title').text("Add Executive Member");
     $('#action2').val("Add_exc");
     $('#operation2').val("Add_exc");
     $('#mem_uploaded_image').html('');
@@ -130,7 +149,7 @@ $(document).ready(function(){
         $('#phone').val(data.PhoneNum);
         $('#position').val(data.Position);
         $('#date_joined').val(data.Date_Joined);
-        $('.modal-title').text("Edit User");
+        $('.modal-title').text("Edit Member");
         $('#user_id').val(user_id);
         $('#action').val("Edit");
         $('#operation').val("Edit");
@@ -155,7 +174,7 @@ $(document).ready(function(){
         $('#phone2').val(data.PhoneNum);
         $('#position2').val(data.Position);
         $('#date_joined2').val(data.Date_Joined);
-        $('.modal-title').text("Edit User");
+        $('.modal-title').text("Edit Executive Member");
         $('#user_id2').val(user_id2);
         $('#mem_uploaded_image').html(data.mem_image)
         $('#action2').val("Edit");
@@ -230,15 +249,13 @@ $(document).ready(function(){
     })
   });
   
-
+  //after submitting edited info
   $(document).on('submit', '#edit_user_form', function (event) {
     event.preventDefault();//stops the summission of form
 
     var lname = $('#lname').val();
     var username = $('#username').val();
     
-
-
     //check if any field is empty
     if (lname != '' && username != '') {
       $.ajax({

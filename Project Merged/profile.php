@@ -22,10 +22,10 @@
             <div class="col-md-5">
                   <?php 
                   if($data["Image"] != ''){
-                  echo "<img id='user_image' src='images/Profile_Pictures/".$data["Image"]."' width='250' height='250'><br>";
+                  echo "<img id='profile_image' src='images/Profile_Pictures/".$data["Image"]."' width='250' height='250'><br>";
                   }
                   else{
-                  echo "<img id='user_image' src='images/blank_image_1.png' width='300' height='300'>";
+                  echo "<img id='profile_image' src='images/blank_image_1.png' width='300' height='300'>";
                   }
                   ?>
                   <form method="post" enctype="multipart/form-data">
