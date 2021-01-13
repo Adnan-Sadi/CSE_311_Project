@@ -17,19 +17,17 @@ session_start();
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
 <style>
-   
-
-    .card img:hover{
+    .card img:hover {
         width: 350px;
         height: 450px;
         transition: 2s;
     }
-    
+
     .card-body {
         background: rgb(218, 248, 248);
         margin-left: 10px;
@@ -39,61 +37,62 @@ session_start();
         margin-left: 20px;
         /* height: 130px; */
     }
-    
+
     .card-body img {
         width: 300px;
         /* height: 70%; */
-    }    
+    }
+    #team-intro {
+        margin: 40px;
+        padding: 40px;
+        text-align: center;
+    }
+    
+    #team-intro button {
+        width: 300px;
+        height: 70px;
+    }
+    
+    #team-intro h1:first-of-type:hover {
+        color: rgb(124, 124, 233);
+    }
 </style>
+
 <body>
 
     <div id="nav"></div>
     <div id="main"></div>
-    <div id="EventsAds" >
+    <div id="EventsAds">
 
     </div>
-    <div id="ex"></div>
-    <div id="teams"> </div>
+    <div id="team-intro">
+        <h1 style="text-align: center; margin-bottom: 60px;" class="hover-line">Our Teams</h1>
+        <ul>
+            <li>
+                <a href="../members.php?id=<?php echo $_GET['Id']; ?>" <button id="OPL" class="btn  btn-success  ">Members</button></a>
+            </li>
+        </ul>
+
+    </div>
     <footer>
         <div id="bottom">
         </div>
     </footer>
-   
-    <script>
 
-//         function onSignIn(googleUser) {
-//   var profile = googleUser.getBasicProfile();
-//   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-//   console.log('Name: ' + profile.getName());
-//   console.log('Image URL: ' + profile.getImageUrl());
-//   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-// }
-//   function signOut() {
-//     var auth2 = gapi.auth2.getAuthInstance();
-//     auth2.signOut().then(function () {
-//       console.log('User signed out.');
-//     });
-//   }
+    <script>
+        var ClubID = "<?php echo $_GET['Id']; ?>";
         $(function() {
             $("#nav").load("nav.php");
         });
         $(function() {
-            $("#main").load("main.php");
+            $("#main").load("main.php?Id="+ClubID);
         });
         $(function() {
-            $("#EventsAds").load("EventsAd.php");
+            $("#EventsAds").load("EventsAd.php?Id="+ClubID);
         });
         $(function() {
             $("#bottom").load("bottom.php");
         });
-        $(function() {
-            $("#ex").load("executive-body.php");
-        });
-    
-        $(function() {
-            $("#teams").load("teams.php");
-        });
-        
     </script>
 
 </body>
