@@ -278,8 +278,9 @@ body{
   font-size: 1.3em;
   text-transform: uppercase;
   background-color: #000;
-  color: #fff;
-  opacity: .5;
+  color	:#F0FFFF;
+  font-weight: 500;
+
   
 }
 
@@ -319,7 +320,45 @@ body{
   display: none;
 }
 
+#mem_info{
+    list-style-type: none;
+    width:700px;
+    margin: 0 auto;
+    
+}
+#mem_info li{
+    font-size: 1.3em;
+
+}
+
+#mem_info label{
+    font-weight: 500;
+
+}
+
+#member_image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
 /*Member Page Ends*/
+
+/*All_club page starts*/
+
+#club_name:hover{
+  color:blue;
+}
+
+.media-body{
+  height: 100px;
+  overflow: auto; 
+}
+
 
 
 

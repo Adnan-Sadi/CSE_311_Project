@@ -1,175 +1,82 @@
-<?php 
-// session_start();
+<?php
+ require "header.php";
+ require_once 'includes/db_inc.php';
+
+ $sql = "SELECT * FROM clubs";
+ 
+ $result = mysqli_query($conn,$sql);
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>All NSU Clubs</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" >
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
-    <link rel="stylesheet" href="style.css" />
-</head>
+    <div class="container">
+        <br><h2 class="section-head">All Clubs</h2><br>
 
-<body>
-    <?php
-    require "header.php";
-    ?>
-    <div class="container section">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="section-head">Some heading goes here</h2>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name1" value="ACMS" href="Club page/Club_main.php">ACM</a>
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name2" href="Club page/Club_main.php">club name</a>
-                    
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name3" href="Club page/Club_main.php">club name</a>
-                    
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
+        <form action="filtered_clubs.php" method="POST" name="Club_Filter">
+          <div class="form-row">
 
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
+            <div class="form-group col-md-4">
+              <select class="custom-select" name="sort" id="sort">
+                 <option value="0">Sort By....</option>
+                 <option value="ASC">Name Ascending</option>
+                 <option value="DESC">Name Descending</option>
+                 <option value="m_DESC">Most Members</option>
+                 <option value="m_ASC">Least Members</option>
+              </select>
+            </div> 
+
+            <div class="form-group col-md-2">
+             <button type="submit" name="filter1" class="btn btn-primary">Filter</button>
+            </div> 
+           
+            <div class="form-group col-md-4">
+              <select class="custom-select" name="sort_dept" id="sort_dept">
+                 <option value="0">Popular Among Students of....</option>
+                  
+                    <?php
+                    $sql2 = "SELECT * FROM departments";
+                    $result2 = mysqli_query($conn,$sql2);
+                    //fetching all departments
+                    While($row = mysqli_fetch_assoc($result2)){
+                       echo "<option value='".$row["Dept_Id"]."'>".$row["Dept_Name"]."</option>";
+                    }
+                    ?>
+
+              </select>
+            </div>  
+
+            <div class="form-group col-md-2">
+             <button type="submit" name="filter2" class="btn btn-primary">Filter</button>
             </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="club-box">
-                    <i class="fa fa-toggle-down"></i><br>
-                    <a id="c_name" href="Club page/Club_main.php">club name</a>
-                    <p>
-                        The royal family of the dynasty begins to decay, corruption
-                        becomes rampant in the imperial court, and the empire begins to
-                        enter decline and instability.
-                    </p>
-                </div>
-            </div>
-        </div>
+
+           </div>  
+        </form><br>
+
+
+        <ul class="list-unstyled">
+        <?php 
+         
+         while($row = mysqli_fetch_assoc($result)){
+
+            echo "
+         
+         <li class='media'>
+         <img class='mr-3' src='images/".$row["Club_logo"]."' alt='Generic placeholder image' width='64' height='64'>
+         <div class='media-body'>
+         <h5 class='mt-0 mb-1' id='club_name' onclick='location.href=\"Club page/Club_main.php?shortname=".$row["Club_Name"]."\";'>".$row["Club_fname"]."</h5>
+         ".$row["Description"]."
+         </div>
+         </li><br><br>
+            
+            ";
+         }
+        ?>
+        </ul>  
+        
     </div>
-    <?php
-    require "footer.php";
-    ?>
-</body>
 
-</html>
-<script>
-// $("#c_name1").click(function(){
-//     console.log($("#c_name1").val);
-//     // alert("100%");
-    // <?php $_SESSION["visitingClubName"] = "ACM" ?>
-// })
-</script>
+<?php
+require "footer.php";
+?>
+
+
