@@ -63,10 +63,10 @@
     } */
 </style>
 <div class="container">
+    <button class="btn btn-link btn-danger d-block w-100 " style="width: 100%;"><a href="./events.php"> All Events </a></button>
     <div class="row">
         <div class="col">
             <div id="EventAdLeft">
-                <button class="btn btn-link btn-danger d-block w-100 "><a href="./events.php"> All Events </a></button>
                 <h1> Recent Events </h1>
                 <div class="adInnerBox">
                     <div id="carouselExampleCaptions0" class="carousel slide" data-ride="carousel">
@@ -96,10 +96,12 @@
         </div>
         <div class="col">
             <div id="EventAdRight">
-                <form class="form-inline d-flex justify-content-center md-form form-sm mt-0" style="margin-bottom: 20px">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Events by Title" aria-label="Search">
-                </form>
+                <div id="searchAD">
+                    <form  class="form-inline d-flex justify-content-center md-form form-sm mt-0" style="margin-bottom: 20px">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Events by Title" aria-label="Search">
+                    </form>
+                </div>
                 <h2>Upcoming Events...</h2>
                 <div class="adInnerBox">
                     <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
@@ -133,6 +135,7 @@
 
 
 <script>
+    $("#searchAD").hide();
     var clubID = "<?php echo $_GET['Id'] ?>"
     $.ajax({
         type: 'POST',
@@ -169,4 +172,5 @@
             // alert("Ok")
         }
     }
+
 </script>
