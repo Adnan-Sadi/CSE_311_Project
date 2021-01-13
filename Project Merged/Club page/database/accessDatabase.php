@@ -60,6 +60,7 @@ function insertPhotos($EventId, $Path,$Title){
     SQL_Query($sql);
 }
 function getEventData($ClubID=1,$EventID=4){
+  $Myarray = Array();
   $sql = "SELECT EventDescription,Date,(SELECT path 
                                         FROM eventphotos 
                                         WHERE Eventid = e.eventID) AS photos,(SELECT path
@@ -69,7 +70,20 @@ function getEventData($ClubID=1,$EventID=4){
                                                                                                                       where photoid = e.eventDP) as DP
           From events AS e, clubs as c 
           WHERE e.ClubId = c.ClubId AND c.ClubId=". $ClubID ." AND e.eventID = ". $EventID .";";
-  return inQuery($sql);
+  // echo json_encode(inQuery($sql));
+  // echo $sql;
+  array_push($Myarray,inQuery($sql));
+  // echo json_encode($Myarray);
+  $sql = 'SELECT ep.path as photo,ep.uploaded_on as Uploaded_On,ep.title as Title 
+          FROM eventphotos AS ep,events as e
+          WHERE ep.EventID=e.eventId AND  ep.eventID = '.$EventID;
+  array_push($Myarray,inQuery($sql));
+  // echo json_encode($Myarray);
+  $sql = 'SELECT ev.path as video,ev.uploaded_on as Uploaded_On,ev.title as Title 
+  FROM eventVideos AS ev,events as e
+  WHERE ev.EventID=e.eventId AND  ev.eventID = '.$EventID;
+  array_push($Myarray,inQuery($sql));
+  return ($Myarray);
 
 }
 // echo json_encode($Myarray);
