@@ -28,7 +28,6 @@ session_start();
                 <div id="un" class="col-md-5">
                     <ul id="menu" class="float-md-right">
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="about_us.php">About Us</a></li>
                         <li><a href="all_clubs.php">Clubs</a></li>
 
                         <?php

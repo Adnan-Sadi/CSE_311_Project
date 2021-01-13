@@ -28,9 +28,10 @@
                   echo "<img id='profile_image' src='images/blank_image_1.png' width='300' height='300'>";
                   }
                   ?>
-                  <form method="post" enctype="multipart/form-data">
+                  <form action="includes/update_user_info.php" method="post" enctype="multipart/form-data">
                   <label>Change Profile Picture</label><br>
                   <input type="file" name="change_image" id="change_image">
+                  <button type="submit" name="submit_image" class="btn btn-primary">Submit</button><br>
                   </form>
             </div>
 

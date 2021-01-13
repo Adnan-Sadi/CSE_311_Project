@@ -111,9 +111,14 @@
 
             while ($memData2 = mysqli_fetch_assoc($result2) ) {
 
-              echo "<div class='col-md-4'>".
-              "<div id='people_tile' onclick = 'location.href=\"Full_mem_info.php?NsuId=".$memData2["NsuId"]."\";'>
-              <img id='mem_img' src='images/Executive_Members/" . $memData2["Photo"] . "' alt=''>
+              echo "<div class='col-md-4'>";
+              if(isset($_SESSION["userEmail"])){
+               echo "<div id='people_tile' onclick = 'location.href=\"Full_mem_info.php?NsuId=".$memData2["NsuId"]."\";'>";//makes the executive members tile clickable
+              }
+              else{
+                 echo "<div id='people_tile'>";
+              }
+              echo "<img id='mem_img' src='images/Executive_Members/" . $memData2["Photo"] . "' alt=''>
               <span>".$memData2['name']."<br>".$memData2['Position']."</span>
               </div>";
 
@@ -121,7 +126,7 @@
               echo "<div align=right>   
               <button type = 'button' name ='update2' id='".$memData2["NsuId"]."' class='btn btn-warning btn-xs update2'>Update</button>
               <button type = 'button' name ='delete2' id='".$memData2["NsuId"]."' class='btn btn-danger btn-xs delete'>Delete</button></div>";
-              }
+              }//removes update and delete buttons if user is not logged in
 
              echo "</div>";
            
