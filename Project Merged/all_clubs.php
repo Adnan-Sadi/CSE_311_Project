@@ -57,7 +57,8 @@
 
         <?php
         if(isset($_SESSION["userEmail"])){
-           $userEmail = $_SESSION["userEmail"];
+         
+         $userEmail = $_SESSION["userEmail"];
 
          while($row = mysqli_fetch_assoc($result)){
 
