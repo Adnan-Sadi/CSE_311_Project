@@ -63,7 +63,7 @@
 </style>
 
 <div id="EventAdLeft">
-    <button class="btn btn-link btn-outline-danger d-block w-100 "><a href="./events.php"> All Events </a></button>
+    <button class="btn btn-link btn-danger d-block w-100 "><a href="./events.php"> All Events </a></button>
     <h1> Recent Events </h1>
     <div class="adInnerBox">
         <div id="carouselExampleCaptions0" class="carousel slide" data-ride="carousel">
@@ -125,27 +125,6 @@
 </div>
 
 
-
-
-
-
-
-<!-- <div class="center" > -->
-<!-- <div class="container"> -->
-
-
-<!-- <div id="right-element">
-        
-        <h1>Upcomming</h1>
-        <div>
-            <div id="UpcomingEventsAdBoard"></div>
-            <div id="ok">
-
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <script>
     $.ajax({
         type: 'POST',
@@ -155,10 +134,10 @@
         success: function(result) {
             $("#FirstAdLeftImg").attr("src", './images/' + result[1][0]["EventHeadImg"]);
             $("#EventAdTitleFirstLeft").text(result[1][0]["name"])
-            $("#EventAdDateFirstLeft").text(result[1][0]["Dated"])
+            $("#EventAdDateFirstLeft").text(result[1][0]["Date"])
             $("#FirstAdRightImg").attr("src", './images/' + result[0][0]["EventHeadImg"]);
             $("#EventAdTitleFirstRight").text(result[0][0]["name"])
-            $("#EventAdDateFirstRight").text(result[0][0]["Dated"])
+            $("#EventAdDateFirstRight").text(result[0][0]["Date"])
             designEventAds(result);
         },
         error: function() {
@@ -171,22 +150,12 @@
         console.log("recent",result[0]);
         console.log("recent",result[1].length);
         for (var i = 1; i < result[0].length; i++) {
-            $("#EventAdInsertHere1").append('<div class = carousel-item ><img  class="d-block w-100" src= ./images/' + result[0][i]["EventHeadImg"] + ' alt=Event Page Missing > <div><h5>' + result[0][i]["name"] + '</h5><p>' + result[0][i]["Dated"] + '</p><p>.</p></div></div>');
+            $("#EventAdInsertHere1").append('<div class = carousel-item ><img  class="d-block w-100" src= ./images/' + result[0][i]["EventHeadImg"] + ' alt=Event Page Missing > <div><h5>' + result[0][i]["name"] + '</h5><p>' + result[0][i]["Date"] + '</p><p>.</p></div></div>');
         }
         console.log("upcomming",result[0].length);
         for (var i = 1; i < result[1].length; i++) {
-            $("#EventAdInsertHere0").append('<div class = carousel-item  ><img  class="d-block w-100" src= ./images/' + result[1][i]["EventHeadImg"] + ' alt=Event Page Missing ><div><h5>' + result[1][i]["name"] + '</h5><p>' + result[1][i]["Dated"] + '</p><p>.</p></div></div>');
+            $("#EventAdInsertHere0").append('<div class = carousel-item  ><img  class="d-block w-100" src= ./images/' + result[1][i]["EventHeadImg"] + ' alt=Event Page Missing ><div><h5>' + result[1][i]["name"] + '</h5><p>' + result[1][i]["Date"] + '</p><p>.</p></div></div>');
             // alert("Ok")
         }
-
     }
-
-    function designEventsAd() {
-
-        // $("#insertEventsAdHere").append('<div class = carousel-item ><img  style=margin: 50px; src= ./images/' + ' alt=Event Page Missing ><div class=carousel-caption d-none d-md-block></div><h5>Last slide label</h5><p>First LAST slide label</br></p><p>.</p></div>');
-    }
-
-
-    // $("#nextRecentEventAd").click();
-    // $("#nextRecentEventAd").click();
 </script>
