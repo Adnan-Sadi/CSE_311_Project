@@ -10,7 +10,9 @@
 
         <ul class="list-unstyled">
         <?php 
-
+        
+        //1.Order clubs in Ascending or descending order of name 
+        //2.Order clubs in Ascending or descending number of member count
         if(isset($_POST["filter1"])){
          
             $sort = $_POST["sort"];
@@ -59,7 +61,8 @@
          }
 
         }
-
+        
+        //filter clubs which are popular among a certain department
         if(isset($_POST["filter2"])){
          
             $dept_id = $_POST["sort_dept"];
@@ -94,7 +97,8 @@
          }
 
         }
-
+        
+        //when a club is serached by name
         if(isset($_POST["submit_search"])){
          
             $search = $_POST["search"];
