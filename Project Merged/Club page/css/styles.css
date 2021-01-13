@@ -1,0 +1,325 @@
+html{
+   height: 100%;
+}
+
+
+a , li{
+	text-decoration: none !important;
+
+}
+
+body{
+	/*background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );*/
+	background-color:white;
+	min-height: 100vh;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	
+}
+
+
+
+
+.section {
+    /*for all section padding same*/
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.section h2.section-head {
+    /*for sub heading align center*/
+    color: #000;
+    text-align: center;
+}
+
+.section h2.section-head:after {
+    /*for sub heading after under-line */
+    background: #e74c3c;
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    margin: 20px auto;
+}
+
+
+/*end of common work*/
+
+#header {
+    color: #fff;
+    background: #e74c3c;
+}
+
+#logo {
+	font-size: 2rem;
+	
+    /* making font size 2.5 to 2*/
+    padding-top: 5px;
+}
+
+#menu {
+	list-style: none;
+    /*for removing bolets*/
+    margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+#menu li {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+    /*for showing all lists in one line*/
+}
+
+#menu li a {
+    color: #fff;
+    /*making all blue writings white*/
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: block;
+}
+
+#menu li a:hover {
+    background: #f39c12;
+    /*making hover a block with background color*/
+}
+
+#search {
+    
+	padding-bottom: 15px;
+	position: absolute;
+	top:5px;
+	right: 60px;
+}
+
+#search button {
+	position: absolute;
+	top:5px;
+	right:26px;
+}
+
+
+/*end of header css*/
+
+#banner {
+    background: url("../images/nsu.jpg") no-repeat 0 0;
+    background-size: cover;
+    /*make the pic always like the coloumn*/
+}
+
+.banner-title {
+    padding-top: 5rem;
+}
+
+.banner-title h1 {
+    background: rgba(255, 255, 255, 0.8);
+    display: inline-block;
+    padding: 10px;
+    margin: 0;
+}
+
+.banner-title p.lead {
+    color: white;
+    background: rgba(231, 76, 60, 0.7);
+    padding: 10px;
+}
+
+
+/* end of banner css*/
+
+.club-box {
+    text-align: center;
+}
+
+.club-box i.fa {
+    color: #e74c3c;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+.club-box #c_name {
+    font-size: 1.5em;
+    font-weight: 500;
+    color:#000;
+}
+
+.club-box #c_name:hover {
+    color: blue;
+}
+
+/* end of club boxes css*/
+
+#superiors {
+    color: #000;
+    padding: 5px 0;
+    position: relative;
+}
+
+.superior img {
+    border-radius: 50px;
+    /* make the img round*/
+}
+
+#footer {
+    color: #fff;
+    background: #e74c3c;
+}
+
+#showing {
+    text-align: right;
+    /*for showing all cards*/
+}
+
+.showing i.fa {
+    color: #e74c3c;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+#search {
+    padding: 10px;
+}
+
+#botton {
+    text-shadow: #fff;
+}
+
+
+/*sticks on the bottom*/
+
+.footer-panel {
+    height: 100px;
+    background-color: #191970;
+    border-top: 0;
+    margin-top: auto;
+}
+
+.logo {
+    width: 150px;
+    height: 100px;
+    margin: 20px
+}
+
+
+
+/*homepage ends*/
+
+
+
+
+/*Signup Page*/
+#signup-panel{
+	position: relative;
+	text-align: center;
+}
+
+
+#signup-panel input{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 400px;
+	padding: 12px 20px 12px 20px;
+	box-sizing: border-box;
+	
+}
+
+
+#signup-panel input:focus{
+	outline: none;
+}
+
+#signup-panel button{
+	
+	font-weight: 500;
+	font-size: 1.2em;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 200px;
+}
+
+/*Signup Page ends*/
+
+/*Club Page */
+
+
+/*Club Page Ends */
+
+/*Member Page*/
+
+#exc_body{
+    margin-top: 20px;
+    margin-bottom: 20px;
+	font-size: 1.4em;
+	font-weight: 500;
+	border-bottom: 1px groove gray;
+	
+}
+
+#people_tile{
+	margin-top: 50px;
+	position: relative;
+	width: 100%;
+	height:300px;
+	overflow: hidden;	
+}
+
+#mem_img{
+	height: 100%;
+	width: 100%;
+}
+
+#people_tile span{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  background-color: #000;
+  color: #fff;
+  opacity: .5;
+  
+}
+
+#all_mem{
+	margin-top: 60px;
+	font-size: 1.4em;
+	font-weight: 500;
+	border-bottom: 1px groove gray;
+}
+
+#member-nav{
+	list-style: none;
+
+}
+
+
+#member-nav li{
+	margin-top: 5px;
+	list-style-type: none;
+	font-size: 1.2em;
+	text-align: center;
+	border: 3px outset gray;
+	background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+}
+#member-nav a{
+	color: indigo;
+	font-weight: 600;
+}
+
+#panel1, #flip1,#panel2, #flip2,#panel3, #flip3 {
+  padding: 5px;
+  text-align: center;
+  border: solid 1px #c3c3c3;
+}
+
+#panel1,#panel2,#panel3 {
+  display: none;
+}
+
+/*Member Page Ends*/
+
+
+

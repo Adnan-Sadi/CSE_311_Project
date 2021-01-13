@@ -151,7 +151,7 @@ Goingtoevents :
 CREATE TABLE Goingtoevents(
   Man_id INT(6) AUTO_INCREMENT PRIMARY KEY,
   UserId INT(6),
-  EventId SMALLINT NOT NULL,
+  EventId INT(6) NOT NULL,
   CONSTRAINT Unic_Man UNIQUE(userId,EventId),
   FOREIGN KEY(UserId) REFERENCES all_Users(userId)
     ON DELETE CASCADE 
@@ -165,13 +165,12 @@ CREATE TABLE Goingtoevents(
 Events:
 
 CREATE TABLE Events(
-  Eventid SMALLINT PRIMARY KEY AUTO_INCREMENT,
+  Eventid INT(6) PRIMARY KEY AUTO_INCREMENT,
   ClubId INT(3),
   EventName VARCHAR(128) NOT NULL,
   EventDescription VARCHAR(512),
   Date DATE NOT NULL,
   eventDP INT(10),
-  FOREIGN KEY (eventDP) REFERENCES eventphotos(PhotoId)
   FOREIGN KEY(ClubId) REFERENCES clubs(ClubId) 
                  ON DELETE CASCADE
                  ON UPDATE CASCADE

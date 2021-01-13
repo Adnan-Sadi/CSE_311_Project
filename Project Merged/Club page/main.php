@@ -12,7 +12,7 @@
     #club-links {
         margin-top: 5px;
         margin-right: 50px;
-        border-color: #75d977;
+        border-color: red;
     }
 
     .logo {
@@ -24,7 +24,7 @@
         margin: 15px;
     }
     #main :hover{
-        background-color: #75d977;
+        background-color: red;
     }
     #main a:hover{
         color: black;
@@ -69,12 +69,12 @@ $(document).ready( function() {
         // alert('./images/'+ mainArray[0][0]['Club_Name']+'Head.jpg');
         for(var i=0;i<mainArray[1].length;i++)
         {
-            if(/facebook/ .test(mainArray[1][i]))
-                $("#club-links").append('<a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>');
-            else if(/twitter/ .test(mainArray[1][i]))
-                $("#club-links").append('<a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>');
+            if(/facebook/.test(mainArray[1][i]["link"].toLowerCase()))
+                $("#club-links").append('<a href=https://www.'+mainArray[1][i]["link"]+'><i class="fa fa-facebook" aria-hidden="true"></i></a>');
+            else if(/twitter/ .test(mainArray[1][i]["link"].toLowerCase()))
+                $("#club-links").append('<a href=https://www.'+mainArray[1][i]["link"]+'><i class="fa fa-twitter" aria-hidden="true"></i></a>');
             else
-                $("#club-links").append('<a href=""><i class="fa fa-link" aria-hidden="true"></i></a>');
+                $("#club-links").append('<a href=https://www.'+mainArray[1][i]["link"]+'><i class="fa fa-link" aria-hidden="true"></i></a>');
         }
     }
 </script>
