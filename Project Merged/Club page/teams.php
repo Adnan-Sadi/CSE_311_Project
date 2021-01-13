@@ -1,31 +1,9 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <style>
-    #teams li {
-        list-style: none;
-    }
-    
-    #teams li:hover {
-        background: lightgreen;
-    }
-    
-    #opl-intro,
-    #pub-intro,
-    #cor-intro,
-    #promo-intro {
-        display: none;
-        margin: 30px;
-    }
-    
-    #opl-intro img,
-    #pub-intro img,
-    #cor-intro img,
-    #promo-intro img {
-        width: 80px;
-        height: 50px;
-        margin-left: 50px;
-        display: inline-block;
-    }
-    
+   
     #opl-intro h1:hover,
     #pub-intro h1:hover,
     #cor-intro h1:hover,
@@ -51,28 +29,13 @@
 <script>
     $(document).ready(function() {
 
-        $("#opl-intro").slideDown();
-        $("#OPL").click(function(e) {
-            $("#opl-intro").slideToggle();
-
-        });
-        $("#PROMO").click(function() {
-            $("#promo-intro").slideToggle();
-        });
-        $("#PUB").click(function() {
-            $("#pub-intro").slideToggle();
-            // $('.btn').click();
-        });
-        $("#COR").click(function() {
-            $("#cor-intro").slideToggle();
-        });
     });
 </script>
 <div id="team-intro">
     <h1 style="text-align: center; margin-bottom: 60px;" class="hover-line">Our Teams</h1>
     <ul>
         <li>
-          <a href="../members.php?id=1"  <button id="OPL" class="btn  btn-success  ">Members</button></a>
+          <a href="../members.php?id=<?php echo $_SESSION['']; ?>"  <button id="OPL" class="btn  btn-success  ">Members</button></a>
         </li>
     </ul>
 
