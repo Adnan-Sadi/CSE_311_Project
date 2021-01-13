@@ -15,11 +15,9 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="banner-title">
-                            <h1 class="title">some heading goes here</h1>
+                            <h1 class="title">Welcome to NSU Clubs</h1>
                             <p class="lead">
-                                some paragraph The royal family of the dynasty begins to decay,
-                                corruption becomes rampant in the imperial court, and the empire
-                                begins to enter decline and instability.
+                             A place where you can find all necessary informations about the clubs of North South University.
                             </p>
                         </div>
                     </div>
