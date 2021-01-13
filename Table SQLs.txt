@@ -234,9 +234,8 @@ CREATE TABLE Videos_Archive(
 Club_Links :
 
 CREATE TABLE Club_Links(
-    id INT(3),
-    link VARCHAR(128) NOT NULL,
-    CONSTRAINT unic_link UNIQUE(id,link),
+    id INT(3) NOT NULL,
+    link VARCHAR(128) NOT NULL ,
 	FOREIGN KEY(id) REFERENCES clubs(ClubId) 
                  ON DELETE CASCADE 
                  ON UPDATE CASCADE);

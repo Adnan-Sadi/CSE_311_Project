@@ -1,13 +1,18 @@
 <?php
 require "./accessDatabase.php";
-$clubName = 'ACM';
-$sql = "SELECT * FROM `clubs` WHERE  club_name = "."'$clubName'";
+// $clubName = $_POST["clubId"];
+$clubId = 1;
+$sql = "SELECT Club_Name,Description,Club_Fname,Club_Logo FROM clubs WHERE  clubId=1";
 // echo $sql;
 // $MyArray = array();
 // echo json_encode($Myarray);
 $MyArray = array();
-array_push($MyArray,inQuery($sql,$dbname = "nsu_clubs"));
-$sql = "SELECT link FROM `club_links`,clubs WHERE club_links.id = clubs.clubID AND id in (SELECT id from clubs WHERE  club_name = "."'$clubName')";
+array_push($MyArray,inQuery($sql));
+$sql = "SELECT link
+ FROM `club_links`,clubs
+  WHERE club_links.id = clubs.clubID AND id in (SELECT id
+                                                from clubs
+                                                WHERE  clubId = ".$clubId.")";
 array_push($MyArray,inQuery($sql,$dbname = "nsu_clubs"));
 echo json_encode($MyArray);
 // $ClubArray = array();

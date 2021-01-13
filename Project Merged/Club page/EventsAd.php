@@ -125,27 +125,6 @@
 </div>
 
 
-
-
-
-
-
-<!-- <div class="center" > -->
-<!-- <div class="container"> -->
-
-
-<!-- <div id="right-element">
-        
-        <h1>Upcomming</h1>
-        <div>
-            <div id="UpcomingEventsAdBoard"></div>
-            <div id="ok">
-
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <script>
     $.ajax({
         type: 'POST',
@@ -178,15 +157,5 @@
             $("#EventAdInsertHere0").append('<div class = carousel-item  ><img  class="d-block w-100" src= ./images/' + result[1][i]["EventHeadImg"] + ' alt=Event Page Missing ><div><h5>' + result[1][i]["name"] + '</h5><p>' + result[1][i]["Date"] + '</p><p>.</p></div></div>');
             // alert("Ok")
         }
-
     }
-
-    function designEventsAd() {
-
-        // $("#insertEventsAdHere").append('<div class = carousel-item ><img  style=margin: 50px; src= ./images/' + ' alt=Event Page Missing ><div class=carousel-caption d-none d-md-block></div><h5>Last slide label</h5><p>First LAST slide label</br></p><p>.</p></div>');
-    }
-
-
-    // $("#nextRecentEventAd").click();
-    // $("#nextRecentEventAd").click();
 </script>

@@ -38,7 +38,7 @@
 <div style="padding:20px;padding-top:30px;">
     <h1 id="mainClubShortName" style="color: lightcoral;" ></h1>
     <p id="mainHeading" style="font-size: large;" ></p>
-    <img id="mainHeadImg" src="./images/friends-week.jpg" alt="Club HOME" style="width: 90%; height:400px; margin:20px">
+    <img id="mainHeadImg" src="./images/friends-week.jpg" alt="Club HOME column missing comment" style="width: 90%; height:400px; margin:20px">
     <hr>
 </div>
 <script>
@@ -65,16 +65,16 @@ $(document).ready( function() {
         var strID=0;
         $('#mainClubShortName').append(mainArray[0][0]['Club_Name']  );
         $('#mainHeading').append(mainArray[0][0]['Description']  );
-        $('#mainHeadImg').attr('src','./images/'+ mainArray[0][0]['Club_Name']+'Head.jpg');
+        $('#mainHeadImg').attr('src','./images/'+ mainArray[0][0]['ClubDP']);
         // alert('./images/'+ mainArray[0][0]['Club_Name']+'Head.jpg');
         for(var i=0;i<mainArray[1].length;i++)
         {
             if(/facebook/.test(mainArray[1][i]["link"].toLowerCase()))
-                $("#club-links").append('<a href=https://www.'+mainArray[1][i]["link"]+'><i class="fa fa-facebook" aria-hidden="true"></i></a>');
+                $("#club-links").append('<a href=https://www.'+ mainArray[1][i]["link"] +'><i class="fa fa-facebook" aria-hidden="true"></i></a>');
             else if(/twitter/ .test(mainArray[1][i]["link"].toLowerCase()))
-                $("#club-links").append('<a href=https://www.'+mainArray[1][i]["link"]+'><i class="fa fa-twitter" aria-hidden="true"></i></a>');
+                $("#club-links").append('<a href=https://www.'+ mainArray[1][i]["link"] +'><i class="fa fa-twitter" aria-hidden="true"></i></a>');
             else
-                $("#club-links").append('<a href=https://www.'+mainArray[1][i]["link"]+'><i class="fa fa-link" aria-hidden="true"></i></a>');
+                $("#club-links").append('<a href=https://www.'+ mainArray[1][i]["link"] +'><i class="fa fa-link" aria-hidden="true"></i></a>');
         }
     }
 </script>
