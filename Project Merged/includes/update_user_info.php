@@ -35,6 +35,30 @@ if(isset($_POST["operation"])){
 
     mysqli_stmt_close($stmt);
 
+  }
+
+  if(isset($_POST["submit_image"])){
+
+     $userEmail = $_SESSION["userEmail"];
+     $path = $_FILES["change_image"]["name"];
+     $extension = strtolower(pathinfo($path,PATHINFO_EXTENSION));
+     $image = '';
+     
+     if($extension == 'gif' || $extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){      
+         $image = upload_user_image();
+     }
+     else{
+         header("location: ../profile.php?error=invlaidimage&extentsion=$extension");
+         exit();
+     }
+
+     $sql = "UPDATE users
+             SET Image = '$image'
+             WHERE Email = '$userEmail';";
+
+     mysqli_query($conn,$sql);
+     
+     header("location: ../profile.php");
 
   }
   

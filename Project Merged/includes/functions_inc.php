@@ -89,6 +89,15 @@ function upload_user_image(){
         move_uploaded_file($_FILES['user_image']['tmp_name'], $destination);//moving file to destination folder
         return $new_name;
        }
+
+       if(isset($_FILES["change_image"]))
+       {
+        $extension = explode('.', $_FILES['change_image']['name']);//breaks the image name into an array
+        $new_name = rand() . '.' . $extension[1];//generates a new name for the image
+        $destination = '../images/Profile_Pictures/' . $new_name;
+        move_uploaded_file($_FILES['change_image']['tmp_name'], $destination);//moving file to destination folder
+        return $new_name;
+       }
 }
 
 function createUser($conn,$fname,$lname,$email,$username,$pwd,$image){
