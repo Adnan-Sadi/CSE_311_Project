@@ -147,11 +147,11 @@
         cache: false,
         success: function(result) {
             $("#FirstAdLeftImg").attr("src", './images/' + result[1][0]["DP"]);
-            $("#EventAdTitleFirstLeft").text(result[1][0]["name"])
-            $("#EventAdDateFirstLeft").text(result[1][0]["Date"])
+            $("#EventAdTitleFirstLeft").text(result[1][0]["name"]);
+            $("#EventAdDateFirstLeft").text(result[1][0]["Date"]);
             $("#FirstAdRightImg").attr("src", './images/' + result[0][0]["DP"]);
-            $("#EventAdTitleFirstRight").text(result[0][0]["name"])
-            $("#EventAdDateFirstRight").text(result[0][0]["Date"])
+            $("#EventAdTitleFirstRight").text(result[0][0]["name"]);
+            $("#EventAdDateFirstRight").text(result[0][0]["Date"]);
             designEventAds(result);
         },
         error: function() {
