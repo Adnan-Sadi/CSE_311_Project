@@ -18,7 +18,7 @@ if(isset($_POST["submit"])){
          $image = upload_user_image();
      }
      else{
-         header("location: ../signup.php?error=invlaidimage&extentsion=$extension");
+         header("location: ../signup.php?error=invalidimage");
          exit();
      }
      

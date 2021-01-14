@@ -6,7 +6,7 @@ $gClient = new Google_Client();
 $gClient->setClientId("886397366311-4oinbv4o5dubfolchn89r2apo771l3n7.apps.googleusercontent.com");
 $gClient->setClientSecret("dSC-AnO-AY3wR17DS2chwndq");
 $gClient->setApplicationName("NSU Clubs");
-$gClient->setRedirectUri("http://localhost/Lab%20Project/CSE_311_Project/Project%20Merged/g-callback.php");
+$gClient->setRedirectUri("http://localhost/Git%20Repos/CSE_311_Project/Project%20Merged/g-callback.php");
 $gClient->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email");
 
 ?>

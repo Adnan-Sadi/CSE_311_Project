@@ -58,7 +58,7 @@
                 <ul class="list-unstyled">
 
                 <?php
-                 $sql2 = "SELECT Club_fname,Club_Name,Club_logo
+                 $sql2 = "SELECT ClubId,Club_fname,Club_Name,Club_logo
                           FROM followclubs NATURAL JOIN clubs
                           WHERE UserId = (SELECT UserId
                                           FROM all_users
@@ -72,7 +72,7 @@
                              <li class='media'>
                              <img class='mr-3' src='images/".$row["Club_logo"]."' alt='Generic placeholder image' width='64' height='64'>
                              <div class='media-body'>
-                             <h5 class='mt-0 mb-1 mr-2 float-left' id='club_name' onclick='location.href=\"Club page/Club_main.php?shortname=".$row["Club_Name"]."\";'>".$row["Club_fname"]."</h5>
+                             <h5 class='mt-0 mb-1 mr-2 float-left' id='club_name' onclick='location.href=\"Club page/Club_main.php?Id=".$row["ClubId"]."\";'>".$row["Club_fname"]."</h5>
                              </div>
                              </li><br>      
                                 ";                      
