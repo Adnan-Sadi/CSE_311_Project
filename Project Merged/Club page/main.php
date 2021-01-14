@@ -50,7 +50,7 @@ $ClubID = $_GET['Id'];
 <div style="padding:20px;padding-top:30px;">
     <h1 id="mainClubLongName" style="color: lightcoral;" ></h1>
     <p id="mainHeading" style="font-size: large;" ></p>
-    <img id="mainHeadImg" src="./images/friends-week.jpg" alt="Club HOME column missing comment" style="width: 90%; height:400px; margin:20px">
+    <img id="mainHeadImg" src="./images/" alt="Club HOME column missing comment" style="width: 90%; height:400px; margin:20px">
     <hr>
 </div>
 <script>

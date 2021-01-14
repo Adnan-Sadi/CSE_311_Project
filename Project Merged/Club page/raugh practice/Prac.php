@@ -1,6 +1,13 @@
+
 <?php
 require "../database/accessDatabase.php";
+$eventID = 1;
+$Path = "pafas";
+$Title = "AMi";
 
-  echo json_encode(getEventData($ClubID=1,$EventID=4));
+if(insertUploadedImageData($eventID,$Path,$Title))
+  echo "Success";
+else 
+  echo "NO WORKING";;
 
 ?>

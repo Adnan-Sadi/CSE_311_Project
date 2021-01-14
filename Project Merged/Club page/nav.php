@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h1 id="logo"><a style= "color: #fff;" href="index.php">NSU Clubs</a></h1>
+                    <h1 id="logo"><a style= "color: #fff;" href="../index.php">NSU Clubs</a></h1>
                 </div>
                 <div id="un" class="col-md-5">
                     <ul id="menu" class="float-md-right">

@@ -63,7 +63,7 @@
     } */
 </style>
 <div class="container">
-    <button class="btn btn-link btn-danger d-block w-100 " style="width: 100%;"><a href="./events.php"> All Events </a></button>
+    <button class="btn btn-link btn-danger d-block w-100 " style="width: 100%;"><a href="./events.php?Id=<?php echo $_GET['Id']; ?>"> All Events </a></button>
     <div class="row">
         <div class="col">
             <div id="EventAdLeft">
@@ -92,12 +92,15 @@
                         </a>
                     </div>
                 </div>
+                <div id="NoEvents">
+                    <h1>No Past Events</h1>
+                </div>
             </div>
         </div>
         <div class="col">
             <div id="EventAdRight">
                 <div id="searchAD">
-                    <form  class="form-inline d-flex justify-content-center md-form form-sm mt-0" style="margin-bottom: 20px">
+                    <form class="form-inline d-flex justify-content-center md-form form-sm mt-0" style="margin-bottom: 20px">
                         <i class="fas fa-search" aria-hidden="true"></i>
                         <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Events by Title" aria-label="Search">
                     </form>
@@ -107,7 +110,7 @@
                     <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner" id="EventAdInsertHere1">
                             <div class="carousel-item active">
-                                <img id="FirstAdRightImg" src="./images/acm.png" class="d-block w-100" alt="Image Missing">
+                                <img id="FirstAdRightImg" src="" class="d-block w-100" alt="Image Missing">
                                 <!-- <div class="carousel-caption ">
                     </div> -->
                                 <div>
@@ -136,7 +139,8 @@
 
 <script>
     $("#searchAD").hide();
-    var clubID = "<?php echo $_GET['Id'] ?>"
+    $(".adInnerBox").children().hide();
+    var clubID = "<?php echo $_GET['Id'] ?>";
     $.ajax({
         type: 'POST',
         url: './database/ClubEvents.php',
@@ -146,31 +150,32 @@
         dataType: 'json',
         cache: false,
         success: function(result) {
-            $("#FirstAdLeftImg").attr("src", './images/' + result[1][0]["DP"]);
-            $("#EventAdTitleFirstLeft").text(result[1][0]["name"])
-            $("#EventAdDateFirstLeft").text(result[1][0]["Date"])
-            $("#FirstAdRightImg").attr("src", './images/' + result[0][0]["DP"]);
-            $("#EventAdTitleFirstRight").text(result[0][0]["name"])
-            $("#EventAdDateFirstRight").text(result[0][0]["Date"])
+            console.log(result);
+            // $("#FirstAdLeftImg").attr("src", './images/' + result[1][0]["DP"]);
+            // $("#EventAdTitleFirstLeft").text(result[1][0]["name"]);
+            // $("#EventAdDateFirstLeft").text(result[1][0]["Date"]);
+            // $("#FirstAdRightImg").attr("src", './images/' + result[0][0]["DP"]);
+            $("#EventAdTitleFirstRight").text(result[0][0]["name"]);
+            $("#EventAdDateFirstRight").text(result[0][0]["Date"]);
             designEventAds(result);
         },
         error: function() {
             window.alert("Wrong query 'queryDB.php': ");
         }
+        
     });
 
 
     function designEventAds(result) {
-        console.log("recent", result[0]);
-        console.log("recent", result[1].length);
+        // console.log("recent", result[0]);
+        // console.log("recent", result[1].length);
         for (var i = 1; i < result[0].length; i++) {
             $("#EventAdInsertHere1").append('<div class = carousel-item ><img  class="d-block w-100" src= ./Upload/image/' + result[0][i]["DP"] + ' alt=Event Page Missing > <div><h5>' + result[0][i]["name"] + '</h5><p>' + result[0][i]["Date"] + '</p><p>.</p></div></div>');
         }
-        console.log("upcomming", result[0].length);
+        // console.log("upcomming", result[0].length);
         for (var i = 1; i < result[1].length; i++) {
             $("#EventAdInsertHere0").append('<div class = carousel-item  ><img  class="d-block w-100" src= ./Upload/image/' + result[1][i]["DP"] + ' alt=Event Page Missing ><div><h5>' + result[1][i]["name"] + '</h5><p>' + result[1][i]["Date"] + '</p><p>.</p></div></div>');
             // alert("Ok")
         }
     }
-
 </script>
