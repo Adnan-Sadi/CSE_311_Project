@@ -23,7 +23,7 @@ else{
   if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-      $Myarray[ ]= $row;
+      array_push($Myarray,$row);
     }
   } else {
     // echo "0 results";
@@ -34,14 +34,19 @@ else{
 function SQL_Query($sql,$dbname = "nsu_clubs",$servername = "localhost",$username = "root",$password = "" ){
   $conn = new mysqli($servername, $username, $password, $dbname);
   // Check connection
+  $x = true;
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-  }
-  else{
+  } else {
     // echo "Success";
   }
-  $conn->query($sql);
+  if ($conn->query($sql)) {
+    $x = true;
+  } else {
+    $x = false;
+  }
   $conn->close();
+  return $x;
 }
 function insertEvents($ClubId, $EventName , $EventDescription , $Dated ,$EventDP){
   $EventId="DEFAULT";
@@ -52,6 +57,8 @@ function insertEvents($ClubId, $EventName , $EventDescription , $Dated ,$EventDP
     // echo $sql;
     SQL_Query($sql);
 }
+
+//sql photo table input
 function insertPhotos($EventId, $Path,$Title){
   $PhotoID="DEFAULT";
   $Uploaded_On = "DEFAULT";
@@ -59,33 +66,99 @@ function insertPhotos($EventId, $Path,$Title){
     // echo $sql;
     SQL_Query($sql);
 }
-function getEventData($ClubID=1,$EventID=4){
+function getEventData($ClubID,$EventID){
   $Myarray = Array();
-  $sql = "SELECT EventDescription,Date,(SELECT path 
-                                        FROM eventphotos 
-                                        WHERE Eventid = e.eventID) AS photos,(SELECT path
-                                                                              FROM eventvideos
-                                                                              WHERE Eventid = e.Eventid) AS videos,( SELECT path
-                                                                                                                      FROM eventPhotos
-                                                                                                                      where photoid = e.eventDP) as DP
-          From events AS e, clubs as c 
-          WHERE e.ClubId = c.ClubId AND c.ClubId=". $ClubID ." AND e.eventID = ". $EventID .";";
+  $sql = 'SELECT EventDescription,Date,(SELECT path
+                                        FROM eventPhotos
+                                        WHERE photoid = '. $EventID .' ) AS DP
+          From events';
+
+// echo $sql;
+// echo 'description';
   // echo json_encode(inQuery($sql));
-  // echo $sql;
   array_push($Myarray,inQuery($sql));
   // echo json_encode($Myarray);
   $sql = 'SELECT ep.path as photo,ep.uploaded_on as Uploaded_On,ep.title as Title 
           FROM eventphotos AS ep,events as e
           WHERE ep.EventID=e.eventId AND  ep.eventID = '.$EventID;
   array_push($Myarray,inQuery($sql));
-  // echo json_encode($Myarray);
   $sql = 'SELECT ev.path as video,ev.uploaded_on as Uploaded_On,ev.title as Title 
   FROM eventVideos AS ev,events as e
   WHERE ev.EventID=e.eventId AND  ev.eventID = '.$EventID;
   array_push($Myarray,inQuery($sql));
+  // echo json_encode($Myarray);
   return ($Myarray);
 
 }
-// echo json_encode($Myarray);
+function uploadImage($file, $folderPath)
+    {
+        $errors = array();
+        $file_name = $_FILES[$file]['name'];
+        $file_size = $_FILES[$file]['size'];
+        $file_tmp = $_FILES[$file]['tmp_name'];
+        $file_type = $_FILES[$file]['type'];
+        $arrayVar = explode('.', $_FILES[$file]['name']);
+        $extension = end($arrayVar);
+        $file_ext = strtolower($extension);
+        $file_name = base64_encode($_FILES[$file]['name']) . ".jpg";
+        $extensions = array("jpeg", "jpg", "png");
+        //file upload path
+        $fileDestination = $folderPath . $file_name;
+        if (in_array($file_ext, $extensions) === false) {
+            $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
+        }
 
+        if ($file_size > 2097152) {
+            $errors[] = 'File size must be excately 2 MB';
+        }
+
+        if (empty($errors) == true) {
+            move_uploaded_file($file_tmp, $fileDestination);
+        } else {
+            print_r($errors);
+        }
+        return $file_name;
+    }
+
+    function uploadVideo($file,$fileDestination)
+{
+    $errors = array();
+  echo "<script>console.log('working')</script>";
+    $file_name = $_FILES[$file]['name'];
+    echo "FILENAME". $file_name;
+  echo "<script>console.log('working')</script>";
+    $file_size = $_FILES[$file]['size'];
+    $file_tmp = $_FILES[$file]['tmp_name'];
+    $file_type = $_FILES[$file]['type'];
+    $arrayVar = explode('.', $_FILES[$file]['name']);
+    $extension = end($arrayVar);
+    $file_ext = strtolower($extension);
+    $file_name = base64_encode($_FILES[$file]['name']) . ".mp4";
+    $extensions = array("mp4", "webm");
+    //file upload path
+    $fileDestination = $fileDestination . $file_name;
+    // if (in_array($file_ext, $extensions) === false) {
+    //     $errors[] = "extension not allowed, please choose a MP4  file.";
+    // }
+
+    if (empty($errors) == true) {
+        move_uploaded_file($file_tmp, $fileDestination);
+    } else {
+        print_r($errors);
+    }
+    return $file_name;
+}
+function insertUploadedImageData($EventID,$Path,$Title){
+  $sql = 'INSERT INTO eventvideos VALUES (DEFAULT,'. $EventID .', '. "'$Path'" .', DEFAULT,'. "'$Title'" .')';
+  // echo $sql;
+  return(SQL_Query($sql));
+
+}
+function get_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 ?>

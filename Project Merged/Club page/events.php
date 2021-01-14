@@ -1,12 +1,17 @@
-    <?php
-    // session_start();
-    // echo $_SESSION["clubName"];
-    ?>
+
 
     <!DOCTYPE html>
     <style>
         #eventsBottom :hover {
             background-color: white;
+        }
+        #AllEvents img {
+            width: 200px;
+            height: 200px;
+        }
+        #AllEvents > div {
+            margin: 50px;
+            padding: 50px;
         }
     </style>
     <html lang="en">
@@ -36,7 +41,7 @@
             </div>
 
             <div style="clear:both;margin-top:20px">
-                <div id="eventsBottom">
+                <div id="eventsBottom" class="footer">
                 </div>
             </div>
         </div>
@@ -84,45 +89,65 @@
 
     </html>
 
-    <?php
+
+
+    <script>
+        var clubID = 1;
+        $.ajax({
+            type: 'POST',
+            url: './database/getAllEvents.php',
+            data: ({'clubID': clubID}),
+            dataType: 'json',
+            cache: false,
+            success: function(result) {
+                var count = 0;
+                designEvents(result[0], count);
+                console.log(result);
+            },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message)
+            }
+        });
+
+        function designEvents(dataArray, count) {
+            var j = -1;
+            var makeRow = 3;
+            for (var i = 0; i < dataArray.length; i++) {
+                if (i % makeRow == 0) {
+                    j++;
+                    $("#AllEventTableBody").append('<tr id=AllEventTableRow' + j + '>');
+                    $("#AllEventTableBody").append('</tr>');
+                }
+                createAdInAllEvent(dataArray, i, j); //creates a event ad column
+
+            }
+        }
+
+        function createAdInAllEvent(dataArray, count, row) {
+            $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./Upload/image/'+ dataArray[count]['DP'] +'  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['Name'] + '</h5> <p class="card-text">' + dataArray[count]["Date"] + '</p><p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID='+dataArray[count]['eID']+'&Id='+clubID+'>Read More..</a></button></p></div></td>');
+            console.log("CLUBID",clubID)
+        }
+        $(function() {
+            $("#eventsNav").load("nav.php");
+        });
+        $(function() {
+            $("#eventsBottom").load("bottom.php");
+        });
+    </script>
+
+    
+<?php
     require "./database/accessDatabase.php";
     $file = 'image';
     $folderPath = "./Upload/image/";
-    function uploadImage($file, $folderPath)
-    {
-        $errors = array();
-        $file_name = $_FILES[$file]['name'];
-        $file_size = $_FILES[$file]['size'];
-        $file_tmp = $_FILES[$file]['tmp_name'];
-        $file_type = $_FILES[$file]['type'];
-        $arrayVar = explode('.', $_FILES[$file]['name']);
-        $extension = end($arrayVar);
-        $file_ext = strtolower($extension);
-        $file_name = base64_encode($_FILES[$file]['name']) . ".jpg";
-        $extensions = array("jpeg", "jpg", "png");
-        //file upload path
-        $fileDestination = $folderPath . $file_name;
-        if (in_array($file_ext, $extensions) === false) {
-            $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
-        }
-
-        if ($file_size > 2097152) {
-            $errors[] = 'File size must be excately 2 MB';
-        }
-
-        if (empty($errors) == true) {
-            move_uploaded_file($file_tmp, $fileDestination);
-        } else {
-            print_r($errors);
-        }
-        return $file_name;
-    }
+    
     if (isset($_POST['evSubmit'])) {
         $file = "image";
         $folderPath = "./Upload/image/";
         $fileName = uploadImage($file, $folderPath);
 
-        $ClubId = 1;
+        $ClubId = $_GET['Id'];
         $EventDescription = "";
         $EventName = get_input($_POST['evTitle']);  //************************* I NEED U */
         $EventDP = "";
@@ -152,49 +177,6 @@
                                 LIMIT 1 )";
         SQL_Query($sql);
     }
-    function get_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+    
 
     ?>
-
-
-    <script>
-        $.ajax({
-            type: 'POST',
-            url: './database/getAllEvents.php',
-            dataType: 'json',
-            cache: false,
-            success: function(result) {
-                var count = 0;
-                designEvents(result[0], count);
-                console.log(result);
-            },
-            error: function(xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err.Message)
-            }
-        });
-
-        function designEvents(dataArray, count) {
-            var j = -1;
-            var makeRow = 3;
-            for (var i = 0; i < dataArray.length; i++) {
-                if (i % makeRow == 0) {
-                    j++;
-                    $("#AllEventTableBody").append('<tr id=AllEventTableRow' + j + '>');
-                    $("#AllEventTableBody").append('</tr>');
-                }
-                createAdInAllEvent(dataArray, i, j); //creates a event ad column
-
-            }
-        }
-
-        function createAdInAllEvent(dataArray, count, row) {
-            $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./images/Hossain.jpeg  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['Name'] + '</h5> <p class="card-text">' + dataArray[count]["Date"] + '</p><p class="card-text">' + dataArray[count]["Description"].substring(0, 150) + '<button class="btn" style="color:red;text-decoration: underline;"><a href="./FullEvent.php">Read More..</a></button></p></div></td>');
-        }
-    </script>

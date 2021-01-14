@@ -51,20 +51,13 @@
     } */
 </style>
 
-<body style="background:red">
+<body>
     <div id="fullEventNav"></div>
     <div id="fullEvent" class="container">
-        <!-- <Button onclick="eShowMore()" class="btn btn-block btn-danger"><b> Back</b></Button> -->
         <div class="container-center">
-            <img id="EventImage" src="" alt="not found">
+            <img id="EventImage" src="" alt="Image missing">
             <p id="describe">
-                For the first time in its 25 year-long legacy, NSU YES! will be hosting its strategic business case-solving competition online. The arena is set for Masters of Ideation, the battle for supremacy.
-
-                One of the most prestigious case solving competitions is back for opportunities of cognitive and analytical thinking. Masters of Ideation is all set to kick-start a brand new expedition with an aim to create a stimulating experience for the business competition. Undergraduate students all across the nation will join their intellect to come out victorious in the ultimate business battle.
-
-                North South University Young Entrepreneurs Society, NSU YES! is initiating its seventh edition of Masters of Ideation in 2020 by adapting to the new normal.
-
-                This time, we are proud and delighted to have Perfetti Van Melle as our Title Sponsor for this event.
+                Admin missed to write description
             </p>
         </div>
     </div>
@@ -72,17 +65,52 @@
         <div class="row">
             <div class="col">
                 <div id="VideosList">
+                    <button id="uploadVideoButton" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadVideo">
+                        <h1>Upload Video</h1>
+                    </button>
+                    <!-- Modal starts -->
+                    <div class="modal fade" id="uploadVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Upload Video</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label>Title </label>
+                                            <input name='videoTitle' value="Example123" type="text" class="form-control" placeholder="Example">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlFile1">Upload Video</label>
+                                            <input type="file" name="video123" class="form-control-file">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <input name="videoSubmit" type="submit" value="Save changes">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ends -->
+
+                    <h1 id="noVideoH" class="section-head" style="background-color: orange;text-align:center;margin-top:20px;border-bottom:5px solid green">Uploaded Videos</h1>
                     <div class="adInnerBox">
                         <div id="carouselExampleCaptions0" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" id="EventInsertHere0">
                                 <div class="carousel-item active ">
                                     <video id="v1" controls>
-                                        <source src="" type="video/mp4">
-                                        <source src="movie.ogg" type="video/ogg">
+                                        <source src="./Upload/video/" type="video/mp4">
+                                        <!-- <source src="" type="video/ogg"> -->
                                         Your browser does not support the video tag.
                                     </video>
                                     <h6 id="firstVideoTitle"></h6>
-                                    <h7 id="firstVideoUploadTime">Uploaded On:</h7>
+                                    <h7 id="firstVideoUploadTime"></h7>
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleCaptions0" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -99,19 +127,54 @@
             </div>
             <div class="col">
                 <div id="PhotoList">
+                    <button id="uploadPhotoButton" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadPhoto">
+                        <h1>Photo Video</h1>
+                    </button>
+                    <!-- Modal starts -->
+                    <div class="modal fade" id="uploadPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Upload Photo</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label>Title </label>
+                                            <input name='photoTitle' value="Example123" type="text" class="form-control" placeholder="Example">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlFile1">Upload Photo </label>
+                                            <input type="file" name="image" class="form-control-file">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <input name="photoSubmit" type="submit" value="Save changes">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ends -->
+
+                    <h1 id="noPhotoH" class="section-head" style="background-color: orange;text-align:center;margin-top:20px;border-bottom:5px solid green">Uploaded Videos</h1>
                     <div class="adInnerBox">
                         <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" id="EventInsertHere1">
                                 <div class="carousel-item active ">
-                                    <img src="./Upload/image/DMC.jpg" alt="">
+                                    <img id="p1" src="./Upload/image/SXN0aWFrLmpwZw==.jpg" alt="">
                                     <h6 id="firstPhotoTitle"></h6>
-                                    <h7 id="firstPhotoUploadTime">Uploaded On:</h7>
+                                    <h7 id="firstPhotoUploadTime"></h7>
                                 </div>
-                                <!-- <div class="carousel-item ">
-                                    <img src="./Upload/image/DMC.jpg" alt="">
+                                <div class="carousel-item ">
+                                    <img src="./Upload/image/YWRuYW4uanBn.jpg" alt="">
                                     <h4 ></h4>
                                     <h5 >Uploaded On:</h5>
-                                </div> -->
+                                </div>
                                 <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Previous</span>
@@ -133,14 +196,21 @@
 
 <script>
     //  echo $_SESSION["visitingClubName"] 
+    var clubID = <?php echo $_GET['Id']; ?>;
+    var eventID = <?php echo $_GET['eID']; ?>;
+    console.log(clubID,eventID);
     $.ajax({
-        type: 'POST',
+        type: 'post',
         url: './database/fullEventData.php',
+        data: ({
+            'clubID': clubID,
+            'eventID': eventID,
+        }),
         dataType: 'json',
         cache: false,
         success: function(result) {
 
-            console.log(result);
+            // console.log(result);
             designEvent(result);
             console.log(result);
         },
@@ -151,9 +221,6 @@
     });
 
     function designEvent(dataArray) {
-        console.log(dataArray[0][0]["EventDescription"]);
-        console.log(dataArray[0][0]["EventDescription"]);
-        console.log(dataArray[0][0]["EventDescription"]);
         $("#describe").text(dataArray[0][0]["EventDescription"]);
         $("#EventImage").attr("src", "./Upload/image/" + dataArray[0][0]["DP"]);
         // $("#EventVideo").attr("src", "./Upload/image/" + dataArray[0]["DP"]);
@@ -161,24 +228,34 @@
     }
 
     function insertingVideoList(dataArray) {
+        console.log(dataArray[2][0]['video'], "Video name");
         console.log("inserting videolist");
-        $("#v1").html('<source src=' + dataArray[2][0]["video"] + ' type="video/mp4"></source>');
-        $("#firstVideoTitle").append(dataArray[2][0]["Title"]);
-        $("#firstVideoUploadTime").append(dataArray[2][0]["Uploaded_On"]);
-        for (var video = 1; video < dataArray[2].length; video++) {
-            $("#EventInsertHere0").append('<div class="carousel-item" ><video controls><source src= ./Upload/video/' + dataArray[2][video]["video"] + '  type="video/mp4"><source src="movie.ogg" type="video/ogg">Your browser does not support the video tag.</video><h6>' + dataArray[2][video]["Title"] + '</h6><h7>Uploaded on:' + dataArray[2][video]["Uploaded_On"] + '</h7></div>')
+        if (dataArray[2].length > 0) {
+            var video = $("#v1");
+            video.find("source").attr("src", 'Seyam.mp4');
+            video.get(0).load();
+            video.get(0).play();
+            // $("#v1").html('<source src= ./Upload/video/'+dataArray[2][0]['video']+' type="video/mp4"></source>');
+            $("#firstVideoTitle").append(dataArray[2][0]["Title"]);
+            $("#firstVideoUploadTime").append('Uploaded On:' + dataArray[2][0]["Uploaded_On"]);
+            for (var video = 1; video < dataArray[2].length; video++) {
+                $("#EventInsertHere0").append('<div class="carousel-item" ><video controls><source src= ./Upload/video/' + dataArray[2][video]["video"] + '  type="video/mp4"><source src="movie.ogg" type="video/ogg">Your browser does not support the video tag.</video><h6>' + dataArray[2][video]["Title"] + '</h6><h7>Uploaded on:' + dataArray[2][video]["Uploaded_On"] + '</h7></div>')
+            }
         }
         // console.log(dataArray[0]['videos']);
         insertingPhotoList(dataArray);
 
     }
-    function insertingPhotoList(dataArray){
+
+    function insertingPhotoList(dataArray) {
         console.log("inserting Videolists");
-        $("#p1").attr("src","./Upload/image/"+dataArray[1][0]["photo"]);
-        $("#firstPhotoTitle").append(dataArray[1][0]["Title"]);
-        $("#firstPhotoUploadTime").append(dataArray[1][0]["Uploaded_On"]);
-        for (var photo = 1; photo < dataArray[1].length; photo++) {
-            $("#EventInsertHere1").append('<div class="carousel-item" ><img src= ./Upload/image/' + dataArray[2][photo]["photo"] + '  alt=image not found><h6>' + dataArray[2][video]["Title"] + '</h6><h7>Uploaded on:' + dataArray[2][video]["Uploaded_On"] + '</h7></div>')
+        if (dataArray[1].length > 0) {
+            $("#p1").attr("src", "./Upload/image/" + dataArray[1][0]["photo"]);
+            $("#firstPhotoTitle").append(dataArray[1][0]["Title"]);
+            $("#firstPhotoUploadTime").append('Uploaded On:' + dataArray[1][0]["Uploaded_On"]);
+            for (var photo = 1; photo < dataArray[1].length; photo++) {
+                $("#EventInsertHere1").append('<div class="carousel-item" ><img src= ./Upload/image/' + dataArray[2][photo]["photo"] + '  alt=image not found><h6>' + dataArray[2][video]["Title"] + '</h6><h7>Uploaded on:' + dataArray[2][video]["Uploaded_On"] + '</h7></div>')
+            }
         }
         // console.log(dataArray[0]['videos']);
     }
@@ -189,3 +266,33 @@
         $("#fullEvent").load(".php");
     });
 </script>
+
+
+<?php
+require "./database/accessDatabase.php";
+if (isset($_POST['videoSubmit'])) {
+    // echo "<script>console.log('Video submitted')</script>";
+    $file = 'video123';
+    $fileDestination = "./Upload/video/";
+    $Path = uploadVideo($file, $fileDestination);
+    $Title = get_input($_POST['videoTitle']);
+    $EventID = $_GET['eID'];
+    if (insertUploadedImageData($EventID, $Path, $EventID)) {
+        echo "<script>console.log('Video recorded')</script>";
+    } else {
+        echo "<script>console.log('Video was not recorded')</script>";
+    }
+}
+if (isset($_POST['photoSubmit'])) {
+    $file = 'image';
+    $fileDestination = "./Upload/image/";
+    $Path = uploadImage($file, $fileDestination);
+    $Title = get_input($_POST['photoTitle']);
+    $EventID = $_GET['eID'];
+    if (insertPhotos($EventID, $Path, $EventID)) {
+        echo "<script>console.log('Image recorded')</script>";
+    } else {
+        echo "<script>console.log('Image was not recorded')</script>";
+    }
+}
+?>
