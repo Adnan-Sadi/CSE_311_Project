@@ -32,7 +32,16 @@
         width: 100%;
         height: 250px;
     }
-
+    #EventImage{
+        max-width: 400px;
+        height: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top:50px;
+    width: 40%;
+    }
+   
     /* #VideosList {
         text-align: center;
         float: left;
@@ -55,7 +64,8 @@
     <div id="fullEventNav"></div>
     <div id="fullEvent" class="container">
         <div class="container-center">
-            <img id="EventImage" src="" alt="Image missing">
+            <img class="center" id="EventImage" src="" alt="Image missing">
+            <h1 id="eventName"></h1>
             <p id="describe">
                 Admin missed to write description
             </p>
@@ -103,7 +113,7 @@
                     <div class="adInnerBox">
                         <div id="carouselExampleCaptions0" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" id="EventInsertHere0">
-                                <div class="carousel-item active ">
+                                <div id="videoDiv" class="carousel-item active ">
                                     <video id="v1" controls>
                                         <source src="./Upload/video/" type="video/mp4">
                                         <!-- <source src="" type="video/ogg"> -->
@@ -128,7 +138,7 @@
             <div class="col">
                 <div id="PhotoList">
                     <button id="uploadPhotoButton" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadPhoto">
-                        <h1>Photo Video</h1>
+                        <h1>Upload Photo</h1>
                     </button>
                     <!-- Modal starts -->
                     <div class="modal fade" id="uploadPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -166,14 +176,9 @@
                         <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" id="EventInsertHere1">
                                 <div class="carousel-item active ">
-                                    <img id="p1" src="./Upload/image/SXN0aWFrLmpwZw==.jpg" alt="">
+                                    <img id="p1" src="./Upload/image/" alt="">
                                     <h6 id="firstPhotoTitle"></h6>
                                     <h7 id="firstPhotoUploadTime"></h7>
-                                </div>
-                                <div class="carousel-item ">
-                                    <img src="./Upload/image/YWRuYW4uanBn.jpg" alt="">
-                                    <h4 ></h4>
-                                    <h5 >Uploaded On:</h5>
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -195,6 +200,9 @@
 </html>
 
 <script>
+      if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
     //  echo $_SESSION["visitingClubName"] 
     var clubID = <?php echo $_GET['Id']; ?>;
     var eventID = <?php echo $_GET['eID']; ?>;
@@ -210,7 +218,6 @@
         cache: false,
         success: function(result) {
 
-            // console.log(result);
             designEvent(result);
             console.log(result);
         },
@@ -221,26 +228,34 @@
     });
 
     function designEvent(dataArray) {
+        // console.log("DP",dataArray[0][0]["DP"]);
+        
+        $("#eventName").text(dataArray[0][0]["ClubName"]);
         $("#describe").text(dataArray[0][0]["EventDescription"]);
+        if(!dataArray[0][0]["DP"].length==0)
         $("#EventImage").attr("src", "./Upload/image/" + dataArray[0][0]["DP"]);
         // $("#EventVideo").attr("src", "./Upload/image/" + dataArray[0]["DP"]);
         insertingVideoList(dataArray);
     }
 
     function insertingVideoList(dataArray) {
-        console.log(dataArray[2][0]['video'], "Video name");
+        // console.log(dataArray[2][0]['video'], "Video name");
         console.log("inserting videolist");
         if (dataArray[2].length > 0) {
             var video = $("#v1");
-            video.find("source").attr("src", 'Seyam.mp4');
+            video.find("source").attr("src",'./Upload/video/'+dataArray[2][0]['video']);
             video.get(0).load();
             video.get(0).play();
             // $("#v1").html('<source src= ./Upload/video/'+dataArray[2][0]['video']+' type="video/mp4"></source>');
-            $("#firstVideoTitle").append(dataArray[2][0]["Title"]);
+            $("#firstVideoTitle").append('Title : '+dataArray[2][0]["Title"]);
             $("#firstVideoUploadTime").append('Uploaded On:' + dataArray[2][0]["Uploaded_On"]);
             for (var video = 1; video < dataArray[2].length; video++) {
                 $("#EventInsertHere0").append('<div class="carousel-item" ><video controls><source src= ./Upload/video/' + dataArray[2][video]["video"] + '  type="video/mp4"><source src="movie.ogg" type="video/ogg">Your browser does not support the video tag.</video><h6>' + dataArray[2][video]["Title"] + '</h6><h7>Uploaded on:' + dataArray[2][video]["Uploaded_On"] + '</h7></div>')
             }
+        }
+        else{
+            $("#v1").hide();
+            $("#videoDiv").append('<img src="./images/No videos yet.png" </img>')
         }
         // console.log(dataArray[0]['videos']);
         insertingPhotoList(dataArray);
@@ -254,8 +269,11 @@
             $("#firstPhotoTitle").append(dataArray[1][0]["Title"]);
             $("#firstPhotoUploadTime").append('Uploaded On:' + dataArray[1][0]["Uploaded_On"]);
             for (var photo = 1; photo < dataArray[1].length; photo++) {
-                $("#EventInsertHere1").append('<div class="carousel-item" ><img src= ./Upload/image/' + dataArray[2][photo]["photo"] + '  alt=image not found><h6>' + dataArray[2][video]["Title"] + '</h6><h7>Uploaded on:' + dataArray[2][video]["Uploaded_On"] + '</h7></div>')
+                $("#EventInsertHere1").append('<div class="carousel-item" ><img src= ./Upload/image/' + dataArray[1][photo]["photo"] + '  alt=image not found><h6>' + dataArray[1][photo]["Title"] + '</h6><h7>Uploaded on:' + dataArray[1][photo]["Uploaded_On"] + '</h7></div>')
             }
+        }
+        else{
+            $("#p1").append('<img src="./images/No videos yet.png" </img>')
         }
         // console.log(dataArray[0]['videos']);
     }
@@ -277,7 +295,7 @@ if (isset($_POST['videoSubmit'])) {
     $Path = uploadVideo($file, $fileDestination);
     $Title = get_input($_POST['videoTitle']);
     $EventID = $_GET['eID'];
-    if (insertUploadedImageData($EventID, $Path, $EventID)) {
+    if (insertUploadedVideoData($EventID, $Path,$Title)) {
         echo "<script>console.log('Video recorded')</script>";
     } else {
         echo "<script>console.log('Video was not recorded')</script>";

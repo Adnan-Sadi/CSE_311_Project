@@ -1,25 +1,20 @@
-html{
-   height: 100%;
+html {
+    height: 100%;
 }
 
-
-a , li{
-	text-decoration: none !important;
-
+a,
+li {
+    text-decoration: none !important;
 }
 
-body{
-	/*background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );*/
-	background-color:white;
-	min-height: 100vh;
-	min-height: 100%;
-	display: flex;
-	flex-direction: column;
-	
+body {
+    /*background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );*/
+    background-color: white;
+    min-height: 100vh;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
-
-
-
 
 .section {
     /*for all section padding same*/
@@ -52,24 +47,23 @@ body{
 }
 
 #logo {
-	font-size: 2rem;
-	
+    font-size: 2rem;
     /* making font size 2.5 to 2*/
     padding-top: 5px;
 }
 
 #menu {
-	list-style: none;
+    list-style: none;
     /*for removing bolets*/
     margin: 0;
-	padding: 0;
-	position: relative;
+    padding: 0;
+    position: relative;
 }
 
 #menu li {
-	display: inline-block;
-	margin-left: 10px;
-	margin-right: 10px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
     /*for showing all lists in one line*/
 }
 
@@ -87,17 +81,16 @@ body{
 }
 
 #search {
-    
-	padding-bottom: 15px;
-	position: absolute;
-	top:5px;
-	right: 60px;
+    padding-bottom: 15px;
+    position: absolute;
+    top: 5px;
+    right: 60px;
 }
 
 #search button {
-	position: absolute;
-	top:5px;
-	right:26px;
+    position: absolute;
+    top: 5px;
+    right: 26px;
 }
 
 
@@ -138,15 +131,17 @@ body{
     font-size: 40px;
     margin-bottom: 15px;
 }
+
 .club-box #c_name {
     font-size: 1.5em;
     font-weight: 500;
-    color:#000;
+    color: #000;
 }
 
 .club-box #c_name:hover {
     color: blue;
 }
+
 
 /* end of club boxes css*/
 
@@ -197,129 +192,128 @@ body{
 
 .logo {
     width: 150px;
-    height: 100px;
+    max-height: 100px;
     margin: 20px
 }
-
 
 
 /*homepage ends*/
 
 
-
-
 /*Signup Page*/
-#signup-panel{
-	position: relative;
-	text-align: center;
+
+#signup-panel {
+    position: relative;
+    text-align: center;
 }
 
-
-#signup-panel input{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	width: 400px;
-	padding: 12px 20px 12px 20px;
-	box-sizing: border-box;
-	
+#signup-panel input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 400px;
+    padding: 12px 20px 12px 20px;
+    box-sizing: border-box;
 }
 
-
-#signup-panel input:focus{
-	outline: none;
+#signup-panel input:focus {
+    outline: none;
 }
 
-#signup-panel button{
-	
-	font-weight: 500;
-	font-size: 1.2em;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	width: 200px;
+#signup-panel button {
+    font-weight: 500;
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
 }
+
 
 /*Signup Page ends*/
+
 
 /*Club Page */
 
 
 /*Club Page Ends */
 
+
 /*Member Page*/
 
-#exc_body{
+#exc_body {
     margin-top: 20px;
     margin-bottom: 20px;
-	font-size: 1.4em;
-	font-weight: 500;
-	border-bottom: 1px groove gray;
-	
+    font-size: 1.4em;
+    font-weight: 500;
+    border-bottom: 1px groove gray;
 }
 
-#people_tile{
-	margin-top: 50px;
-	position: relative;
-	width: 100%;
-	height:300px;
-	overflow: hidden;	
+#people_tile {
+    margin-top: 50px;
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
 }
 
-#mem_img{
-	height: 100%;
-	width: 100%;
+#mem_img {
+    height: 100%;
+    width: 100%;
 }
 
-#people_tile span{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 1.3em;
-  text-transform: uppercase;
-  background-color: #000;
-  color: #fff;
-  opacity: .5;
-  
+#people_tile span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    background-color: #000;
+    color: #fff;
+    opacity: .5;
 }
 
-#all_mem{
-	margin-top: 60px;
-	font-size: 1.4em;
-	font-weight: 500;
-	border-bottom: 1px groove gray;
+#all_mem {
+    margin-top: 60px;
+    font-size: 1.4em;
+    font-weight: 500;
+    border-bottom: 1px groove gray;
 }
 
-#member-nav{
-	list-style: none;
-
+#member-nav {
+    list-style: none;
 }
 
-
-#member-nav li{
-	margin-top: 5px;
-	list-style-type: none;
-	font-size: 1.2em;
-	text-align: center;
-	border: 3px outset gray;
-	background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
-}
-#member-nav a{
-	color: indigo;
-	font-weight: 600;
+#member-nav li {
+    margin-top: 5px;
+    list-style-type: none;
+    font-size: 1.2em;
+    text-align: center;
+    border: 3px outset gray;
+    background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
 }
 
-#panel1, #flip1,#panel2, #flip2,#panel3, #flip3 {
-  padding: 5px;
-  text-align: center;
-  border: solid 1px #c3c3c3;
+#member-nav a {
+    color: indigo;
+    font-weight: 600;
 }
 
-#panel1,#panel2,#panel3 {
-  display: none;
+#panel1,
+#flip1,
+#panel2,
+#flip2,
+#panel3,
+#flip3 {
+    padding: 5px;
+    text-align: center;
+    border: solid 1px #c3c3c3;
 }
+
+#panel1,
+#panel2,
+#panel3 {
+    display: none;
+}
+
 
 /*Member Page Ends*/
-
-
-

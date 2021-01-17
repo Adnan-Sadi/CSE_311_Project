@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-    #HomeUpcommigEventsAd>div>img {
-        width: 250px;
-        height: 200px;
+    #HomeUpcommigEventsAd img {
+        max-width: 335px;
+        max-height: 280px;
+    }
+    #upcomingEvents {
+        margin: 20px;
     }
 
     #HomeUpcommigEventsAd h6 {
-        margin: 5px;
+        margin: 15px;
         text-align: center;
     }
 
@@ -16,6 +19,7 @@
         width: 350px;
         height: 300px;
     }
+
 </style>
 
 <head>
@@ -35,9 +39,9 @@
         <div id="upcomingEvents" class="d-flex justify-content-center">
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                 <div class="carousel-inner" id="HomeUpcommigEventsAd">
-                    <div id="pp" class="carousel-item active">
-                        <img id="FirstAdImg" src="./images/nsu_ieee_logo.jpg" class="d-block w-100" alt="Image missing">
-                        <div>
+                    <div class="carousel-item active">
+                        <img id="FirstAdImg" src="./images/2018_acm_group_pic.jpg" class="d-block w-100" alt="Image missing">
+                        <div id="firstAd">
                             <h6 id="FirstAdTitle">Title</h6>
                             <h6 id="FirstAdDate">Date</h6>
                         </div>
@@ -60,24 +64,34 @@
 
 <script>
     $( document ).ready(function() {
-
-        
         $.ajax({
             type: 'post',
             url: './Club page/database/getUpcomingEvents.php',
             dataType: 'json',
             cache: false,
             success: function(result) {
+                if(result.length == 0 ){
+                    $("#firstAd").hide();
+                    $("#upcomingEvents a").hide();
+                    $("#FirstAdImg").attr("src", './Club page/images/NoUpcomingEvent.png').height('280px');
+                    // $("img").css("max-height", "400px");
+                    return;
+                }
+                 
+                else{
+                    if(result.length == 1){
+                    $("#upcomingEvents a").hide();
+                }
                 $("#NoEventBoard").hide();
                 $("#FirstAdImg").attr("src", './Club page/Upload/image/' + result[0]["DP"]);
                 $("#FirstAdTitle").text(result[0]["name"]);
                 $("#FirstAdDate").text(result[0]["Date"]);
                 designAd(result);
+                }
             },
             error: function() {
                 $("#upcomingEvents").children().hide();
                 $("#NoEventBoard").show();
-
                 console.log("Wrong query './Club page/database/getUpcomingEvents.php': " + "or query did not exicuted");
             }
         });
@@ -86,7 +100,10 @@
 
     function designAd(dataArray) {
         for (var i = 1; i < dataArray.length; i++) {
-            $("#HomeUpcommigEventsAd").append('<div class="carousel-item"><img src= ./Club page/Upload/image/ ' + dataArray[i]['DP'] + ' class="d-block w-100" alt="Image missing"><h6>' + dataArray[i]['name'] + '</h6><h6>' + dataArray[i]['Date'] + '</h6></div>');
+            if(dataArray[i].length==0){
+                continue;
+            }
+            $("#HomeUpcommigEventsAd").append('<div class="carousel-item"><img src= "' + './Club page/Upload/image/' + dataArray[i]['DP'] + '" class="d-block w-100" alt="Image missing" ><h6>' + dataArray[i]['name'] + '</h6><h6>' + dataArray[i]['Date'] + '</h6></div>');
         }
     }
 

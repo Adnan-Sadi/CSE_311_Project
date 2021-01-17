@@ -1,10 +1,10 @@
 <?php
 require "./accessDatabase.php";
 // echo '<script>console.log("post missing")</script>';
-$clubID = $_POST["id"];
+$clubID = $_POST["Id"];
 // echo "<script>alert(". $clubID.")</script>";
-// $clubID = 2;
-$sql = "SELECT Club_Name,Description,Club_Fname,Club_Logo FROM clubs WHERE  clubId=".$clubID;
+// $clubID = 1;
+$sql = "SELECT Club_Name,Description,Club_Fname,Club_Logo,Club_DP FROM clubs WHERE  clubId=".$clubID;
 // echo $sql;
 // $MyArray = array();
 // echo json_encode($Myarray);

@@ -239,3 +239,10 @@ CREATE TABLE Club_Links(
 	FOREIGN KEY(id) REFERENCES clubs(ClubId) 
                  ON DELETE CASCADE 
                  ON UPDATE CASCADE);
+
+
+dropping column serial in archives:
+ALTER TABLE Videos_archive
+DROP COLUMN Serial;
+ALTER TABLE Photos_archive
+DROP COLUMN Serial;

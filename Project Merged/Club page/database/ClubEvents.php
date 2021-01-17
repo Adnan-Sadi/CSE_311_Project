@@ -1,7 +1,7 @@
 <?php
 require './accessDatabase.php';
-// $clubID = $_POST['clubID'];
-$clubID = 1;
+$clubID = $_POST['clubID'];
+// $clubID = 1;
 $Myarray =  array();
 $sql = "SELECT EventName as 'name', Date , (SELECT path 
                                             FROM eventphotos

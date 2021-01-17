@@ -18,7 +18,9 @@ if ($conn->connect_error) {
 else{
   // echo "Success";
 }
+
   $Myarray = array();
+  // $sql = mysqli_real_escape_string($conn,$sql);
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     // output data of each row
@@ -39,12 +41,14 @@ function SQL_Query($sql,$dbname = "nsu_clubs",$servername = "localhost",$usernam
     die("Connection failed: " . $conn->connect_error);
   } else {
     // echo "Success";
+    // $sql = mysqli_real_escape_string($conn, $sql);
+    if ($conn->query($sql)) {
+      $x = true;
+    } else {
+      $x = false;
+    }
   }
-  if ($conn->query($sql)) {
-    $x = true;
-  } else {
-    $x = false;
-  }
+  
   $conn->close();
   return $x;
 }
@@ -70,7 +74,9 @@ function getEventData($ClubID,$EventID){
   $Myarray = Array();
   $sql = 'SELECT EventDescription,Date,(SELECT path
                                         FROM eventPhotos
-                                        WHERE photoid = '. $EventID .' ) AS DP
+                                        WHERE EventID = '. $EventID .' ) AS DP,(Select club_Name 
+                                                                                FROM clubs
+                                                                                where clubId = '. "$ClubID" .' ) AS ClubName'.'
           From events';
 
 // echo $sql;
@@ -100,7 +106,7 @@ function uploadImage($file, $folderPath)
         $arrayVar = explode('.', $_FILES[$file]['name']);
         $extension = end($arrayVar);
         $file_ext = strtolower($extension);
-        $file_name = base64_encode($_FILES[$file]['name']) . ".jpg";
+        $file_name = base64_encode($_FILES[$file]['name']).'.jpg';
         $extensions = array("jpeg", "jpg", "png");
         //file upload path
         $fileDestination = $folderPath . $file_name;
@@ -120,36 +126,41 @@ function uploadImage($file, $folderPath)
         return $file_name;
     }
 
-    function uploadVideo($file,$fileDestination)
-{
-    $errors = array();
-  echo "<script>console.log('working')</script>";
-    $file_name = $_FILES[$file]['name'];
-    echo "FILENAME". $file_name;
-  echo "<script>console.log('working')</script>";
-    $file_size = $_FILES[$file]['size'];
-    $file_tmp = $_FILES[$file]['tmp_name'];
-    $file_type = $_FILES[$file]['type'];
-    $arrayVar = explode('.', $_FILES[$file]['name']);
-    $extension = end($arrayVar);
-    $file_ext = strtolower($extension);
-    $file_name = base64_encode($_FILES[$file]['name']) . ".mp4";
-    $extensions = array("mp4", "webm");
-    //file upload path
-    $fileDestination = $fileDestination . $file_name;
-    // if (in_array($file_ext, $extensions) === false) {
-    //     $errors[] = "extension not allowed, please choose a MP4  file.";
-    // }
+    function uploadVideo($file,$fileDestination){
+        $errors = array();
+        $file_name = $_FILES[$file]['name'];
+        if(empty($file_name)){return $file_name;}
+          echo "FILENAME" . $file_name;
+          echo "<script>console.log('working')</script>";
+          $file_size = $_FILES[$file]['size'];
+          $file_tmp = $_FILES[$file]['tmp_name'];
+          $file_type = $_FILES[$file]['type'];
+          $arrayVar = explode('.', $_FILES[$file]['name']);
+          $extension = end($arrayVar);
+          $file_ext = strtolower($extension);
+          $file_name = base64_encode($_FILES[$file]['name']) . ".mp4";
+          $extensions = array("mp4", "webm");
+          //file upload path
+          $fileDestination = $fileDestination . $file_name;
+          // if (in_array($file_ext, $extensions) === false) {
+          //     $errors[] = "extension not allowed, please choose a MP4  file.";
+          // }
 
-    if (empty($errors) == true) {
-        move_uploaded_file($file_tmp, $fileDestination);
-    } else {
-        print_r($errors);
-    }
-    return $file_name;
-}
+          if (empty($errors) == true) {
+            move_uploaded_file($file_tmp, $fileDestination);
+          } else {
+            print_r($errors);
+          }
+          return $file_name;
+        }
 function insertUploadedImageData($EventID,$Path,$Title){
-  $sql = 'INSERT INTO eventvideos VALUES (DEFAULT,'. $EventID .', '. "'$Path'" .', DEFAULT,'. "'$Title'" .')';
+  $sql = 'INSERT INTO eventPhotos VALUES (DEFAULT,'. $EventID .', '. "'$Path'" .', DEFAULT,'. "'$Title'" .')';
+  // echo $sql;
+  return(SQL_Query($sql));
+
+}
+function insertUploadedVideoData($EventID,$Path,$Title){
+  $sql = 'INSERT INTO eventVideos VALUES (DEFAULT,'. $EventID .', '. "'$Path'" .', DEFAULT,'. "'$Title'" .')';
   // echo $sql;
   return(SQL_Query($sql));
 
@@ -160,5 +171,30 @@ function get_input($data)
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
+    }
+    
+    function eventDelete($ClubID,$EventID){
+          $sql = 'Delete FROM events
+                  WHERE ClubId = '."$ClubID".' AND EventId = '."$EventID";
+            SQL_Query($sql);
+
+    }
+    function eventEdit($ClubID=null,$EventID=null,$Title=null,$Description=null){
+      $items='';
+      if(!empty($Description)){
+        $items.= ' EventDescription = '. "'$Description'";
+      }
+       if(!empty($Title)){
+         if(!empty($Description)){
+           $items .= ' , ';
+         }
+        $items .= ' EventName = '. "'$Title'";
+      }
+      $sql = 'UPDATE  events
+              SET  '."$items" .'
+      WHERE ClubId = '."$ClubID".' AND EventId = '."$EventID";
+      echo $sql;
+      return SQL_Query($sql);
+
     }
 ?>
