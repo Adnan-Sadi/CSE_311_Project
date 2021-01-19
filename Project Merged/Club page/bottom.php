@@ -25,9 +25,9 @@
     font-size: 50px;
     border: 10px inset #4B57B8;
   }
-  #LinkBoardBottom :hover {
+  /* #LinkBoardBottom :hover {
     background-color: #4B57B8;
-  }
+  } */
 
 </style>
 
@@ -41,9 +41,9 @@
     </div>
     <div id="LinkBoardBottom">
       <div class="contact-logo "  >
-        <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
-        <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
-        <a href=""><i class="fa fa-link" aria-hidden="true"></i></a>
+        <a href="https://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <a href="https://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        <a href="https://www.google.com"><i class="fa fa-link" aria-hidden="true"></i></a>
         <a href="https://github.com/Adnan-Sadi/CSE_311_Project"><i class="fa fa-github" aria-hidden="true"></i></a>
       </div>
     </div>

@@ -56,7 +56,7 @@ $ClubID = $_GET['Id'];
 <script>
     $(document).ready(function() {
         var id = "<?php echo $ClubID; ?>";
-        console.log(id);
+        // console.log(id);
         $.ajax({
             type: 'post',
             url: './database/clubdescription.php',
@@ -64,7 +64,7 @@ $ClubID = $_GET['Id'];
             dataType: 'json',
             cache: false,
             success: function(result) {
-                console.log("main return data", result);
+                // console.log("main return data", result);
                 designMain(result);
             },
             error: function(e) {
@@ -82,7 +82,7 @@ $ClubID = $_GET['Id'];
         $('#mainClubLongName').append(mainArray[0][0]['Club_Fname']);
         $('#mainHeading').append(mainArray[0][0]['Description']);
         $('#clubLogo').attr('src', '../images/' + mainArray[0][0]['Club_Logo']);
-        $('#mainHeadImg').attr('src', '../images/' + mainArray[0][0]['Club_DP']);
+        $('#mainHeadImg').attr('src', './images/' + mainArray[0][0]['Club_DP']);
         // alert('./images/'+ mainArray[0][0]['Club_Name']+'Head.jpg');
         if (mainArray[1].length == 0) {
             $("#club-links").hide();

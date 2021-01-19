@@ -132,18 +132,18 @@
 });
 
     function designEventAds(result) {
-        console.log("recent", result[0]);
+        // console.log("recent", result[0]);
         // console.log("recent", result[1].length);
         if(result[0].length<1){
                 $("#LeftRightEventAds a").hide();
         }
 
         for (var i = 1; i < result[0].length; i++) {
-            $("#EventAdInsertHere1").append('<div class = carousel-item ><img  class=rounded w-100 src= ./Upload/image/' + result[0][i]["DP"] + ' alt=Event Page Missing > <div><h5>' + result[0][i]["name"] + '</h5><p>' + result[0][i]["Date"] + '</p><p>.</p></div></div>');
+            $("#EventAdInsertHere1").append('<a href=https://www.google.com><div class = carousel-item ><img  class=rounded w-100 src= ./Upload/image/' + result[0][i]["DP"] + ' alt=Event Page Missing > <div><h5>' + result[0][i]["name"] + '</h5><p>' + result[0][i]["Date"] + '</p><p>.</p></div></div></a>');
         }
         // console.log("upcomming", result[0].length);
         for (var i = 1; i < result[1].length; i++) {
-            $("#EventAdInsertHere0").append('<div class = carousel-item  ><img  class=rounded w-100 src= ./Upload/image/' + result[1][i]["DP"] + ' alt=Event Page Missing ><div><h5>' + result[1][i]["name"] + '</h5><p>' + result[1][i]["Date"] + '</p><p>.</p></div></div>');
+            $("#EventAdInsertHere0").append('<a href=https://www.google.com><div class = carousel-item  ><img  class=rounded w-100 src= ./Upload/image/' + result[1][i]["DP"] + ' alt=Event Page Missing ><div><h5>' + result[1][i]["name"] + '</h5></a><p>' + result[1][i]["Date"] + '</p><p>.</p></div></div></a>');
             // alert("Ok")
         }
     }

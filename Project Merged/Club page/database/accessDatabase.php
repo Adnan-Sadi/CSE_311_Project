@@ -70,15 +70,39 @@ function insertPhotos($EventId, $Path,$Title){
     // echo $sql;
     SQL_Query($sql);
 }
+function insertUploadedImageData($EventID,$Path,$Title){
+  $sql = 'INSERT INTO eventPhotos VALUES (DEFAULT,'. $EventID .', '. "'$Path'" .', DEFAULT,'. "'$Title'" .')';
+  // echo $sql;
+  return(SQL_Query($sql));
+
+}
+function insertUploadedVideoData($EventID,$Path,$Title){
+  $sql = 'INSERT INTO eventVideos VALUES (DEFAULT,'. $EventID .', '. "'$Path'" .', DEFAULT,'. "'$Title'" .')';
+  // echo $sql;
+  return(SQL_Query($sql));
+
+}
+function getEventForMail($ClubID,$EventID){
+  $sql = 'SELECT EventName , EventDescription ,
+                 Club_Fname as Fullname, Date ,
+                 (Select club_Name 
+                 FROM clubs  where clubId = '. "$ClubID" .' ) AS ClubName'.'
+          From events 
+          WHERE eventId = '."$EventID";
+  return inQuery($sql);
+};
+
 function getEventData($ClubID,$EventID){
   $Myarray = Array();
   $sql = 'SELECT EventName , EventDescription , Date , (SELECT path
-                                        FROM eventPhotos
-                                        WHERE PhotoId = '. "$ClubID" .' ) AS DP,(Select club_Name 
-                                                                                FROM clubs
-                                                                                where clubId = '. "$ClubID" .' ) AS ClubName'.'
-          From events';
-  // echo $sql;
+                                                        FROM eventPhotos
+                                                        WHERE PhotoId  = (SELECT eventDP FROM Events WHERE clubId = '. "$ClubID" .' )) AS DP,
+                                                        (Select club_Name 
+                                                        FROM clubs
+                                                        where clubId = '. "$ClubID" .' ) AS ClubName'.'
+          From events
+          WHERE eventId = '."$EventID";
+
   array_push($Myarray,inQuery($sql));
   $sql = 'SELECT ep.path as photo,ep.uploaded_on as Uploaded_On,ep.title as Title 
           FROM eventphotos AS ep,events as e
@@ -149,18 +173,7 @@ function uploadImage($file, $folderPath)
           }
           return $file_name;
         }
-function insertUploadedImageData($EventID,$Path,$Title){
-  $sql = 'INSERT INTO eventPhotos VALUES (DEFAULT,'. $EventID .', '. "'$Path'" .', DEFAULT,'. "'$Title'" .')';
-  // echo $sql;
-  return(SQL_Query($sql));
 
-}
-function insertUploadedVideoData($EventID,$Path,$Title){
-  $sql = 'INSERT INTO eventVideos VALUES (DEFAULT,'. $EventID .', '. "'$Path'" .', DEFAULT,'. "'$Title'" .')';
-  // echo $sql;
-  return(SQL_Query($sql));
-
-}
 function get_input($data)
     {
         $data = trim($data);
@@ -200,15 +213,9 @@ function get_input($data)
       where uid = userID";
       return inQuery($sql);
   }
-  function getEventForMail($ClubID,$EventID){
-    $sql = 'SELECT EventName , EventDescription , Date , (Select club_Name 
-                                          FROM clubs  where clubId = '. "$ClubID" .' ) AS ClubName'.'
-            From events 
-            WHERE eventId = '."$EventID";
-    return inQuery($sql);
-  };
-  function sendMailAboutEventCreation($to_email,$ClubName,$EventName,$FollowerName,$EventDate,$EventDescription){
-  $to_email = "saeem03@gmail.com";
+
+  function sendMailAboutEventCreation($to_email,$ClubName,$EventName,$EventFullname,$FollowerName,$EventDate,$EventDescription){
+  // $to_email = "saeem03@gmail.com";
   $subject = "NEW EVENT COMING AHEAD";
   $ClubName = $ClubName;
   $EventName = $EventName;
@@ -225,4 +232,14 @@ function get_input($data)
   // $headers[] = 'Bcc: birthdaycheck@example.com';
 
   return mail($to_email, $subject, $body, implode("\r\n", $headers));
+}
+function isLeader($ClubID,$email){
+  $sql = 'select m_id
+          from members
+          where Email = ' ."'$email'" . ' AND position like "%president" AND ClubId='.$ClubID; 
+  // echo $sql;
+  if(count(inQuery($sql))>0){
+    return 1;
+  }
+  else return 0;
 }

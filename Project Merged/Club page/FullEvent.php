@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,39 +29,18 @@
         border: 5px solid green;
         width: 100%;
         height: 90%;
+        background-color: #8080ff;
     }
-
-    Video {
-
-        width: 100%;
-        height: 250px;
-    }
-    #EventImage{
-        max-width: 400px;
+    img,video{
+        background-color: #ff8080 ;
+        max-width: 550px;
         height: 200px;
         display: block;
         margin-left: auto;
         margin-right: auto;
         margin-top:50px;
-    width: 40%;
-    }
-   
-    /* #VideosList {
-        text-align: center;
-        float: left;
-        width: 45%;
-        height: 50px;
-        margin: 5px;
-        /* padding-right:70px; */
-    /* border-right: .5px solid black; */
     }
 
-    */
-    /* .ok{
-        width: 600px;
-        height: 600px;
-
-    } */
 </style>
 
 <body>
@@ -65,7 +48,7 @@
     <div id="fullEvent" class="container">
         <div class="container-center">
             <img class="center" id="EventImage" src="" alt="Image missing">
-            <h1 style="margin-top:10px;Text-align:center;color:blueviolet;border: 3px solid red;" id="clubName"></h1>
+            <a href="./Club_main.php?Id=<?php echo $_GET['Id']; ?>"><h1 style="margin-top:10px;Text-align:center;color:blueviolet;border: 3px solid red;" id="clubName"></h1></a>
             <h1 style="margin-top:10px;" id="eventName"></h1>
             <p id="describe">
                 Admin missed to write description
@@ -74,11 +57,13 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div style="color:black" class="col">
                 <div id="VideosList">
-                    <button id="uploadVideoButton" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadVideo">
-                        <h1>Upload Video</h1>
-                    </button>
+                    <?php
+                    if($_SESSION['isPresident']){
+                        echo '<button id="uploadVideoButton" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadVideo"><h1>Upload Video</h1></button>';
+                    }
+                    ?>
                     <!-- Modal starts -->
                     <div class="modal fade" id="uploadVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -93,7 +78,7 @@
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label>Title </label>
-                                            <input name='videoTitle' value="Example123" type="text" class="form-control" placeholder="Example">
+                                            <input name='videoTitle' value="" type="text" class="form-control" placeholder="Example">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlFile1">Upload Video</label>
@@ -116,7 +101,7 @@
                             <div class="carousel-inner" id="EventInsertHere0">
                                 <div id="videoDiv" class="carousel-item active ">
                                     <video id="v1" controls>
-                                        <source src="./Upload/video/" type="video/mp4">
+                                        <source src="" type="video/mp4">
                                         <!-- <source src="" type="video/ogg"> -->
                                         Your browser does not support the video tag.
                                     </video>
@@ -138,9 +123,12 @@
             </div>
             <div class="col">
                 <div id="PhotoList">
-                    <button id="uploadPhotoButton" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadPhoto">
-                        <h1>Upload Photo</h1>
-                    </button>
+                <?php
+                    if($_SESSION['isPresident']){
+                        echo '<button id="uploadPhotoButton" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadPhoto"><h1>Upload Photo</h1></button>';
+                    }
+                ?>
+                    
                     <!-- Modal starts -->
                     <div class="modal fade" id="uploadPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -155,7 +143,7 @@
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label>Title </label>
-                                            <input name='photoTitle' value="Example123" type="text" class="form-control" placeholder="Example">
+                                            <input name='photoTitle' value="" type="text" class="form-control" placeholder="Example">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlFile1">Upload Photo </label>
@@ -177,7 +165,7 @@
                         <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" id="EventInsertHere1">
                                 <div class="carousel-item active ">
-                                    <img id="p1" src="./Upload/image/" alt="">
+                                    <img id="p1" src="" alt="">
                                     <h6 id="firstPhotoTitle"></h6>
                                     <h7 id="firstPhotoUploadTime"></h7>
                                 </div>
@@ -197,7 +185,9 @@
         </div>
     </div>
 </body>
-
+<footer>
+    <div id="FullEventBottom" ></div>
+</footer>
 </html>
 
 <script>
@@ -207,7 +197,7 @@
     //  echo $_SESSION["visitingClubName"] 
     var clubID = <?php echo $_GET['Id']; ?>;
     var eventID = <?php echo $_GET['eID']; ?>;
-    console.log(clubID,eventID);
+    // console.log(clubID,eventID);
     $.ajax({
         type: 'post',
         url: './database/fullEventData.php',
@@ -230,12 +220,13 @@
 
     function designEvent(dataArray) {
         // console.log("DP",dataArray[0][0]["DP"]);
-        
         $("#clubName").text(dataArray[0][0]["ClubName"]);
         $("#eventName").text(dataArray[0][0]["EventName"]);
         $("#describe").text(dataArray[0][0]["EventDescription"]);
-        if(!dataArray[0][0].length==0)
-        $("#EventImage").attr("src", "./Upload/image/" + dataArray[0][0]["DP"]);
+        // if(dataArray[0][0].length==0){
+            // console.log("display :",dataArray[0][0]["DP"]);
+            $("#EventImage").attr("src", "./Upload/image/" + dataArray[0][0]["DP"]);
+        // }
         // $("#EventVideo").attr("src", "./Upload/image/" + dataArray[0]["DP"]);
         insertingVideoList(dataArray);
     }
@@ -283,10 +274,9 @@
         $("#fullEventNav").load("nav.php");
     });
     $(function() {
-        $("#fullEvent").load(".php");
+        $("#FullEventBottom").load("bottom.php");
     });
 </script>
-
 
 <?php
 require "./database/accessDatabase.php";
@@ -309,11 +299,12 @@ if (isset($_POST['photoSubmit'])) {
     $Path = uploadImage($file, $fileDestination);
     $Title = get_input($_POST['photoTitle']);
     $EventID = $_GET['eID'];
-    if (insertPhotos($EventID, $Path, $EventID)) {
+    if (insertPhotos($EventID, $Path, $Title)) {
         echo "<script>console.log('Image recorded')</script>";
     } else {
         echo "<script>console.log('Image was not recorded')</script>";
     }
 }
+unset($_POST);
 // redirec
 ?>

@@ -1,6 +1,9 @@
 <?php
+require './database/accessDatabase.php';
 session_start();
-
+if(isLeader($_GET['Id'],$_SESSION['userEmail'])==1){
+    $_SESSION['isPresident'] = 1;
+}
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +70,7 @@ session_start();
     </div>
     <div id="team-intro">
         <h1 style="text-align: center; margin-bottom: 60px;" class="hover-line">Our Teams</h1>
-                <a href="../members.php?id=<?php echo $_GET['Id']; ?>" <button id="OPL" class="btn  btn-success  d-block w-100  ">Members</button></a>
+                <a href="../members.php?id=<?php echo $_GET['Id']; ?>" <button class="btn  btn-success  d-block w-100  ">Members</button></a>
         </ul>
 
     </div>
