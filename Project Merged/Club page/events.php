@@ -9,8 +9,8 @@
     /* #AllEvents {
             margin : 5px;
         } */
-     #AllEventTableBody td {
-        margin: 0px  70px 0px 70px;
+    #AllEventTableBody td {
+        margin: 0px 70px 0px 70px;
         /* padding: 50px; */
     }
 </style>
@@ -135,65 +135,73 @@ if (isset($_POST['evSubmit'])) {
                                 ORDER BY Uploaded_On DESC
                                 LIMIT 1 )";
     if (SQL_Query($sql)) {
-        echo '<script> $("#eventCreateForm").trigger("reset");</script>';
+        $Followers = getAllFollowers($ClubId, $EventID);
+        $follower = getAllFollowers($ClubId);
+        $event = getEventForMail($ClubId, $EventID);
+        sendMailAboutEventCreation($follower[0]['Email'], $event[0]['ClubName'], $event[0]['EventName'], $follower[0]['Name'], $event[0]['Date'], $event[0]['EventDescription']);
     }
 }
 ?>
 
 
 <script>
-    if ( window.history.replaceState ) {
-  window.history.replaceState( null, null, window.location.href );
-}
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
     var clubID = <?php echo $_GET['Id']; ?>;
     $(document).ready(function() {
-    $.ajax({
-        type: 'POST',
-        url: './database/getAllEvents.php',
-        data: ({
-            'clubID': clubID,
-            'functionName': '',
-            'eventID': null ,
-        }),
-        dataType: 'json',
-        cache: false,
-        success: function(result) {
-            var count = 0;
-            designEvents(result[0], count);
-            console.log(result);
-
-        },
-        error: function(xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")");
-            alert(err.Message)
-        }
-    });
-});
-    function eventDelete(e){
-        $(document).ready(function() {
         $.ajax({
-        type: 'POST',
-        url: './database/getAllEvents.php',
-        data: ({'clubID': clubID,
-            'eventID': e.value,
-            'functionName': 'eventDelete',}),
-        dataType: 'json',
-        cache: false,
-        success: function(result) {
-            // if(result){
+            type: 'POST',
+            url: './database/getAllEvents.php',
+            data: ({
+                'clubID': clubID,
+                'functionName': '',
+                'eventID': null,
+            }),
+            dataType: 'json',
+            cache: false,
+            success: function(result) {
+                var count = 0;
+                designEvents(result[0], count);
                 // console.log(result);
-                alert('Event Deleted');
-                
-                location.reload();
-            // }
-        },
-        error: function(xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")");
-            alert(err.Message);
-        }
+            },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message)
+            }
+        });
     });
-});
+
+    function eventDelete(e) {
+        if (confirm("Are you sure about deleting the event?")) {
+            $(document).ready(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: './database/getAllEvents.php',
+                    data: ({
+                        'clubID': clubID,
+                        'eventID': e.value,
+                        'functionName': 'eventDelete',
+                    }),
+                    dataType: 'json',
+                    cache: false,
+                    success: function(result) {
+                        // if(result){
+                        // console.log(result);
+                        alert('Event Deleted');
+                        location.reload();
+                        // }
+                    },
+                    error: function(xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    }
+                });
+            });
+        }
+
     }
+
     function designEvents(dataArray, count) {
         var j = -1;
         var makeColumn = 4;
@@ -218,7 +226,7 @@ if (isset($_POST['evSubmit'])) {
         cardBody.append('<p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '>Read More..</a></button></p>');
         var cardDown = td.append('<di ></di>')
         cardDown.append('<button class="btn btn-info btn-sm " style="margin: 5px " >Edit</button>');
-        cardDown.append('<button class="btn btn-info btn-sm" onClick=eventDelete(this) value = '+ dataArray[count]['eID'] +' style="margin: 5px " >Delete</button>');
+        cardDown.append('<button class="btn btn-info btn-sm" onClick=eventDelete(this) value = ' + dataArray[count]['eID'] + ' style="margin: 5px " >Delete</button>');
         // $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./Upload/image/'+ dataArray[count]['DP'] +'  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['Name'] + '</h5> <p class="card-text">' + dataArray[count]["Date"] + '</p><p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID='+dataArray[count]['eID']+'&Id='+clubID+'>Read More..</a></button></p></div><button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" >Delete</button></td>');
         // eventCard.append('<h1>OK HI</h1><button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID='+dataArray[count]['eID']+'&Id='+clubID+'>Read More..</a></button></p></div><button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" >Delete</button>');
         console.log("CLUBID", clubID)

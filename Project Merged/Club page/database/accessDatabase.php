@@ -72,18 +72,14 @@ function insertPhotos($EventId, $Path,$Title){
 }
 function getEventData($ClubID,$EventID){
   $Myarray = Array();
-  $sql = 'SELECT EventDescription,Date,(SELECT path
+  $sql = 'SELECT EventName , EventDescription , Date , (SELECT path
                                         FROM eventPhotos
-                                        WHERE EventID = '. $EventID .' ) AS DP,(Select club_Name 
+                                        WHERE PhotoId = '. "$ClubID" .' ) AS DP,(Select club_Name 
                                                                                 FROM clubs
                                                                                 where clubId = '. "$ClubID" .' ) AS ClubName'.'
           From events';
-
-// echo $sql;
-// echo 'description';
-  // echo json_encode(inQuery($sql));
+  // echo $sql;
   array_push($Myarray,inQuery($sql));
-  // echo json_encode($Myarray);
   $sql = 'SELECT ep.path as photo,ep.uploaded_on as Uploaded_On,ep.title as Title 
           FROM eventphotos AS ep,events as e
           WHERE ep.EventID=e.eventId AND  ep.eventID = '.$EventID;
@@ -195,6 +191,38 @@ function get_input($data)
       WHERE ClubId = '."$ClubID".' AND EventId = '."$EventID";
       echo $sql;
       return SQL_Query($sql);
-
     }
-?>
+    function getAllFollowers($ClubID){
+    $sql = "SELECT CONCAT(First_Name,' ',Last_Name) AS Name , Email
+      FROM users,(Select userID
+                  FROM followclubs
+                  WHERE ClubId = " . "$ClubID" . " ) AS follower
+      where uid = userID";
+      return inQuery($sql);
+  }
+  function getEventForMail($ClubID,$EventID){
+    $sql = 'SELECT EventName , EventDescription , Date , (Select club_Name 
+                                          FROM clubs  where clubId = '. "$ClubID" .' ) AS ClubName'.'
+            From events 
+            WHERE eventId = '."$EventID";
+    return inQuery($sql);
+  };
+  function sendMailAboutEventCreation($to_email,$ClubName,$EventName,$FollowerName,$EventDate,$EventDescription){
+  $to_email = "saeem03@gmail.com";
+  $subject = "NEW EVENT COMING AHEAD";
+  $ClubName = $ClubName;
+  $EventName = $EventName;
+
+  $body = 'Hi, ' . $FollowerName . ',<br>There will be an new event holding on <b>' . $EventDate . '</b> named <b>' . $EventName . '</b> by <b>' . $ClubName . '<b><br> ' . $EventDescription . '<br> ';
+  $body = '<html> <body>' . $body . '</body></htm>';
+  $headers[] = 'MIME-Version: 1.0';
+  $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+  // Additional headers
+  $headers[] = 'To: Saeem <Saeem03@gmail.com>';
+  $headers[] = 'From: NSU CLUB ';
+  // $headers[] = 'Cc: birthdayarchive@example.com';
+  // $headers[] = 'Bcc: birthdaycheck@example.com';
+
+  return mail($to_email, $subject, $body, implode("\r\n", $headers));
+}

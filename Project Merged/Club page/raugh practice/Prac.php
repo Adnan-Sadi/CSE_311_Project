@@ -1,54 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-  // $("form").submit(function(e){
-  //   // console.log($(name['FirstName']).val());
-  //   e.preventDefault();
-  // });
-});
-function ghost(e){
-  console.log(e.value);
-}
-</script>
-</head>
-<body>
-
-<form id="1" action="">
-  First name: <input type="text" name="FirstName" id="OP" value=""><br>
-  Last name: <input  type="text" name="LastName" value=""><br>
-  
-  <input id="OK" type="submit" value="Submit">
-</form> 
-<!-- <button id="ghost" name="subject" type="submit" onclick="ghost(this.)" value="fav_CSS">CSS</button> -->
-
-</body>
-</html>
-<script>
-  $("#OK").click(function(){console.log("OOO"); });
-  //  $.ajax({
-  //           type: 'POST',
-  //           url: 'demi_seassion2.php',
-  //           data: ({
-  //           'eventEdit':{'name': 123}}),
-  //           dataType: 'json',
-  //           cache: false,
-  //           success: function(result) {
-               
-  //               console.log(result);
-
-  //           },
-  //           error: function(xhr, status, error) {
-  //               var err = eval("(" + xhr.responseText + ")");
-  //               alert(err.Message)
-  //           }
-  //       });
-</script>
 <?php
-require "../database/accessDatabase.php";
-    // eventDelete(2,142);
-    // eventEdit(2,141,$Title="Works");
-    $sql = "WLL >C :C Z";
+require '../database/accessDatabase.php';
+print_r(getEventData(1,193));
 ?>
+<!-- $follower = getAllFollowers(1);
+$event = getEventForMail(1,186);
+sendMailAboutEventCreation($follower[0]['Email'],$event[0]['ClubName'],$event[0]['EventName'],$follower[0]['Name'],$event[0]['Date'],$event[0]['EventDescription']);
+function sendMailAboutEventCreation($to_email,$ClubName,$EventName,$FollowerName,$EventDate,$EventDescription){
+  $to_email = "saeem03@gmail.com";
+  $subject = "NEW EVENT COMING AHEAD";
+  $ClubName = $ClubName ;
+  $EventName = $EventName ;
+  
+  $body = 'Hi, '.$FollowerName.',<br>There will be an new event holding on <b>'.$EventDate. '</b> named <b>'. $EventName . '</b> by <b>'. $ClubName . '<b> <br> ' . $EventDescription;
+  $body = '<html> <body>' . $body . '</body></htm>';
+  // $headers = "From: NSU CLUB";
+  $headers[] = 'MIME-Version: 1.0';
+$headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+// Additional headers
+$headers[] = 'To: Saeem <Saeem03@gmail.com>';
+$headers[] = 'From: From: NSU CLUB" <Amader@example.com>';
+// $headers[] = 'Cc: birthdayarchive@example.com';
+// $headers[] = 'Bcc: birthdaycheck@example.com';
+  
+  if (mail($to_email, $subject, $body, implode("\r\n", $headers))) {
+      echo "Email successfully sent to $to_email...";
+  } else {
+      echo "Email sending failed...";
+  }
+}
+// sendMailAboutEventCreation($to='Saeem03@gmail.com',$ClubName="ACM",$EventName="TECH",$FollowerName="Saeem",$EventDate="2020-1-12",$EventDescription="OK FINE"); -->

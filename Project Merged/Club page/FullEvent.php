@@ -65,7 +65,8 @@
     <div id="fullEvent" class="container">
         <div class="container-center">
             <img class="center" id="EventImage" src="" alt="Image missing">
-            <h1 id="eventName"></h1>
+            <h1 style="margin-top:10px;Text-align:center;color:blueviolet;border: 3px solid red;" id="clubName"></h1>
+            <h1 style="margin-top:10px;" id="eventName"></h1>
             <p id="describe">
                 Admin missed to write description
             </p>
@@ -230,9 +231,10 @@
     function designEvent(dataArray) {
         // console.log("DP",dataArray[0][0]["DP"]);
         
-        $("#eventName").text(dataArray[0][0]["ClubName"]);
+        $("#clubName").text(dataArray[0][0]["ClubName"]);
+        $("#eventName").text(dataArray[0][0]["EventName"]);
         $("#describe").text(dataArray[0][0]["EventDescription"]);
-        if(!dataArray[0][0]["DP"].length==0)
+        if(!dataArray[0][0].length==0)
         $("#EventImage").attr("src", "./Upload/image/" + dataArray[0][0]["DP"]);
         // $("#EventVideo").attr("src", "./Upload/image/" + dataArray[0]["DP"]);
         insertingVideoList(dataArray);
@@ -313,4 +315,5 @@ if (isset($_POST['photoSubmit'])) {
         echo "<script>console.log('Image was not recorded')</script>";
     }
 }
+// redirec
 ?>

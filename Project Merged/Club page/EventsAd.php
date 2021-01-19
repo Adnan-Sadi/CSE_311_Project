@@ -103,7 +103,7 @@
             // console.log("Result", result[0][0]);
             // console.log(result[0][0]["name"]);
             // console.log(result[1][0]["name"]);
-            if (result[0].length == 0) {
+            if (result[1].length == 0) {
                 $("#EventAdLeft").hide();
                 $("#FirstAdLeftImg").attr("src", './images/NoPastEvent.png');
             } else {
@@ -113,7 +113,7 @@
                 $("#EventAdDateFirstLeft").text(result[1][0]["Date"]);
                
             }
-            if (result[1].length == 0) {
+            if (result[0].length == 0) {
                     $("#EventAdRight").hide();
                     $("#FirstAdRightImg").attr("src", './images/NoUpcomingEvent.png');
             } else {
