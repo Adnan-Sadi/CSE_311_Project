@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <style>
     #AllEvents img {
@@ -31,14 +34,16 @@
     <div>
         <div id="AllEvents" class="container" style="margin-bottom:50px;">
             <!-- <div class="container"> -->
-            <!-- <div class="row"> -->
-            <div class="col">
-                <a href="./Club_main.php?Id=<?php echo $_GET['Id']; ?>"><button class="btn btn-danger"> Back</button></a>
-                <h1 style="text-align:center">All Events</h1>
+            <div  style=" margin-top:10px">
+                <a href="./Club_main.php?Id=<?php echo $_GET['Id']; ?>"><button class="btn btn-danger"><h4>Back</h4></button></a>
             </div>
-            <!-- </div> -->
+            <h1 style="text-align:center">All Events</h1>
             <!-- </div>     -->
-            <button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" data-toggle="modal" data-target="#CreateEvent">Create Event</button>
+            <?php
+            if ($_SESSION['isPresident']){
+                echo '<button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" data-toggle="modal" data-target="#CreateEvent">Create Event</button>';
+            }
+            ?>
             <div class="table-responsive">
                 <table class="table-borderless">
                     <tbody id="AllEventTableBody">
@@ -80,7 +85,7 @@
                         <div class="form-group row">
                             <label for="example-date-input" class="col-2 col-form-label">Date</label>
                             <div class="col-10">
-                                <input name="evDate" class="form-control" type="date" value="" id="example-date-input">
+                                <input name="evDate" min="<?php echo date("Y-m-d");?>" class="form-control" type="date" value="" id="example-date-input">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -138,7 +143,7 @@ if (isset($_POST['evSubmit'])) {
         $Followers = getAllFollowers($ClubId, $EventID);
         $follower = getAllFollowers($ClubId);
         $event = getEventForMail($ClubId, $EventID);
-        sendMailAboutEventCreation($follower[0]['Email'], $event[0]['ClubName'], $event[0]['EventName'], $follower[0]['Name'], $event[0]['Date'], $event[0]['EventDescription']);
+        sendMailAboutEventCreation($follower[0]['Email'], $event[0]['ClubName'], $event[0]['EventName'],$event[0]['Fullname'], $follower[0]['Name'], $event[0]['Date'], $event[0]['EventDescription']);
     }
 }
 ?>
@@ -149,6 +154,9 @@ if (isset($_POST['evSubmit'])) {
         window.history.replaceState(null, null, window.location.href);
     }
     var clubID = <?php echo $_GET['Id']; ?>;
+    var so = <?php echo $_GET['Id']; ?>;
+    var ed = <?php echo $_SESSION['isPresident']; ?>;
+    
     $(document).ready(function() {
         $.ajax({
             type: 'POST',
@@ -186,8 +194,6 @@ if (isset($_POST['evSubmit'])) {
                     dataType: 'json',
                     cache: false,
                     success: function(result) {
-                        // if(result){
-                        // console.log(result);
                         alert('Event Deleted');
                         location.reload();
                         // }
@@ -223,10 +229,13 @@ if (isset($_POST['evSubmit'])) {
         cardBody.append('<img class="card-img-top" src=./Upload/image/' + dataArray[count]['DP'] + '  alt="Event photo not found">');
         cardBody.append('<h5 class="card-title">' + dataArray[count]['Name'] + '</h5>');
         cardBody.append('<p class="card-text">' + dataArray[count]["Date"] + '</p>');
-        cardBody.append('<p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '>Read More..</a></button></p>');
+        cardBody.append('<p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<a href=./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '><button class="btn" style="color:red;text-decoration: underline;">Read More..</button></a></p>');
         var cardDown = td.append('<di ></di>')
-        cardDown.append('<button class="btn btn-info btn-sm " style="margin: 5px " >Edit</button>');
-        cardDown.append('<button class="btn btn-info btn-sm" onClick=eventDelete(this) value = ' + dataArray[count]['eID'] + ' style="margin: 5px " >Delete</button>');
+        // var ed = <?php echo $_SESSION["isPresident"]; ?>;
+        if( <?php echo $_SESSION["isPresident"]; ?>){
+            cardDown.append('<button class="btn btn-info btn-sm " style="margin: 5px " >Edit</button>');
+            cardDown.append('<button class="btn btn-info btn-sm" onClick=eventDelete(this) value = ' + dataArray[count]['eID'] + ' style="margin: 5px " >Delete</button>');
+        }
         // $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./Upload/image/'+ dataArray[count]['DP'] +'  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['Name'] + '</h5> <p class="card-text">' + dataArray[count]["Date"] + '</p><p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID='+dataArray[count]['eID']+'&Id='+clubID+'>Read More..</a></button></p></div><button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" >Delete</button></td>');
         // eventCard.append('<h1>OK HI</h1><button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID='+dataArray[count]['eID']+'&Id='+clubID+'>Read More..</a></button></p></div><button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" >Delete</button>');
         console.log("CLUBID", clubID)
