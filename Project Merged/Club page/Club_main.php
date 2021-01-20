@@ -2,7 +2,7 @@
 require './database/accessDatabase.php';
 session_start();
 
-if(isLeader($_GET['Id'],$_SESSION['userEmail'])==1){
+if(isset($_SESSION['userEmail']) && isLeader($_GET['Id'],$_SESSION['userEmail'])==1){
     $_SESSION['isPresident'] = 1;
 }
 else{

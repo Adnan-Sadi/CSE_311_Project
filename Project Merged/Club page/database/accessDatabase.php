@@ -239,7 +239,7 @@ function isLeader($ClubID,$email){
   $sql = 'select m_id
           from members
           where Email = ' ."'$email'" . ' AND position like "%president" AND ClubId='.$ClubID; 
-  echo $sql;
+  //echo $sql;
   if(count(inQuery($sql))>0){
     return 1;
   }
