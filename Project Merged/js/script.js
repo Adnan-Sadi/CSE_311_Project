@@ -125,6 +125,7 @@ $(document).ready(function(){
           alert(data);
           $('#exec_user_form')[0].reset();
           $('#execUserModal').modal('hide');
+          window.location.reload();//reloads page
         }
       });
     }

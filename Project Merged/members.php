@@ -19,7 +19,13 @@
 
   $_SESSION["mem_rows"] = mysqli_num_rows($result);
   $_SESSION["club_number"] = $postID;
+  
+  if(isset($_SESSION["userEmail"])){
   $userEmail = $_SESSION["userEmail"];
+  }
+  else{
+     $userEmail = '';
+  }
   
   $sql_admin = "SELECT *
                 FROM managesclub

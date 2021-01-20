@@ -14,6 +14,32 @@ function emptyInputSignup($lname,$email,$username,$pwd,$pwdRepeat){
     return $result;
 }
 
+function invalidStdid($stdid){
+    $result;
+    
+    if(!preg_match("/^[0-9]*$/", $stdid)){
+        $result = true;
+    }
+    else{
+        $result = false;
+    }
+
+    return $result;
+}
+
+function invalidPhonenum($phone){
+    $result;
+    
+    if(!preg_match("/^[0-9\+]*$/", $phone)){
+        $result = true;
+    }
+    else{
+        $result = false;
+    }
+
+    return $result;
+}
+
 function invalidUid($username){
     $result;
     
@@ -120,7 +146,7 @@ function createUser($conn,$fname,$lname,$email,$username,$pwd,$image){
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
-    header("location: ../signup.php?error=none");
+    loginUser($conn,$username,$pwd);
     exit();
 }
 
@@ -208,7 +234,7 @@ function AddNewMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$
         echo "Data inserted";
     }
     else{
-        echo  "Error! Please insert appropiate values.". mysqli_error($conn);
+        echo  "Error! Please insert appropiate values.";
     }
 
     mysqli_stmt_close($stmt);
@@ -262,7 +288,7 @@ function UpdateMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$
         echo "Data Updated";
     }
     else{
-        echo  "Error! Please insert appropiate values." . mysqli_error($conn);
+        echo  "Error! Please insert appropiate values." ;
     }
 
     mysqli_stmt_close($stmt);

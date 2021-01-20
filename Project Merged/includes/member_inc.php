@@ -15,6 +15,22 @@ if(isset($_POST["operation"])){
       $position   = $_POST["position"];
       $date_joined = $_POST["date_joined"];
 
+    if(invalidStdid($stdId) !== false){
+      echo "Please insert correct Student Id.";
+      exit();
+    }
+    
+    
+      if(invalidEmail($email) !== false){
+      echo "Please insert correct email.";
+      exit();
+    }
+
+    if (invalidPhonenum($phone) !== false) {
+      echo "Please insert correct Phone Number.";
+      exit();
+    }
+
     if($_POST["operation"] == "Add"){
 
        AddNewMember($conn,$name,$stdId,$clubId,$dept,$email,$phone,$position,$date_joined);
@@ -39,8 +55,23 @@ if(isset($_POST["operation"])){
       $position   = $_POST["position2"];
       $date_joined = $_POST["date_joined2"];
 
+    if(invalidStdid($stdId) !== false){
+      echo "Please insert correct Student Id.";
+      exit();
+    }
+    
+    if(invalidEmail($email) !== false){
+      echo "Please insert correct email.";
+      exit();
+    }
 
-      if($_POST["operation2"] == "Add_exc"){
+    if (invalidPhonenum($phone) !== false) {
+      echo "Please insert correct Phone Number.";
+      exit();
+    }
+
+
+    if($_POST["operation2"] == "Add_exc"){
           
       $image = '';
 
@@ -53,7 +84,7 @@ if(isset($_POST["operation"])){
        AddNewExecMember($conn,$stdId,$clubId,$image);
     }
 
-      if($_POST["operation2"] == "Edit"){
+    if($_POST["operation2"] == "Edit"){
 
         $mem_id = $_POST["user_id2"];  
         $image = '';
