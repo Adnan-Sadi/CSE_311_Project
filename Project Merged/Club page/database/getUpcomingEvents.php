@@ -6,6 +6,6 @@
             FROM events 
             WHERE  Date  >= \"" .date("Y-m-d"). "\" 
             ORDER BY Date DESC";
-    echo $sql;
+    // echo $sql;
     echo json_encode(inQuery($sql));
 ?>
