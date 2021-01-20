@@ -19,6 +19,23 @@
 
   $_SESSION["mem_rows"] = mysqli_num_rows($result);
   $_SESSION["club_number"] = $postID;
+  
+  if(isset($_SESSION["userEmail"])){
+  $userEmail = $_SESSION["userEmail"];
+  }
+  else{
+     $userEmail = '';
+  }
+  
+  $sql_admin = "SELECT *
+                FROM managesclub
+                WHERE ClubId = $postID AND UserId = (SELECT UserId
+                                                     FROM all_users
+                                                     WHERE UserEmail = '$userEmail');";
+  
+  $result_admin = mysqli_query($conn,$sql_admin);
+   
+  $isAdmin = mysqli_num_rows($result_admin);
 
 
 ?>
@@ -31,7 +48,7 @@
             <div id="exc_body" class="text-left">Executive Body</div>
             <?php
              
-             if(isset($_SESSION["userEmail"])){
+             if($isAdmin > 0){
              echo "<div align='right'>
                 <button type='button' id='add_button2' data-toggle='modal' data-target='#execUserModal' class='btn btn-info btn-md'>Add</button>
               </div><br/>"; 
@@ -112,7 +129,7 @@
             while ($memData2 = mysqli_fetch_assoc($result2) ) {
 
               echo "<div class='col-md-4'>";
-              if(isset($_SESSION["userEmail"])){
+              if($isAdmin > 0){
                echo "<div id='people_tile' onclick = 'location.href=\"Full_mem_info.php?NsuId=".$memData2["NsuId"]."\";'>";//makes the executive members tile clickable
               }
               else{
@@ -122,7 +139,7 @@
               <span>".$memData2['name']."<br>".$memData2['Position']."</span>
               </div>";
 
-              if(isset($_SESSION["userEmail"])){
+              if($isAdmin > 0){
               echo "<div align=right>   
               <button type = 'button' name ='update2' id='".$memData2["NsuId"]."' class='btn btn-warning btn-xs update2'>Update</button>
               <button type = 'button' name ='delete2' id='".$memData2["NsuId"]."' class='btn btn-danger btn-xs delete'>Delete</button></div>";
@@ -141,7 +158,7 @@
         <section>
             <div id="all_mem" class="text-left">All Members</div><br/><br/> 
                  <?php 
-                  if(isset($_SESSION["userEmail"])){
+                  if($isAdmin > 0){
                     echo "<div align='right'>
                        <button type='button' id='add_button' data-toggle='modal' data-target='#userModal' class='btn btn-info btn-md'>Add</button><br>
                     </div>";
@@ -209,7 +226,7 @@
                 
                 <div class="table-responsive">
                    <?php
-                   if(isset($_SESSION["userEmail"])){ 
+                   if($isAdmin > 0){ 
                     echo "
                     <table id='member_table' class='table table-bordered table-striped'>
                        <thead>

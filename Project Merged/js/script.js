@@ -1,5 +1,24 @@
 $(document).ready(function(){
+  
+  //creating non-editable member table
+  var dataTable = $('#member_table_small').DataTable({
+    "processing": true,
+    "serverSide": true,
+    "order": [],
+    "ajax": {
+      url: "./includes/fetch_small_table.php",
+      type: "POST"
+    },
 
+    "language": {
+      "searchPlaceholder": "Name,Id,Department Or Position",//placeholder for search field
+    },
+
+    initComplete: function () {
+      $('.dataTables_filter input[type="search"]').css({ 'width': '300px', 'display': 'inline-block' }); //changing search box css
+    },
+  });
+  
   //creating editable member table
   var dataTable = $('#member_table').DataTable({
     "processing": true,
@@ -22,24 +41,7 @@ $(document).ready(function(){
     },
   });
 
-  //creating non-editable member table
-  var dataTable = $('#member_table_small').DataTable({
-    "processing": true,
-    "serverSide": true,
-    "order": [],
-    "ajax": {
-      url: "./includes/fetch_small_table.php",
-      type: "POST"
-    },
 
-    "language": {
-      "searchPlaceholder": "Name,Id,Department Or Position",//placeholder for search field
-    },
-
-    initComplete: function () {
-      $('.dataTables_filter input[type="search"]').css({ 'width': '300px', 'display': 'inline-block' }); //changing search box css
-    },
-  });
     
     
     $('#add_button').click(function () {
@@ -123,6 +125,7 @@ $(document).ready(function(){
           alert(data);
           $('#exec_user_form')[0].reset();
           $('#execUserModal').modal('hide');
+          window.location.reload();//reloads page
         }
       });
     }
