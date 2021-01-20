@@ -143,7 +143,9 @@ if (isset($_POST['evSubmit'])) {
         // $Followers = getAllFollowers($ClubId, $EventID);
         $follower = getAllFollowers($ClubId);
         $event = getEventForMail($ClubId, $EventID);
-        sendMailAboutEventCreation($follower[0]['Email'], $event[0]['ClubName'], $event[0]['EventName'],$event[0]['Fullname'], $follower[0]['Name'], $event[0]['Date'], $event[0]['EventDescription']);
+        foreach($follower as $fol){
+            sendMailAboutEventCreation($fol['Email'], $event[0]['ClubName'], $event[0]['EventName'],$event[0]['Fullname'], $fol['Name'], $event[0]['Date'], $event[0]['EventDescription']);
+        }
     }
 }
 ?>

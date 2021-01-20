@@ -1,5 +1,17 @@
+<?php 
+require "./database/accessDatabase.php";
+$ClubId = 1;
+$EventID = 202;
+
+$follower = getAllFollowers($ClubId);
+        $event = getEventForMail($ClubId, $EventID);
+        foreach($follower as $value)
+            print_r($value['Email']);
+?>
 
 
+
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,21 +35,22 @@
     // console.log($("#1").val());
     // document.getElementById("2").innerHTML = $("#1").text();
     function cli(){
-        var  x = document.getElementsByName('2').textcontent();
+        var  x = document.getElementsByName("2").value;
         console.log(x);
+
         // console.log($("form").serializeArray());
         alert('p');
     }
     // $("#1").html('<div class="form-group"><label for=""></label><textarea class="form-control" <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" columns="10">'+$("#1").text()+'</textarea></div>');
 </script>
-</html>
+</html> -->
 <?php 
 // require './database/accessDatabase.php';
 //   if(eventEdit(1,197,'',$description = "koli")){
 //       echo "u r sweet";
 //   };
-if(isset($_POST['submit'])){
-    echo $_POST['2'];
-    echo ks;                                                        
-}
-?>
+// if(isset($_POST['submit'])){
+//     echo $_POST['2'];
+//     // echo ks;                                                        
+// }
+// ?>

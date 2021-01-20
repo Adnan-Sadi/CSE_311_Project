@@ -84,13 +84,14 @@ function insertUploadedVideoData($EventID,$Path,$Title){
 
 }
 function getEventForMail($ClubID,$EventID){
-  $sql = 'SELECT EventName , EventDescription ,
-                 Club_Fname as Fullname, Date ,
-                 (Select club_Name 
-                 FROM clubs  where clubId = '. "$ClubID" .' ) AS ClubName'.'
-          From events 
+  $sql = 'SELECT EventName , EventDescription , Date, Fullname, ClubName
+          From events , (Select club_Name as ClubName , Club_Fname as Fullname 
+                        FROM clubs 
+                        where clubId = '. "$ClubID" .' ) AS ClubName'.'
           WHERE eventId = '."$EventID";
+  // echo $sql;
   return inQuery($sql);
+  // ($sql);
 };
 
 function getEventData($ClubID,$EventID){
@@ -151,8 +152,8 @@ function uploadImage($file, $folderPath)
         $errors = array();
         $file_name = $_FILES[$file]['name'];
         if(empty($file_name)){return $file_name;}
-          echo "FILENAME" . $file_name;
-          echo "<script>console.log('working')</script>";
+          // echo "FILENAME" . $file_name;
+          // echo "<script>console.log('working')</script>";
           $file_size = $_FILES[$file]['size'];
           $file_tmp = $_FILES[$file]['tmp_name'];
           $file_type = $_FILES[$file]['type'];
@@ -228,7 +229,7 @@ function get_input($data)
   $headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
   // Additional headers
-  $headers[] = 'To: Saeem <Saeem03@gmail.com>';
+  // $headers[] = 'To: Saeem <Saeem03@gmail.com>';
   $headers[] = 'From: NSU CLUB ';
   // $headers[] = 'Cc: birthdayarchive@example.com';
   // $headers[] = 'Bcc: birthdaycheck@example.com';
@@ -239,7 +240,7 @@ function isLeader($ClubID,$email){
   $sql = 'select m_id
           from members
           where Email = ' ."'$email'" . ' AND position like "%president" AND ClubId='.$ClubID; 
-  echo $sql;
+  // echo $sql;
   if(count(inQuery($sql))>0){
     return 1;
   }
