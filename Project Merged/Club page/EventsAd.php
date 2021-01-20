@@ -23,9 +23,9 @@
                 <div id="carouselExampleCaptions0" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" id="EventAdInsertHere0">
                         <div class="carousel-item active">
-                            <img id="FirstAdLeftImg" src="./images/" class="rounded w-100" alt="Image ">
+                            <img id="FirstAdLeftImg" src="" class="rounded w-100" alt="Image ">
                             <div id="EventAdLeft">
-                                <h5 id="EventAdTitleFirstLeft">Title</h5>
+                               <a id="FirstadLeftlink" href=""><h5 id="EventAdTitleFirstLeft">Title</h5></a>
                                 <p id="EventAdDateFirstLeft">Date</p>
                                 <p>.</p>
                             </div>
@@ -57,10 +57,10 @@
                 <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" id="EventAdInsertHere1">
                         <div class="carousel-item active">
-                            <img id="FirstAdRightImg" src="./images/" class="rounded w-100" alt="Image Missing">
+                            <img id="FirstAdRightImg" src="" class="rounded w-100" alt="Image Missing">
                             <!-- <div class="carousel-caption "><div> -->
                             <div  id="EventAdRight">
-                                <h5 id="EventAdTitleFirstRight">Title</h5>
+                                <a id="FirstadRightlink" href=""><h5 id="EventAdTitleFirstRight">Title</h5></a>
                                 <p id="EventAdDateFirstRight">Date</p>
                                 <p>.</p>
                             </div>
@@ -105,20 +105,24 @@
             // console.log(result[1][0]["name"]);
             if (result[1].length == 0) {
                 $("#EventAdLeft").hide();
+                $("#carouselExampleCaptions0 a").hide();
                 $("#FirstAdLeftImg").attr("src", './images/NoPastEvent.png');
             } else {
                 $("#NoPastEvents").hide();
                 $("#FirstAdLeftImg").attr("src", './Upload/image/' + result[1][0]["DP"]);
+                $("#FirstadLeftlink").attr("href","https://www.google.com")
                 $("#EventAdTitleFirstLeft").text(result[1][0]["name"]);
                 $("#EventAdDateFirstLeft").text(result[1][0]["Date"]);
                
             }
             if (result[0].length == 0) {
                     $("#EventAdRight").hide();
+                    $("#carouselExampleCaptions1 a").hide();
                     $("#FirstAdRightImg").attr("src", './images/NoUpcomingEvent.png');
             } else {
                 $("#NoUpcomingEvents").hide();
                 $("#FirstAdRightImg").attr("src", './Upload/image/' + result[0][0]["DP"]);
+                $("#FirstadRightlink").attr("href", 'https://www.google.com');
                 $("#EventAdTitleFirstRight").text('' + result[0][0]["name"]);
                 $("#EventAdDateFirstRight").text(result[0][0]["Date"]);
             }
@@ -139,11 +143,11 @@
         }
 
         for (var i = 1; i < result[0].length; i++) {
-            $("#EventAdInsertHere1").append('<a href=https://www.google.com><div class = carousel-item ><img  class=rounded w-100 src= ./Upload/image/' + result[0][i]["DP"] + ' alt=Event Page Missing > <div><h5>' + result[0][i]["name"] + '</h5><p>' + result[0][i]["Date"] + '</p><p>.</p></div></div></a>');
+            $("#EventAdInsertHere1").append('<div class = carousel-item ><img  class=rounded w-100 src= ./Upload/image/' + result[0][i]["DP"] + ' alt=Event Page Missing > <div><a href=https://www.google.com><h5>' + result[0][i]["name"] + '</h5></a><p>' + result[0][i]["Date"] + '</p><p>.</p></div></div>');
         }
         // console.log("upcomming", result[0].length);
         for (var i = 1; i < result[1].length; i++) {
-            $("#EventAdInsertHere0").append('<a href=https://www.google.com><div class = carousel-item  ><img  class=rounded w-100 src= ./Upload/image/' + result[1][i]["DP"] + ' alt=Event Page Missing ><div><h5>' + result[1][i]["name"] + '</h5></a><p>' + result[1][i]["Date"] + '</p><p>.</p></div></div></a>');
+            $("#EventAdInsertHere0").append('<div class = carousel-item  ><img  class=rounded w-100 src= ./Upload/image/' + result[1][i]["DP"] + ' alt=Event Page Missing ><div><a href=https://www.google.com><h5>' + result[1][i]["name"] + '</h5></a><p>' + result[1][i]["Date"] + '</p><p>.</p></div></div>');
             // alert("Ok")
         }
     }

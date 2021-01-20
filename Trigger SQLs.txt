@@ -48,8 +48,8 @@ CREATE TRIGGER After_Delete_Event_Photo
 AFTER DELETE ON eventphotos 
 FOR EACH ROW
     BEGIN
-        INSERT INTO photos_archive(Serial,Photoid,Eventid,Path,Uploaded_on,Title,Deleted_On)
-         VALUES(DEFAULT,OlD.PhotoID,OLD.EventID,OLD.Path,OLD.Uploaded_On,OLD.Title,DEFAULT);
+        INSERT INTO photos_archive(Photoid,Eventid,Path,Uploaded_on,Title,Deleted_On)
+         VALUES(OlD.PhotoID,OLD.EventID,OLD.Path,OLD.Uploaded_On,OLD.Title,DEFAULT);
     END $$
 DELIMITER ;
 
@@ -60,8 +60,8 @@ CREATE TRIGGER After_Delete_Event_Video
 AFTER DELETE ON eventvideos 
 FOR EACH ROW
     BEGIN
-        INSERT INTO videos_archive(Serial,Videoid,Eventid,Path,Uploaded_on,Title,Deleted_On)
-         VALUES(DEFAULT,OLD.VideoId,OLD.EventID,OLD.Path,OLD.Uploaded_On,OLD.Title,DEFAULT);
+        INSERT INTO videos_archive(Videoid,Eventid,Path,Uploaded_on,Title,Deleted_On)
+         VALUES(OLD.VideoId,OLD.EventID,OLD.Path,OLD.Uploaded_On,OLD.Title,DEFAULT);
     END $$
 DELIMITER ;
 

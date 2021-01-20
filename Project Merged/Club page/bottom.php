@@ -6,7 +6,7 @@
         width: 100%;
         height: 170px;
         text-align: center;
-        /* position: fixed; */
+        position: relative;
         bottom: 0;
         padding: 50px;
     }

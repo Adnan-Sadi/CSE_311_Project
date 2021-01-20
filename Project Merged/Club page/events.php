@@ -4,7 +4,7 @@ session_start();
 <!DOCTYPE html>
 <style>
     #AllEvents img {
-        max-width: 250px;
+        width: 350px;
         height: 200px;
 
     }
@@ -140,7 +140,7 @@ if (isset($_POST['evSubmit'])) {
                                 ORDER BY Uploaded_On DESC
                                 LIMIT 1 )";
     if (SQL_Query($sql)) {
-        $Followers = getAllFollowers($ClubId, $EventID);
+        // $Followers = getAllFollowers($ClubId, $EventID);
         $follower = getAllFollowers($ClubId);
         $event = getEventForMail($ClubId, $EventID);
         sendMailAboutEventCreation($follower[0]['Email'], $event[0]['ClubName'], $event[0]['EventName'],$event[0]['Fullname'], $follower[0]['Name'], $event[0]['Date'], $event[0]['EventDescription']);

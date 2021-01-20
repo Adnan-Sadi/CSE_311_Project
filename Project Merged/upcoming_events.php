@@ -3,7 +3,7 @@
 <style>
     #HomeUpcommigEventsAd img {
         max-width: 335px;
-        max-height: 280px;
+        height: 200px;
     }
     #upcomingEvents {
         margin: 20px;
@@ -40,7 +40,7 @@
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                 <div class="carousel-inner" id="HomeUpcommigEventsAd">
                     <div class="carousel-item active">
-                        <img id="FirstAdImg" src="./images/2018_acm_group_pic.jpg" class="d-block w-100" alt="Image missing">
+                        <img id="FirstAdImg" src="" class="d-block w-100" alt="Image missing">
                         <div id="firstAd">
                             <h6 id="FirstAdTitle">Title</h6>
                             <h6 id="FirstAdDate">Date</h6>

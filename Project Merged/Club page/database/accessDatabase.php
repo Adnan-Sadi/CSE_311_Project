@@ -19,6 +19,7 @@ else{
   // echo "Success";
 }
 
+// echo $sql;
   $Myarray = array();
   // $sql = mysqli_real_escape_string($conn,$sql);
   $result = $conn->query($sql);
@@ -96,13 +97,13 @@ function getEventData($ClubID,$EventID){
   $Myarray = Array();
   $sql = 'SELECT EventName , EventDescription , Date , (SELECT path
                                                         FROM eventPhotos
-                                                        WHERE PhotoId  = (SELECT eventDP FROM Events WHERE clubId = '. "$ClubID" .' )) AS DP,
+                                                        WHERE PhotoId  = (SELECT eventDP FROM Events WHERE eventId = '. "$EventID" .' )) AS DP,
                                                         (Select club_Name 
                                                         FROM clubs
                                                         where clubId = '. "$ClubID" .' ) AS ClubName'.'
           From events
           WHERE eventId = '."$EventID";
-
+  // echo $sql;
   array_push($Myarray,inQuery($sql));
   $sql = 'SELECT ep.path as photo,ep.uploaded_on as Uploaded_On,ep.title as Title 
           FROM eventphotos AS ep,events as e
@@ -193,16 +194,17 @@ function get_input($data)
       if(!empty($Description)){
         $items.= ' EventDescription = '. "'$Description'";
       }
-       if(!empty($Title)){
-         if(!empty($Description)){
-           $items .= ' , ';
-         }
+      if(!empty($Title)){
+        if(!empty($Description)){
+          $items .= ' , ';
+        }
+      
         $items .= ' EventName = '. "'$Title'";
       }
       $sql = 'UPDATE  events
               SET  '."$items" .'
       WHERE ClubId = '."$ClubID".' AND EventId = '."$EventID";
-      echo $sql;
+      // echo $sql;
       return SQL_Query($sql);
     }
     function getAllFollowers($ClubID){
@@ -237,9 +239,10 @@ function isLeader($ClubID,$email){
   $sql = 'select m_id
           from members
           where Email = ' ."'$email'" . ' AND position like "%president" AND ClubId='.$ClubID; 
-  // echo $sql;
+  echo $sql;
   if(count(inQuery($sql))>0){
     return 1;
   }
   else return 0;
 }
+
