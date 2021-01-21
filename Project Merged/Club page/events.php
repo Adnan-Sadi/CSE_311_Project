@@ -178,7 +178,9 @@ if (isset($_POST['evSubmit'])) {
         });
         }else{
             var isPresident = <?php echo $_SESSION['isPresident']; ?>;
+            console.log("no guest allowed", isPresident);
             if(isPresident){
+                console.log(isPresident);
                 $('#createEventButton').show();
             }
             $.ajax({

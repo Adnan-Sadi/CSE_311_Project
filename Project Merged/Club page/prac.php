@@ -1,7 +1,8 @@
 <?php 
 require "./database/accessDatabase.php";
 $ClubId = 1;
-goingToEvent(8,205);
+// goingToEvent(8,205);
+echo isLeader(1,'Saeem03@gmail.com');
 //  print_r (getUserID("Saeem03@gmail.com"));
 // $EventID = 202;
 // echo (isLeader(1,'Saee03@gmail.com'))
@@ -14,7 +15,7 @@ goingToEvent(8,205);
 
 
 
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <script src="../js/jquery-3.5.1.min.js"></script>
@@ -24,12 +25,12 @@ goingToEvent(8,205);
 </head>
 <body>
     <form id="o" action="" method="post" onsubmit="cli()">
-        <p id="1">dasdsa d</p>  
-        <input type="text" id="inp"   value="222">
-        <textarea name="" id="go" cols="30" rows="10"></textarea>
-        <input type="submit" value="ok" name="submit">
+    <label for="example-date-input" class="col-2 col-form-label">Date</label>
+                            <div class="col-10">
+                                <input name="evDate" min="<?php echo date("Y-m-d");?>" class="form-control" type="date" value="" id="example-date-input">
+                            </div>
     </form>
-</body> -->
+</body>
 <script>
     // if (window.history.replaceState) {
     //     window.history.replaceState(null, null, window.location.href);

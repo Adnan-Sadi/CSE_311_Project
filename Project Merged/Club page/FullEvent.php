@@ -93,7 +93,7 @@ if(isset($_SESSION["userEmail"])){
         <div style="margin:100px 0px" class="row">
             <div style="color:black" class="col">
                 <div id="VideosList">
-                <button id="uploadVideoButton" style="display:none" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadVideo"><h1>Upload Video</h1></button>
+                <button id="uploadVideoButton"  class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadVideo"><h1>Upload Video</h1></button>
                     <!-- Modal starts -->
                     <div class="modal fade" id="uploadVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -111,7 +111,7 @@ if(isset($_SESSION["userEmail"])){
                                             <input name='videoTitle' value="" type="text" class="form-control" placeholder="Example" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleFormControlFile1">Upload Video</label>
+                                            <label for="exampleFormControlFile1">Upload Photo</label>
                                             <input type="file" name="video123" class="form-control-file" required>
                                         </div>
                                         <div class="modal-footer">
@@ -153,7 +153,7 @@ if(isset($_SESSION["userEmail"])){
             </div>
             <div class="col">
                 <div id="PhotoList">
-                    <button id="uploadPhotoButton" style="display: none;" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadPhoto"><h1>Upload Photo</h1></button>
+                    <button id="uploadPhotoButton" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadPhoto"><h1>Upload Photo</h1></button>
                     <!-- Modal starts -->
                     <div class="modal fade" id="uploadPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -227,6 +227,8 @@ if(isset($_SESSION["userEmail"])){
     var UserEmail = <?php echo '"' . $userEmail . '"'?>;
     console.log(userType);
     if(userType == 'guest'){
+                $("#uploadVideoButton").hide();
+        $("#uploadPhotoButton").hide();
         $.ajax({
         type: 'post',
         url: './database/fullEventData.php',
@@ -321,7 +323,7 @@ if(isset($_SESSION["userEmail"])){
             }),
             dataType: 'json',
             error: function(xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
+                // var err = eval("(" + xhr.responseText + ")");
                  alert(err.Message)
             }
         });
@@ -343,7 +345,7 @@ if(isset($_SESSION["userEmail"])){
             }),
             dataType: 'json',
             error: function(xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
+                // var err = eval("(" + xhr.responseText + ")");
                  alert(err.Message)
             }
         });
