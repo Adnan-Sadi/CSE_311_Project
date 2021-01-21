@@ -238,6 +238,10 @@ body{
 	width: 200px;
 }
 
+#login_button{
+    width: 300px !important;
+}
+
 /*Signup Page ends*/
 
 /*Club Page */
