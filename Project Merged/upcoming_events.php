@@ -2,21 +2,17 @@
 <html lang="en">
 <style>
     #HomeUpcommigEventsAd img {
-        max-width: 335px;
+        max-width: 100%;
         height: 200px;
     }
-    #upcomingEvents {
-        margin: 20px;
-    }
-
     #HomeUpcommigEventsAd h6 {
-        margin: 15px;
+        /* margin: 15px; */
         text-align: center;
     }
 
     #carouselExampleFade {
         border: 10px solid red;
-        width: 350px;
+        width: 550px;
         height: 300px;
     }
 

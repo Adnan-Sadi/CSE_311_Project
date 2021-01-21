@@ -223,7 +223,7 @@ function get_input($data)
   $ClubName = $ClubName;
   $EventName = $EventName;
 
-  $body = 'Hi, ' . $FollowerName . ',<br>There will be an new event holding on <b>' . $EventDate . '</b> named <b>' . $EventName . '</b> by <b>' . $ClubName . '<b><br> ' . $EventDescription . '<br> ';
+  $body = 'Hi, ' . $FollowerName . ',<br>There will be an new event holding on <b>' . $EventDate . '</b> named <b>' . $EventName . '</b> by   <b> '. $EventFullname .'. (' . $ClubName . ')<b><br> ' . $EventDescription . '<br> ';
   $body = '<html> <body>' . $body . '</body></htm>';
   $headers[] = 'MIME-Version: 1.0';
   $headers[] = 'Content-type: text/html; charset=iso-8859-1';
@@ -237,13 +237,40 @@ function get_input($data)
   return mail($to_email, $subject, $body, implode("\r\n", $headers));
 }
 function isLeader($ClubID,$email){
-  $sql = 'select m_id
-          from members
-          where Email = ' ."'$email'" . ' AND position like "%president" AND ClubId='.$ClubID; 
+  $sql = 'SELECT Man_id
+          FROM managesclub
+          where  ClubId='.$ClubID .' AND UserId = (SELECT UserId 
+                                                   FROM all_users
+                                                   WHERE UserEmail like '. "'$email'" .')'; 
   // echo $sql;
   if(count(inQuery($sql))>0){
     return 1;
   }
   else return 0;
 }
+function goingToEvent($UserID,$EventID){
+  $sql = "INSERT INTO goingtoevents(Man_id ,	UserId , EventId) VALUES(DEFAULT, ". $UserID ." , ". $EventID .")";
+  SQL_Query($sql);
+}
+function NOTgoingToEvent($UserID,$EventID){
+  $sql = "DELETE FROM goingtoevents
+          WHERE UserId = ". $UserID ." AND EventId = ". $EventID;
+  SQL_Query($sql);
+}
+function getUserID($Email){
+  $sql = "SELECT UserID
+          FROM all_users
+          WHERE UserEmail LIKE " ."'$Email'";
+  return inquery($sql)[0]['UserID'];
+}
+function isFollower($UserID,$EventID){
+  $sql = 'SELECT man_id 
+          from goingtoevents
+          where UserID = '. $UserID .'   AND EventID = '. $EventID;
+   if(count(inQuery($sql))>0){
+    return 1;
+  }
+  else return 0;
+}
+
 

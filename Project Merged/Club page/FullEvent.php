@@ -34,7 +34,7 @@ session_start();
         border: 5px solid green;
         width: 100%;
         height: 400px;
-        background-color: #8080ff;
+        /* background-color: #8080ff; */
     }
 
     img,
@@ -52,13 +52,17 @@ session_start();
 <body>
     <div id="fullEventNav"></div>
     <div id="fullEvent" class="container">
-        <div class="container-center">
-            <img class="center" id="EventImage" src="" alt="Image missing">
+        <div class="container-center" style="margin: 50px 0px;">
+            <div style="margin: 50px 0px;">
+            <img class="center"  style="max-width: 700px;height:250px;" id="EventImage" src="" alt="Image missing">
             <a href="./Club_main.php?Id=<?php echo $_GET['Id']; ?>">
-                <h1 style="margin-top:10px;Text-align:center;color:blueviolet;border: 3px solid red;" id="clubName"></h1>
+                <h1 style="margin-top:20px;Text-align:center;color:blueviolet;border: 3px solid red;" id="clubName"></h1>
             </a>
+            </div>
             <div id="onlyText">
-                <button id="editEventButton" onclick="OnEditEvent()" type="button" class="btn btn-outline-primary">Edit</button>
+                <button id="editEventButton" onclick="OnEditEvent()" style="display: none;" type="button" class="btn btn-outline-primary">Edit</button>
+                <button id="interested" onclick="goingToEvent()" type="button" class="btn btn-outline-primary">Interested</button>
+                <button id="notInterested" onclick="NOTgoingToEvent()" type="button" class="btn btn-danger" style="display: none;">set to not Interested</button>
                 <!-- <button >Save</button> -->
                 <h1 style="text-align:center;margin-top:10px;" id="eventName"></h1>
                 <!-- <textarea  id="eventNameTextArea"></textarea> -->
@@ -66,22 +70,24 @@ session_start();
                     Admin missed to write description
                 </p>
             </div>
-            <form action="" method="post" onsubmit="saveEditedEvent()" >
+            <form id="editEventForm" action="" method="post" onsubmit="saveEditedEvent()" >
                 <div class="form-group">
                     <!-- <label for="eventNameTextArea">Event Name :</label> -->
-                    <textarea id="eventNameTextArea" style="text-align:center;margin-top:10px;font-weight: bold;" class="form-control" rows="1"></textarea>
+                    <textarea id="eventNameTextArea" style="text-align:center;margin-top:10px;font-weight: bold;display: none;" class="form-control" rows="1"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" class="form-control" id="eventDescriptionTextArea" rows="8"></textarea>
+                    <textarea class="form-control" style="display: none;" id="eventDescriptionTextArea" rows="8"></textarea>
                 </div>
                 <div class="form-group center">
-                    <input id="saveEventButton" class="btn btn-primary" type="submit" value="submit1">
+                    <input id="saveEventButton" style="display: none;" class="btn btn-primary" type="submit" value="Save">
+                    <input id="ResetButton" style="display: none;" class="btn btn-primary" type="reset" value="Reset">
+                    <input id="CancelButton" style="display: none;" class="btn btn-primary" type="button"  onclick="onCancel()" value="Cancel">
                 </div>
             </form>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
+    <div  class="container" >
+        <div style="margin:100px 0px" class="row">
             <div style="color:black" class="col">
                 <div id="VideosList">
                     <?php
@@ -221,12 +227,17 @@ session_start();
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
-    $("#eventNameTextArea").hide();
-    $("#eventDescriptionTextArea").hide();
-    //  echo $_SESSION["visitingClubName"] 
+    var isPresident = <?php echo $_SESSION['isPresident'] ;?>;
+    if(isPresident){
+        $("#editEventButton").show();
+    }
     var clubID = <?php echo $_GET['Id']; ?>;
     var eventID = <?php echo $_GET['eID']; ?>;
-    console.log(clubID, eventID);
+    var haveEmail = <?php echo $var = isset($_SESSION["userEmail"]) ; ?> ;
+    var UserEmail = '';
+    if (haveEmail){
+    var UserEmail = <?php echo '"'.$_SESSION["userEmail"] .'"'; ?>
+    }
     $.ajax({
         type: 'post',
         url: './database/fullEventData.php',
@@ -234,44 +245,127 @@ session_start();
             'clubID': clubID,
             'eventID': eventID,
             'function': '',
+            'userEmail': UserEmail,
         }),
         dataType: 'json',
         cache: false,
         success: function(result) {
             $("#saveEventButton").hide();
-            console.log(result);
+            if(result[3]['isFollowing']){
+                $("#interested").toggle();
+                $("#notInterested").toggle();
+            }
+            // console.log(result);
+            // console.log(result[3]['isFollowing']);
             designEvent(result);
+            
+            if(<?php echo '"'. isset($_GET["tsk"]) .'"'?>){
+                OnEditEvent();
+            }
         },
         error: function(xhr, status, error) {
             var err = eval("(" + xhr.responseText + ")");
             //  alert(err.Message)
         }
     });
+    function OnEditEvent() {
+        $("#saveEventButton").show();
+        $("#ResetButton").show();
+        $("#CancelButton").show();
+        $("#onlyText").hide();
+        $("#eventNameTextArea").show();
+        $("#eventDescriptionTextArea").show();
+        var oldName = document.getElementById("eventName").textContent;
+        document.getElementById("eventNameTextArea").innerHTML = oldName;
+        var oldDescription = document.getElementById("eventDescription").textContent;
+        document.getElementById("eventDescriptionTextArea").innerHTML = oldDescription;
+    }
+    function onCancel(){
+        $("#eventNameTextArea").hide();
+        $("#eventDescriptionTextArea").hide();
+        $("#onlyText").show();
+        $("#saveEventButton").hide();
+        $("#ResetButton").hide();
+        $("#CancelButton").hide();
+    }
+    function saveEditedEvent() {
+        var newName = document.getElementById("eventNameTextArea").value;
+        var newDescription = document.getElementById("eventDescriptionTextArea").value;
+        $.ajax({
+            type: "POST",
+            url: './database/FullEventData.php',
+            data: ({
+                'clubID': clubID,
+                'eventID': eventID,
+                'function': 'f',
+                'newEventName': newName,
+                'newDescription': newDescription,
+                'userEmail': <?php echo '"'.$_SESSION["userEmail"] .'"'; ?>,
+            }),
+            dataType: 'json',
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                 alert(err.Message)
+            }
+        });
+    }
+    function goingToEvent(){
+        // $("#interested").css('background', 'red');
+        // $("#interested").css('color', 'white');
+        $("#interested").toggle();
+        $("#notInterested").toggle();
+        $.ajax({
+            type: "POST",
+            url: './database/FullEventData.php',
+            data: ({
+                'clubID': clubID,
+                'eventID': eventID,
+                'function': 'followEvent',
+                'userEmail': <?php echo '"'.$_SESSION["userEmail"] .'"'; ?>,
+            }),
+            dataType: 'json',
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                 alert(err.Message)
+            }
+        });
+    }
+    function NOTgoingToEvent(){
+        // $("#interested").css('background', 'red');
+        // $("#interested").css('color', 'white');
+        $("#interested").toggle();
+        $("#notInterested").toggle();
+        $.ajax({
+            type: "POST",
+            url: './database/FullEventData.php',
+            data: ({
+                'clubID': clubID,
+                'eventID': eventID,
+                'function': 'unFollowEvent',
+                'userEmail': <?php echo '"'.$_SESSION["userEmail"] .'"'; ?>,
+            }),
+            dataType: 'json',
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                 alert(err.Message)
+            }
+        });
+    }
 
     function designEvent(dataArray) {
-        // console.log("DP",dataArray[0][0]["DP"]);
         $("#clubName").text(dataArray[0][0]["ClubName"]);
         $("#eventName").text(dataArray[0][0]["EventName"]);
         $("#eventDescription").text(dataArray[0][0]["EventDescription"]);
-        // if(dataArray[0][0].length==0){
-        // console.log("display :",dataArray[0][0]["DP"]);
         $("#EventImage").attr("src", "./Upload/image/" + dataArray[0][0]["DP"]);
-        // }
-        // $("#EventVideo").attr("src", "./Upload/image/" + dataArray[0]["DP"]);
         insertingVideoList(dataArray);
     }
 
     function insertingVideoList(dataArray) {
-        // console.log(dataArray[2][0]['video'], "Video name");
-        console.log("inserting videolist");
         if (dataArray[2].length > 0) {
             var video = $("#v1");
             video.find("source").attr("src", './Upload/video/' + dataArray[2][0]['video'] + '#t=1');
             video.get(0).load();
-            // video.get(1).load();
-            // video.get(0).play();
             video.muted = false;
-            // $("#v1").html('<source src= ./Upload/video/'+dataArray[2][0]['video']+' type="video/mp4"></source>');
             $("#firstVideoTitle").append('<h6> ' + dataArray[2][0]["Title"] + '</h6>');
             $("#firstVideoUploadTime").append('<h5>Uploaded On: </h5>' + dataArray[2][0]["Uploaded_On"]);
             if (dataArray[2].length == 1) {
@@ -285,13 +379,11 @@ session_start();
             $("#carouselExampleCaptions0 a").hide();
             $("#videoDiv").append('<img src="./images/No videos yet.png" </img>')
         }
-        // console.log(dataArray[0]['videos']);
         insertingPhotoList(dataArray);
 
     }
 
     function insertingPhotoList(dataArray) {
-        console.log("inserting Videolists");
         if (dataArray[1].length > 0) {
             $("#p1").attr("src", "./Upload/image/" + dataArray[1][0]["photo"]);
             $("#firstPhotoTitle").append('<h6>' + dataArray[1][0]["Title"] + '</h6>');
@@ -306,57 +398,6 @@ session_start();
             $("#carouselExampleCaptions0 a").hide();
             $("#p1").append('<img src="./images/No videos yet.png" </img>')
         }
-        // console.log(dataArray[0]['videos']);
-    }
-    var y;
-
-    function OnEditEvent() {
-        $("#saveEventButton").show();
-        $("#onlyText").hide();
-        $("#eventNameTextArea").show();
-        $("#eventDescriptionTextArea").show();
-        var oldName = document.getElementById("eventName").textContent;
-        document.getElementById("eventNameTextArea").innerHTML = oldName;
-        var oldDescription = document.getElementById("eventDescription").textContent;
-        document.getElementById("eventDescriptionTextArea").innerHTML = oldDescription;
-    }
-
-    function saveEditedEvent() {
-       
-        // var newName = document.getElementById("eventNameTextArea").textContent;
-        var newDescription = document.getElementById("eventDescriptionTextArea").textContent;
-        alert(')');
-        console.log(newDescription);
-        console.log( $('form').serialize());
-        alert('[');
-        $("#eventNameTextArea").hide();
-        $("#eventDescriptionTextArea").hide();
-        $("#onlyText").show();
-        // $.ajax({
-        //     type: "POST",
-        //     url: './database/FullEventData.php',
-        //     data: ({
-        //         'clubID': clubID,
-        //         'eventID': eventID,
-        //         'function': 'f',
-        //         'newEventName': newName,
-        //         'newDescription': newDescription,
-        //     }),
-        //     success: function(result) {
-        //         // $("#saveEventButton").hide();
-        //         // console.log(result);
-        //         // designEvent(result);
-        //         console.log(result);
-        //         alert('-');
-        //         // alert(result[0]);
-        //     },
-        // cache: false,
-        //     dataType: 'json',
-        //     error: function(xhr, status, error) {
-        //         var err = eval("(" + xhr.responseText + ")");
-        //         //  alert(err.Message)
-        //     }
-        // });
     }
     $(function() {
         $("#fullEventNav").load("nav.php");
@@ -369,17 +410,12 @@ session_start();
 <?php
 require "./database/accessDatabase.php";
 if (isset($_POST['videoSubmit'])) {
-    // echo "<script>console.log('Video submitted')</script>";
     $file = 'video123';
     $fileDestination = "./Upload/video/";
     $Path = uploadVideo($file, $fileDestination);
     $Title = get_input($_POST['videoTitle']);
     $EventID = $_GET['eID'];
-    if (insertUploadedVideoData($EventID, $Path, $Title)) {
-        echo "<script>console.log('Video recorded')</script>";
-    } else {
-        echo "<script>console.log('Video was not recorded')</script>";
-    }
+    insertUploadedVideoData($EventID, $Path, $Title);
 }
 if (isset($_POST['photoSubmit'])) {
     $file = 'image';
@@ -387,12 +423,7 @@ if (isset($_POST['photoSubmit'])) {
     $Path = uploadImage($file, $fileDestination);
     $Title = get_input($_POST['photoTitle']);
     $EventID = $_GET['eID'];
-    if (insertPhotos($EventID, $Path, $Title)) {
-        echo "<script>console.log('Image recorded')</script>";
-    } else {
-        echo "<script>console.log('Image was not recorded')</script>";
-    }
+    insertPhotos($EventID, $Path, $Title);
 }
 unset($_POST);
-// redirec
 ?>
