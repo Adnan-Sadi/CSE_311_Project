@@ -88,19 +88,22 @@
                                 <ul class="list-unstyled">
 
                 <?php
-                 $sql2 = "SELECT ClubId,EventId,EventName,eventDP
-                          FROM goingtoevents NATURAL JOIN events
-                          WHERE UserId = (SELECT UserId
+                 $sql3 = "SELECT e.ClubId,e.EventId,e.EventName,(SELECT Path
+                                                                FROM eventphotos 
+                                                                WHERE PhotoId = e.eventDP) AS imagePath
+                          FROM goingtoevents g INNER JOIN events e
+                          ON g.EventId = e.EventId
+                          WHERE g.UserId = (SELECT UserId
                                           FROM all_users
                                           WHERE UserEmail = '$userEmail');";
                  
-                 $result2 = mysqli_query($conn,$sql2);
+                 $result3 = mysqli_query($conn,$sql3);
 
-                 while($row = mysqli_fetch_assoc($result2)){
+                 while($row = mysqli_fetch_assoc($result3)){
                     
                              echo "        
                              <li class='media'>
-                             <img class='mr-3' src='images/".$row["eventDP"]."' alt='Generic placeholder image' width='64' height='64'>
+                             <img class='mr-3' src='Club page/Upload/image/".$row["imagePath"]."' alt='Generic placeholder image' width='64' height='64'>
                              <div class='media-body'>
                              <h5 class='mt-0 mb-1 mr-2 float-left' id='club_name' onclick='location.href=\"Club page/FullEvent.php?eID=".$row["EventId"]."&Id=".$row["ClubId"]."\";'>".$row["EventName"]."</h5>
                              </div>
