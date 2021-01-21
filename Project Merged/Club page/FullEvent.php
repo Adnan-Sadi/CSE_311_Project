@@ -258,6 +258,9 @@ if(isset($_SESSION["userEmail"])){
     var isPresident = <?php echo $_SESSION['isPresident'] ;?>;
     if(isPresident){
         $("#editEventButton").show();
+    }else{
+        $('#uploadVideoButton').hide();
+        $('#uploadPhotoButton').hide();
     }
 
     $.ajax({
