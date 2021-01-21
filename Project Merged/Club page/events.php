@@ -180,7 +180,7 @@ if (isset($_POST['evSubmit'])) {
             var isPresident = <?php echo $_SESSION['isPresident']; ?>;
             console.log("no guest allowed", isPresident);
             if(isPresident){
-                console.log(isPresident);
+                console.log('ima president');
                 $('#createEventButton').show();
             }
             $.ajax({
@@ -195,7 +195,7 @@ if (isset($_POST['evSubmit'])) {
                 cache: false,
                 success: function(result) {
                     var count = 0;
-                    designEvents(result[0], count,userType);
+                    designEvents(result[0], count,userType,isPresident=1);
                     // console.log(result);
                 },
                 error: function(xhr, status, error) {
@@ -206,6 +206,46 @@ if (isset($_POST['evSubmit'])) {
         }
     });
 
+    function designEvents(dataArray, count,userType,isPresident=0) {
+        var j = -1;
+        var makeColumn = 3;
+        for (var i = 0; i < dataArray.length; i++) {
+            if (i % makeColumn == 0) {
+                j++;
+                $("#AllEventTableBody").append('<tr id=AllEventTableRow' + j + '>');
+                $("#AllEventTableBody").append('</tr>');
+            }
+            createAdInAllEvent(dataArray, i, j,userType,isPresident); //creates a event ad column
+        }
+    }
+
+    function createAdInAllEvent(dataArray, count, row,userType,isPresident=0) {
+        var td = $("#AllEventTableRow" + row).append('<td></td>');
+        var card = td.append('<div class="card"></div>');
+        var cardBody = card.append('<div class="card-body"></div>');
+        cardBody.append('<img class="card-img-top" src=./Upload/image/' + dataArray[count]['DP'] + '  alt="Event photo not found">');
+        cardBody.append('<h5 class="card-title">' + dataArray[count]['Name'] + '</h5>');
+        cardBody.append('<p class="card-text">' + dataArray[count]["Date"] + '</p>');
+        cardBody.append('<p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<a href=./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '><button class="btn" style="color:red;text-decoration: underline;">Read More..</button></a></p>');
+        if(!(userType == 'guest')){
+            var cardDown = td.append('<div ></div>');
+            if(1){
+                console.log("FIne");
+                cardDown.append('<a href= "./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '&tsk=edit" ><button class="btn btn-info btn-sm "  style="margin: 5px " >Edit</button></a>');
+                cardDown.append('<button class="btn btn-info btn-sm" onClick=eventDelete(this) value = ' + dataArray[count]['eID'] + ' style="margin: 5px " >Delete</button>');
+            }
+        }
+        // $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./Upload/image/'+ dataArray[count]['DP'] +'  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['Name'] + '</h5> <p class="card-text">' + dataArray[count]["Date"] + '</p><p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID='+dataArray[count]['eID']+'&Id='+clubID+'>Read More..</a></button></p></div><button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" >Delete</button></td>');
+        // eventCard.append('<h1>OK HI</h1><button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID='+dataArray[count]['eID']+'&Id='+clubID+'>Read More..</a></button></p></div><button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" >Delete</button>');
+        console.log("CLUBID", clubID)
+    }
+    $(function() {
+        $("#eventsNav").load("nav.php");
+    });
+    $(function() {
+        $("#eventsBottom").load("bottom.php");
+    });
+    
     function eventDelete(e) {
         if (confirm("Are you sure about deleting the event?")) {
             $(document).ready(function() {
@@ -234,44 +274,4 @@ if (isset($_POST['evSubmit'])) {
 
     }
 
-    function designEvents(dataArray, count,userType) {
-        var j = -1;
-        var makeColumn = 3;
-        for (var i = 0; i < dataArray.length; i++) {
-            if (i % makeColumn == 0) {
-                j++;
-                $("#AllEventTableBody").append('<tr id=AllEventTableRow' + j + '>');
-                $("#AllEventTableBody").append('</tr>');
-            }
-            createAdInAllEvent(dataArray, i, j); //creates a event ad column
-
-        }
-    }
-
-    function createAdInAllEvent(dataArray, count, row,userType) {
-        var td = $("#AllEventTableRow" + row).append('<td></td>');
-        var card = td.append('<div class="card"></div>');
-        var cardBody = card.append('<div class="card-body"></div>');
-        cardBody.append('<img class="card-img-top" src=./Upload/image/' + dataArray[count]['DP'] + '  alt="Event photo not found">');
-        cardBody.append('<h5 class="card-title">' + dataArray[count]['Name'] + '</h5>');
-        cardBody.append('<p class="card-text">' + dataArray[count]["Date"] + '</p>');
-        cardBody.append('<p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<a href=./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '><button class="btn" style="color:red;text-decoration: underline;">Read More..</button></a></p>');
-        if(!userType == 'guest'){
-            var cardDown = td.append('<div ></div>')
-            // var ed = <?php echo $_SESSION["isPresident"]; ?>;
-            if( <?php echo $_SESSION["isPresident"]; ?>){
-                cardDown.append('<a href= "./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '&tsk=edit" ><button class="btn btn-info btn-sm "  style="margin: 5px " >Edit</button></a>');
-                cardDown.append('<button class="btn btn-info btn-sm" onClick=eventDelete(this) value = ' + dataArray[count]['eID'] + ' style="margin: 5px " >Delete</button>');
-            }
-        }
-        // $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./Upload/image/'+ dataArray[count]['DP'] +'  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['Name'] + '</h5> <p class="card-text">' + dataArray[count]["Date"] + '</p><p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID='+dataArray[count]['eID']+'&Id='+clubID+'>Read More..</a></button></p></div><button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" >Delete</button></td>');
-        // eventCard.append('<h1>OK HI</h1><button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID='+dataArray[count]['eID']+'&Id='+clubID+'>Read More..</a></button></p></div><button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" >Delete</button>');
-        console.log("CLUBID", clubID)
-    }
-    $(function() {
-        $("#eventsNav").load("nav.php");
-    });
-    $(function() {
-        $("#eventsBottom").load("bottom.php");
-    });
 </script>

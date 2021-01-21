@@ -39,9 +39,9 @@
                     </ul>
                 </div>
                 <div id="search" style="margin-top:1%;" >
-                    <form class="form-inline" >
-                        <input id="search" class="form-control " type="text" placeholder="Search club" aria-label="Search" style="margin-right:20px ;" />
-                        <button class="btn btn-outline-success " type="submit" style="width:40px;height:40px;margin-left:200px;"><i class="fa fa-search"></i></button>
+                    <form action="../filtered_clubs.php" method="POST" class="form-inline" >
+                        <input type="text" name="search" id="search" class="form-control" placeholder="Search club" style="margin-right:20px ;" />
+                        <button class="btn btn-outline-success " type="submit" name="submit_search" style="width:40px;height:40px;margin-left:200px;"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
 

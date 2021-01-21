@@ -145,7 +145,7 @@ function uploadImage($file, $folderPath)
         } else {
             print_r($errors);
         }
-        return $file_name;
+        return $file_nameg;
     }
 
     function uploadVideo($file,$fileDestination){

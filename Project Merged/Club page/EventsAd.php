@@ -6,14 +6,16 @@
         padding: 20px;
         /* margin-left: 20px; */
     }
-    
-    img{
+    .carousel-item h5{
+        margin-top: 50px;
+    }
+    .carousel-item img{
         max-width: 100%;
         height: 300px;
     }
 </style>
 <div class="container">
-    <h1><a href="./events.php?Id=<?php echo $_GET['Id']; ?>"><button class="btn btn-link btn-secondary d-block w-100 " style="width: 100%;margin:20px 0px;">All Events </button></a></h1>
+    <a href="./events.php?Id=<?php echo $_GET['Id']; ?>"><button class="btn btn-link btn-danger d-block w-100 " style="width: 100%;margin:20px 0px;"><h1>All Events</h1></button></a>
 </div>
 <div id="LeftRightEventAds" class="container">
     <div class="row justify-content-around">
@@ -85,11 +87,11 @@
 
 
 <script>
+    var clubID = "<?php echo $_GET['Id'] ?>";
     $( document ).ready(function() {
 
     $("#searchAD").hide();
     // $(".adInnerBox").children().hide();
-    var clubID = "<?php echo $_GET['Id'] ?>";
     $.ajax({
         type: 'POST',
         url: './database/ClubEvents.php',
@@ -99,10 +101,6 @@
         dataType: 'json',
         cache: false,
         success: function(result) {
-            // console.log("Result", result);
-            // console.log("Result", result[0][0]);
-            // console.log(result[0][0]["name"]);
-            // console.log(result[1][0]["name"]);
             if (result[1].length == 0) {
                 $("#EventAdLeft").hide();
                 $("#carouselExampleCaptions0 a").hide();
@@ -143,11 +141,11 @@
         }
 
         for (var i = 1; i < result[0].length; i++) {
-            $("#EventAdInsertHere1").append('<div class = carousel-item ><img  class=rounded w-100 src= ./Upload/image/' + result[0][i]["DP"] + ' alt=Event Page Missing > <div><a href=https://www.google.com><h5>' + result[0][i]["name"] + '</h5></a><p>' + result[0][i]["Date"] + '</p><p>.</p></div></div>');
+            $("#EventAdInsertHere1").append('<div class = carousel-item ><img  class=rounded w-100 src= ./Upload/image/' + result[0][i]["DP"] + ' alt=Event Page Missing > <div><a href="./FullEvent.php?eID='+result[0][i]["Eventid"] +'&Id='+clubID +'"><h5>' + result[0][i]["name"] + '</h5></a><p>' + result[0][i]["Date"] + '</p><p>.</p></div></div>');
         }
         // console.log("upcomming", result[0].length);
         for (var i = 1; i < result[1].length; i++) {
-            $("#EventAdInsertHere0").append('<div class = carousel-item  ><img  class=rounded w-100 src= ./Upload/image/' + result[1][i]["DP"] + ' alt=Event Page Missing ><div><a href=https://www.google.com><h5>' + result[1][i]["name"] + '</h5></a><p>' + result[1][i]["Date"] + '</p><p>.</p></div></div>');
+            $("#EventAdInsertHere0").append('<div class = carousel-item  ><img  class=rounded w-100 src= ./Upload/image/' + result[1][i]["DP"] + ' alt=Event Page Missing ><div><a href="./FullEvent.php?eID='+result[1][i]["Eventid"] +'&Id='+clubID +'"><h5>' + result[1][i]["name"] + '</h5></a><p>' + result[1][i]["Date"] + '</p><p>.</p></div></div>');
             // alert("Ok")
         }
     }

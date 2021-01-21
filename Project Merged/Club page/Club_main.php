@@ -79,10 +79,10 @@ else{
 
     </div>
     <div id="team-intro">
-        <h1 style="text-align: center; margin-bottom: 60px;" class="hover-line">Our Teams</h1>
-                <a href="../members.php?id=<?php echo $_GET['Id']; ?>" <button class="btn  btn-success  d-block w-100  ">Members</button></a>
-        </ul>
-
+        <div class="container">
+            <h1 style="text-align: center; margin-bottom: 60px;" class="hover-line">Our Teams</h1>
+            <a href="../members.php?id=<?php echo $_GET['Id']; ?>" <button class="btn  btn-success  d-block w-100  ">Members</button></a>
+        </div>
     </div>
     <footer>
         <div id="bottom">

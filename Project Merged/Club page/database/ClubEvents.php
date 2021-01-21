@@ -3,7 +3,7 @@ require './accessDatabase.php';
 $clubID = $_POST['clubID'];
 // $clubID = 1;
 $Myarray =  array();
-$sql = "SELECT EventName as 'name', Date , (SELECT path 
+$sql = "SELECT EventName as 'name',Eventid, Date , (SELECT path 
                                             FROM eventphotos
                                             WHERE photoID = eventDP AND eventID = events.eventid) as DP
          FROM events 

@@ -80,7 +80,7 @@
                 }
                 $("#NoEventBoard").hide();
                 $("#FirstAdImg").attr("src", './Club page/Upload/image/' + result[0]["DP"]);
-                $("#FirstAdTitle").text(result[0]["name"]);
+                $("#FirstAdTitle").html('<a href="./Club page/FullEvent.php?eID='+ result[0]["Eventid"] +'&Id='+ result[0]["ClubId"] +' " >' + result[0]['name'] + '</a>');
                 $("#FirstAdDate").text(result[0]["Date"]);
                 designAd(result);
                 }
@@ -99,7 +99,7 @@
             if(dataArray[i].length==0){
                 continue;
             }
-            $("#HomeUpcommigEventsAd").append('<div class="carousel-item"><img src= "' + './Club page/Upload/image/' + dataArray[i]['DP'] + '" class="d-block w-100" alt="Image missing" ><h6>' + dataArray[i]['name'] + '</h6><h6>' + dataArray[i]['Date'] + '</h6></div>');
+            $("#HomeUpcommigEventsAd").append('<div class="carousel-item"><img src= "' + './Club page/Upload/image/' + dataArray[i]['DP'] + '" class="d-block w-100" alt="Image missing" ><a href="./Club page/FullEvent.php?eID='+ dataArray[i]["Eventid"] +'&Id='+ dataArray[i]["ClubId"] +' " ><h6>' + dataArray[i]['name'] + '</h6></a><h6>' + dataArray[i]['Date'] + '</h6></div>');
         }
     }
 
