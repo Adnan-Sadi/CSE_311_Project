@@ -82,8 +82,35 @@
                 ?>
                 </ul>
             </div>
+
             <div class="col-md-6">
                 <h4><u>Events following</u></h4>
+                                <ul class="list-unstyled">
+
+                <?php
+                 $sql2 = "SELECT ClubId,EventId,EventName,eventDP
+                          FROM goingtoevents NATURAL JOIN events
+                          WHERE UserId = (SELECT UserId
+                                          FROM all_users
+                                          WHERE UserEmail = '$userEmail');";
+                 
+                 $result2 = mysqli_query($conn,$sql2);
+
+                 while($row = mysqli_fetch_assoc($result2)){
+                    
+                             echo "        
+                             <li class='media'>
+                             <img class='mr-3' src='images/".$row["eventDP"]."' alt='Generic placeholder image' width='64' height='64'>
+                             <div class='media-body'>
+                             <h5 class='mt-0 mb-1 mr-2 float-left' id='club_name' onclick='location.href=\"Club page/FullEvent.php?eID=".$row["EventId"]."&Id=".$row["ClubId"]."\";'>".$row["EventName"]."</h5>
+                             </div>
+                             </li><br>      
+                                ";                      
+                 }
+
+
+                ?>
+                </ul>
             </div>
         </div>
     </div>

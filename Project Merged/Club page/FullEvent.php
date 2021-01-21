@@ -1,8 +1,11 @@
 <?php
 session_start();
-// echo '<pre>';
-// var_dump($_SESSION);
-// echo '</pre>'
+if(isset($_SESSION["userEmail"])){
+    $userEmail = $_SESSION["userEmail"];
+    }
+    else{
+       $userEmail = '';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +64,7 @@ session_start();
             </div>
             <div id="onlyText">
                 <button id="editEventButton" onclick="OnEditEvent()" style="display: none;" type="button" class="btn btn-outline-primary">Edit</button>
-                <button id="interested" onclick="goingToEvent()" type="button" class="btn btn-outline-primary">Interested</button>
+                <button id="interested" style="display: none;" onclick="goingToEvent()" type="button" class="btn btn-outline-primary">Interested</button>
                 <button id="notInterested" onclick="NOTgoingToEvent()" type="button" class="btn btn-danger" style="display: none;">set to not Interested</button>
                 <!-- <button >Save</button> -->
                 <h1 style="text-align:center;margin-top:10px;" id="eventName"></h1>
@@ -90,11 +93,7 @@ session_start();
         <div style="margin:100px 0px" class="row">
             <div style="color:black" class="col">
                 <div id="VideosList">
-                    <?php
-                    if ($_SESSION['isPresident']) {
-                        echo '<button id="uploadVideoButton" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadVideo"><h1>Upload Video</h1></button>';
-                    }
-                    ?>
+                <button id="uploadVideoButton" style="display:none" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadVideo"><h1>Upload Video</h1></button>
                     <!-- Modal starts -->
                     <div class="modal fade" id="uploadVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -154,12 +153,7 @@ session_start();
             </div>
             <div class="col">
                 <div id="PhotoList">
-                    <?php
-                    if ($_SESSION['isPresident']) {
-                        echo '<button id="uploadPhotoButton" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadPhoto"><h1>Upload Photo</h1></button>';
-                    }
-                    ?>
-
+                    <button id="uploadPhotoButton" style="display: none;" class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadPhoto"><h1>Upload Photo</h1></button>
                     <!-- Modal starts -->
                     <div class="modal fade" id="uploadPhoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -227,17 +221,39 @@ session_start();
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+    var clubID = <?php echo $_GET['Id']; ?>;
+    var eventID = <?php echo $_GET['eID']; ?>;
+    var userType = <?php echo '"'. $_SESSION['userType'] .'"'; ?>;
+    var UserEmail = <?php echo '"' . $userEmail . '"'?>;
+    console.log(userType);
+    if(userType == 'guest'){
+        $.ajax({
+        type: 'post',
+        url: './database/fullEventData.php',
+        data: ({
+            'clubID': clubID,
+            'eventID': eventID,
+            'function': '',
+            'userEmail': UserEmail,
+        }),
+        dataType: 'json',
+        cache: false,
+        success: function(result) {
+            // $("#saveEventButton").hide();
+            designEvent(result);
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            //  alert(err.Message)
+        }
+    });
+    }else{
+    console.log(UserEmail);
     var isPresident = <?php echo $_SESSION['isPresident'] ;?>;
     if(isPresident){
         $("#editEventButton").show();
     }
-    var clubID = <?php echo $_GET['Id']; ?>;
-    var eventID = <?php echo $_GET['eID']; ?>;
-    var haveEmail = <?php echo $var = isset($_SESSION["userEmail"]) ; ?> ;
-    var UserEmail = '';
-    if (haveEmail){
-    var UserEmail = <?php echo '"'.$_SESSION["userEmail"] .'"'; ?>
-    }
+
     $.ajax({
         type: 'post',
         url: './database/fullEventData.php',
@@ -250,7 +266,7 @@ session_start();
         dataType: 'json',
         cache: false,
         success: function(result) {
-            $("#saveEventButton").hide();
+            // $("#saveEventButton").hide();
             if(result[3]['isFollowing']){
                 $("#interested").toggle();
                 $("#notInterested").toggle();
@@ -258,7 +274,6 @@ session_start();
             // console.log(result);
             // console.log(result[3]['isFollowing']);
             designEvent(result);
-            
             if(<?php echo '"'. isset($_GET["tsk"]) .'"'?>){
                 OnEditEvent();
             }
@@ -268,6 +283,7 @@ session_start();
             //  alert(err.Message)
         }
     });
+}
     function OnEditEvent() {
         $("#saveEventButton").show();
         $("#ResetButton").show();
@@ -300,7 +316,7 @@ session_start();
                 'function': 'f',
                 'newEventName': newName,
                 'newDescription': newDescription,
-                'userEmail': <?php echo '"'.$_SESSION["userEmail"] .'"'; ?>,
+                'userEmail': userEmail,
             }),
             dataType: 'json',
             error: function(xhr, status, error) {
@@ -321,7 +337,7 @@ session_start();
                 'clubID': clubID,
                 'eventID': eventID,
                 'function': 'followEvent',
-                'userEmail': <?php echo '"'.$_SESSION["userEmail"] .'"'; ?>,
+                'userEmail': userEmail,
             }),
             dataType: 'json',
             error: function(xhr, status, error) {
@@ -342,7 +358,7 @@ session_start();
                 'clubID': clubID,
                 'eventID': eventID,
                 'function': 'unFollowEvent',
-                'userEmail': <?php echo '"'.$_SESSION["userEmail"] .'"'; ?>,
+                'userEmail': userEmail,
             }),
             dataType: 'json',
             error: function(xhr, status, error) {
