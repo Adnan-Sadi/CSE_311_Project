@@ -1,7 +1,8 @@
 <?php 
 require "./database/accessDatabase.php";
 $ClubId = 1;
-goingToEvent(8,205);
+// goingToEvent(8,205);
+echo isLeader(1,'Saeem03@gmail.com');
 //  print_r (getUserID("Saeem03@gmail.com"));
 // $EventID = 202;
 // echo (isLeader(1,'Saee03@gmail.com'))
