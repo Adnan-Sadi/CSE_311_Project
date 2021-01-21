@@ -1,8 +1,8 @@
 <?php 
 require "./database/accessDatabase.php";
 $ClubId = 1;
-goingToEvent(3,205);
- print_r (getUserID("Saeem03@gmail.com"));
+goingToEvent(8,205);
+//  print_r (getUserID("Saeem03@gmail.com"));
 // $EventID = 202;
 // echo (isLeader(1,'Saee03@gmail.com'))
 // $follower = getAllFollowers($ClubId);

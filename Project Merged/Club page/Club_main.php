@@ -8,11 +8,7 @@ if(isset($_SESSION['userEmail'])){
         $_SESSION['isPresident'] = 1;
     }
     else{
-<<<<<<< Updated upstream
         $_SESSION['isPresident']=0;
-=======
-        $_SESSION[''];
->>>>>>> Stashed changes
     }
 }
 else{
