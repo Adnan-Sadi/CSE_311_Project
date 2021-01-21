@@ -2,6 +2,7 @@
 require './database/accessDatabase.php';
 session_start();
 $_SESSION['userType'] = 'NOTguest';
+$_SESSION['isPresident']=0;
 if(isset($_SESSION['userEmail'])){
     if(isLeader($_GET['Id'],$_SESSION['userEmail'])==1){
         $_SESSION['isPresident'] = 1;
