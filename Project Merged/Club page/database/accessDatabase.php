@@ -118,6 +118,25 @@ function getEventData($ClubID,$EventID){
   return ($Myarray);
 
 }
+function getEventVideos($EventID){
+  // $Myarray = array();
+  $sql = 'SELECT ev.path as video, ev.VideoId as Vid, ev.uploaded_on as Uploaded_On,ev.title as Title 
+          FROM eventVideos AS ev,events as e
+          WHERE ev.EventID=e.eventId AND  ev.eventID = ' . $EventID;
+  // echo $sql;
+  return inQuery($sql);
+  // echo json_encode($Myarray);
+  // return ($Myarray);
+}
+function getEventPhotos($EventID){
+  // $Myarray = array();
+  $sql = 'SELECT ep.path as photo,ep.PhotoId as Pid,ep.uploaded_on as Uploaded_On,ep.title as Title 
+          FROM eventphotos AS ep,events as e
+          WHERE ep.EventID=e.eventId AND  ep.eventID = ' . $EventID;
+  return inQuery($sql);
+  // echo json_encode($Myarray);
+  // return ($Myarray);
+}
 function uploadImage($file, $folderPath)
     {
         $errors = array();
@@ -189,6 +208,27 @@ function get_input($data)
                   WHERE ClubId = '."$ClubID".' AND EventId = '."$EventID";
             SQL_Query($sql);
 
+    }
+    function eventVideoDelete($EventID,$VideoID){
+          $sql = 'Delete FROM eventVideos
+                  WHERE EventId = '."$EventID".' AND VideoId = '."$VideoID" ;
+            return SQL_Query($sql);
+    }
+    function getEventDP($EventID){
+      $sql = "SELECT EventDP
+              FROM events
+              WHERE eventID = ". $EventID;
+          // echo $sql;
+       return inQuery($sql)[0]['EventDP'];
+    }
+    function eventPhotoDelete($EventID,$PhotoID){
+          if($PhotoID == getEventDP($EventID)){
+            return 0;
+          }else{
+            $sql = 'Delete FROM eventPhotos
+                    WHERE EventId = '."$EventID".' AND photoId = '."$PhotoID" ;
+              return SQL_Query($sql);
+          }
     }
     function eventEdit($ClubID=null,$EventID=null,$Title=null,$Description=null){
       $items='';

@@ -62,6 +62,7 @@ if(isset($_SESSION["userEmail"])){
                 <h1 style="margin-top:20px;Text-align:center;color:blueviolet;border: 3px solid red;" id="clubName"></h1>
             </a>
             </div>
+            
             <div id="onlyText">
                 <button id="editEventButton" onclick="OnEditEvent()" style="display: none;" type="button" class="btn btn-outline-primary">Edit</button>
                 <button id="interested" style="display: none;" onclick="goingToEvent()" type="button" class="btn btn-outline-primary">Interested</button>
@@ -73,7 +74,7 @@ if(isset($_SESSION["userEmail"])){
                     Admin missed to write description
                 </p>
             </div>
-            <form id="editEventForm" action="" method="post" onsubmit="saveEditedEvent()" >
+            <form id="editEventForm" action="" method="post" onsubmit="saveEditedEvent(this);return false;" >
                 <div class="form-group">
                     <!-- <label for="eventNameTextArea">Event Name :</label> -->
                     <textarea id="eventNameTextArea" style="text-align:center;margin-top:10px;font-weight: bold;display: none;" class="form-control" rows="1"></textarea>
@@ -90,7 +91,10 @@ if(isset($_SESSION["userEmail"])){
         </div>
     </div>
     <div  class="container" >
-        <div style="margin:100px 0px" class="row">
+        <div style="margin-top:100px; margin-bottom: 10px">
+            <a  href="./gallery.php?Id=<?php echo $_GET['Id']; ?>&eID=<?php echo $_GET['eID']; ?>"><button class="btn btn-outline-danger btn-block"><h2 style="margin-top:20px;"> ALL Media </h2></button></a>
+        </div>
+        <div  class="row">
             <div style="color:black" class="col">
                 <div id="VideosList">
                 <button id="uploadVideoButton"  class=" btn btn-block btn-secondary" type="button" data-toggle="modal" data-target="#uploadVideo"><h1>Upload Video</h1></button>
@@ -185,7 +189,7 @@ if(isset($_SESSION["userEmail"])){
                     </div>
                     <!-- Ends -->
 
-                    <h1 id="noPhotoH" class="section-head" style="background-color: orange;text-align:center;margin-top:20px;border-bottom:5px solid green">Uploaded Videos</h1>
+                    <h1 id="noPhotoH" class="section-head" style="background-color: orange;text-align:center;margin-top:20px;border-bottom:5px solid green">Uploaded Photos</h1>
                     <div class="adInnerBox">
                         <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" id="EventInsertHere1">
@@ -307,9 +311,11 @@ if(isset($_SESSION["userEmail"])){
         $("#ResetButton").hide();
         $("#CancelButton").hide();
     }
-    function saveEditedEvent() {
+    function saveEditedEvent(e) {
         var newName = document.getElementById("eventNameTextArea").value;
         var newDescription = document.getElementById("eventDescriptionTextArea").value;
+        // onCancel();
+        // alert('sd');
         $.ajax({
             type: "POST",
             url: './database/FullEventData.php',
@@ -321,12 +327,20 @@ if(isset($_SESSION["userEmail"])){
                 'newDescription': newDescription,
                 'userEmail': UserEmail,
             }),
+            success:function(){
+                onCancel();
+                var x =location.href;
+        window.location.replace(x.substring(0,x.length-9));
+        console.log(location.href);
+                // e.preventDefault();
+            },
             dataType: 'json',
             error: function(xhr, status, error) {
                 // var err = eval("(" + xhr.responseText + ")");
                  alert(err.Message)
             }
         });
+
     }
     function goingToEvent(){
         // $("#interested").css('background', 'red');

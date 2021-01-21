@@ -67,6 +67,7 @@ DELIMITER ;
 
 # Trigger for event Deleted
 
+
 DELIMITER $$
 CREATE TRIGGER After_Delete_Event
 AFTER DELETE ON events 
@@ -74,7 +75,17 @@ FOR EACH ROW
     BEGIN
         DELETE FROM eventphotos
         WHERE Eventid = old.eventID;
+        
+        INSERT INTO photos_archive(Photoid,Eventid,Path,Uploaded_on,Title)
+        SELECT PhotoId,EventID,Path,Uploaded_On,Title FROM eventphotos WHERE Eventid = old.eventID;
+        
         DELETE FROM eventvideos
         WHERE Eventid = old.eventID;
+        
+        INSERT INTO videos_archive(videoid,Eventid,Path,Uploaded_on,Title)
+        SELECT videoId,EventID,Path,Uploaded_On,Title FROM eventvideos WHERE EventID = old.EventID;
     END $$
 DELIMITER ;
+
+
+
