@@ -108,7 +108,7 @@
             } else {
                 $("#NoPastEvents").hide();
                 $("#FirstAdLeftImg").attr("src", './Upload/image/' + result[1][0]["DP"]);
-                $("#FirstadLeftlink").attr("href","https://www.google.com")
+                $("#FirstadLeftlink").attr("href",'./FullEvent.php?eID='+result[0][0]["Eventid"] +'&Id='+clubID )
                 $("#EventAdTitleFirstLeft").text(result[1][0]["name"]);
                 $("#EventAdDateFirstLeft").text(result[1][0]["Date"]);
                
@@ -120,7 +120,7 @@
             } else {
                 $("#NoUpcomingEvents").hide();
                 $("#FirstAdRightImg").attr("src", './Upload/image/' + result[0][0]["DP"]);
-                $("#FirstadRightlink").attr("href", 'https://www.google.com');
+                $("#FirstadRightlink").attr("href",'./FullEvent.php?eID='+result[0][0]["Eventid"] +'&Id='+clubID );
                 $("#EventAdTitleFirstRight").text('' + result[0][0]["name"]);
                 $("#EventAdDateFirstRight").text(result[0][0]["Date"]);
             }
