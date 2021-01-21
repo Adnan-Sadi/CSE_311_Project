@@ -36,7 +36,6 @@ session_start();
                             echo "<li><a href='profile.php'>Profile Page</a></li>";
                             echo "<li><a href='includes/logout_inc.php'>Log out</a></li>";
                         } else if (isset($_SESSION["userEmail"])) {
-                            echo "<li><a href='profile.php'>Google Page</a></li>";
                             echo "<li><a href='includes/logout_inc.php'>Log out</a></li>";
                         } else {
                             echo "<li><a href='signup.php'>Sign Up</a></li>";

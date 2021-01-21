@@ -20,6 +20,8 @@
         position: relative;
         bottom: 0;
         padding: 50px;
+        border-top: 0;
+	      margin-top: auto;
     }
     #bottom  a{
       color: black;

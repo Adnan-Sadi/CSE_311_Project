@@ -206,7 +206,8 @@
                         <label>Position</label><br>
  		                    <input type="text" name="position" id="position" class="form-control"><br>
                         <label>Date Joined</label><br>
-                        <input type="text" name="date_joined" id="date_joined" class="form-control" placeholder="yyyy-mm-dd"><br>
+                       <input type="text" name="date_joined" id="date_joined" class="form-control" placeholder="yyyy-mm-dd"><br>
+
                 
                      </div>
 
