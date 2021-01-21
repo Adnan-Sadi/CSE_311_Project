@@ -263,7 +263,7 @@ function get_input($data)
   $ClubName = $ClubName;
   $EventName = $EventName;
 
-  $body = 'Hi, ' . $FollowerName . ',<br>There will be an new event holding on <b>' . $EventDate . '</b> named <b>' . $EventName . '</b> by   <b> '. $EventFullname .'. (' . $ClubName . ')<b><br> ' . $EventDescription . '<br> ';
+  $body = '<p styele="font-size:20px">Hi, ' . $FollowerName . ',<br>There will be an new event holding on <b>' . $EventDate . '</b> named <b>' . $EventName . '</b> by   <b> '. $EventFullname .'. (' . $ClubName . ')<b><br> ' . $EventDescription . '<br></p> ';
   $body = '<html> <body>' . $body . '</body></htm>';
   $headers[] = 'MIME-Version: 1.0';
   $headers[] = 'Content-type: text/html; charset=iso-8859-1';

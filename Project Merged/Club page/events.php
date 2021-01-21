@@ -229,7 +229,7 @@ if (isset($_POST['evSubmit'])) {
         cardBody.append('<p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<a href=./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '><button class="btn" style="color:red;text-decoration: underline;">Read More..</button></a></p>');
         if(!(userType == 'guest')){
             var cardDown = td.append('<div ></div>');
-            if(1){
+            if(<?php echo $_SESSION['isPresident']; ?>){
                 console.log("FIne");
                 cardDown.append('<a href= "./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '&tsk=edit" ><button class="btn btn-info btn-sm "  style="margin: 5px " >Edit</button></a>');
                 cardDown.append('<button class="btn btn-info btn-sm" onClick=eventDelete(this) value = ' + dataArray[count]['eID'] + ' style="margin: 5px " >Delete</button>');

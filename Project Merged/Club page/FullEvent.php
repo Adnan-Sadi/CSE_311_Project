@@ -360,7 +360,7 @@ if(isset($_SESSION["userEmail"])){
             dataType: 'json',
             error: function(xhr, status, error) {
                 // var err = eval("(" + xhr.responseText + ")");
-                 alert(err.Message)
+                 alert('err.Message')
             }
         });
     }
