@@ -227,25 +227,16 @@ session_start();
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
-    var isPresident = <?php echo $_SESSION['isPresident'] ;?>;
-    if(isPresident){
-        $("#editEventButton").show();
-    }
     var clubID = <?php echo $_GET['Id']; ?>;
     var eventID = <?php echo $_GET['eID']; ?>;
-    var haveEmail = <?php echo $var = isset($_SESSION["userEmail"]) ; ?> ;
-    var UserEmail = '';
-    if (haveEmail){
-    var UserEmail = <?php echo '"'.$_SESSION["userEmail"] .'"'; ?>
-    }
-    $.ajax({
+    var userType = <?php echo $_SESSION['userType'] ?>;
+    if(userType == 'guest'){
+        $.ajax({
         type: 'post',
         url: './database/fullEventData.php',
         data: ({
             'clubID': clubID,
             'eventID': eventID,
-            'function': '',
-            'userEmail': UserEmail,
         }),
         dataType: 'json',
         cache: false,
@@ -268,6 +259,43 @@ session_start();
             //  alert(err.Message)
         }
     });
+    }else{
+    var UserEmail = <?php echo '"'.$_SESSION["userEmail"] .'"'; ?>
+    var isPresident = <?php echo $_SESSION['isPresident'] ;?>;
+    if(isPresident){
+        $("#editEventButton").show();
+    }
+
+    $.ajax({
+        type: 'post',
+        url: './database/fullEventData.php',
+        data: ({
+            'clubID': clubID,
+            'eventID': eventID,
+            'function': '',
+            'userEmail': UserEmail,
+        }),
+        dataType: 'json',
+        cache: false,
+        success: function(result) {
+            $("#saveEventButton").hide();
+            if(result[3]['isFollowing']){
+                $("#interested").toggle();
+                $("#notInterested").toggle();
+            }
+            // console.log(result);
+            // console.log(result[3]['isFollowing']);
+            designEvent(result);
+            if(<?php echo '"'. isset($_GET["tsk"]) .'"'?>){
+                OnEditEvent();
+            }
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            //  alert(err.Message)
+        }
+    });
+}
     function OnEditEvent() {
         $("#saveEventButton").show();
         $("#ResetButton").show();

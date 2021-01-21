@@ -39,11 +39,7 @@ session_start();
             </div>
             <h1 style="text-align:center">All Events</h1>
             <!-- </div>     -->
-            <?php
-            if ($_SESSION['isPresident']){
-                echo '<button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" data-toggle="modal" data-target="#CreateEvent">Create Event</button>';
-            }
-            ?>
+            <button id="createEventButton" class="btn btn-info btn-block" style="display:none;margin: 5px 0px 20px 0px" data-toggle="modal" data-target="#CreateEvent">Create Event</button>
             <div class="table-responsive">
                 <table class="table-borderless">
                     <tbody id="AllEventTableBody">
@@ -156,11 +152,12 @@ if (isset($_POST['evSubmit'])) {
         window.history.replaceState(null, null, window.location.href);
     }
     var clubID = <?php echo $_GET['Id']; ?>;
-    // var so = <?php echo $_GET['Id']; ?>;
-    // var ed = <?php echo $_SESSION['isPresident']; ?>;
     
     $(document).ready(function() {
-        $.ajax({
+        var userType = <?php echo $_SESSION['userType']?>;
+        
+        if(userType=='guest'){
+            $.ajax({
             type: 'POST',
             url: './database/getAllEvents.php',
             data: ({
@@ -173,13 +170,38 @@ if (isset($_POST['evSubmit'])) {
             success: function(result) {
                 var count = 0;
                 designEvents(result[0], count);
-                // console.log(result);
             },
             error: function(xhr, status, error) {
                 var err = eval("(" + xhr.responseText + ")");
                 alert(err.Message)
             }
         });
+        }else{
+            var isPresident = <?php echo $_SESSION['isPresident']; ?>;
+            if(isPresident){
+                $('#createEventButton').show();
+            }
+            $.ajax({
+                type: 'POST',
+                url: './database/getAllEvents.php',
+                data: ({
+                    'clubID': clubID,
+                    'functionName': '',
+                    'eventID': null,
+                }),
+                dataType: 'json',
+                cache: false,
+                success: function(result) {
+                    var count = 0;
+                    designEvents(result[0], count);
+                    // console.log(result);
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message)
+                }
+            });
+        }
     });
 
     function eventDelete(e) {

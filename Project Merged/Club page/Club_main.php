@@ -1,17 +1,17 @@
 <?php
 require './database/accessDatabase.php';
 session_start();
+$_SESSION['userType'] = 'NOTguest';
 if(isset($_SESSION['userEmail'])){
     if(isLeader($_GET['Id'],$_SESSION['userEmail'])==1){
         $_SESSION['isPresident'] = 1;
     }
     else{
-        $_SESSION['']
+        $_SESSION['isPresident']=0;
     }
 }
 else{
-    $_SESSION['isPresident'] = 0;
-    $_SESSION['userEmail'] = '';
+    $_SESSION['userType'] = 'guest';
 }
 ?>
 
