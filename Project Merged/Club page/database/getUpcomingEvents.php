@@ -1,6 +1,6 @@
 <?php
     require "./accessDatabase.php";
-    $sql = "SELECT EventName as 'name', Date , (SELECT path 
+    $sql = "SELECT EventName AS 'name',Eventid,ClubId , Date , (SELECT path 
                                                  FROM eventphotos
                                                  WHERE photoID = eventDP AND eventID = events.eventid) as DP
             FROM events 
