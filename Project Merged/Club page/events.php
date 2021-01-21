@@ -156,8 +156,8 @@ if (isset($_POST['evSubmit'])) {
         window.history.replaceState(null, null, window.location.href);
     }
     var clubID = <?php echo $_GET['Id']; ?>;
-    var so = <?php echo $_GET['Id']; ?>;
-    var ed = <?php echo $_SESSION['isPresident']; ?>;
+    // var so = <?php echo $_GET['Id']; ?>;
+    // var ed = <?php echo $_SESSION['isPresident']; ?>;
     
     $(document).ready(function() {
         $.ajax({
@@ -212,7 +212,7 @@ if (isset($_POST['evSubmit'])) {
 
     function designEvents(dataArray, count) {
         var j = -1;
-        var makeColumn = 4;
+        var makeColumn = 3;
         for (var i = 0; i < dataArray.length; i++) {
             if (i % makeColumn == 0) {
                 j++;
@@ -232,10 +232,10 @@ if (isset($_POST['evSubmit'])) {
         cardBody.append('<h5 class="card-title">' + dataArray[count]['Name'] + '</h5>');
         cardBody.append('<p class="card-text">' + dataArray[count]["Date"] + '</p>');
         cardBody.append('<p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<a href=./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '><button class="btn" style="color:red;text-decoration: underline;">Read More..</button></a></p>');
-        var cardDown = td.append('<di ></di>')
+        var cardDown = td.append('<div ></div>')
         // var ed = <?php echo $_SESSION["isPresident"]; ?>;
         if( <?php echo $_SESSION["isPresident"]; ?>){
-            cardDown.append('<button class="btn btn-info btn-sm " style="margin: 5px " >Edit</button>');
+            cardDown.append('<a href= "./FullEvent.php?eID=' + dataArray[count]['eID'] + '&Id=' + clubID + '&tsk=edit" ><button class="btn btn-info btn-sm "  style="margin: 5px " >Edit</button></a>');
             cardDown.append('<button class="btn btn-info btn-sm" onClick=eventDelete(this) value = ' + dataArray[count]['eID'] + ' style="margin: 5px " >Delete</button>');
         }
         // $("#AllEventTableRow" + row).append('<td> <div class="card"><div class="card-body"><img class="card-img-top" src=./Upload/image/'+ dataArray[count]['DP'] +'  alt="Event photo not found"> <h5 class="card-title">' + dataArray[count]['Name'] + '</h5> <p class="card-text">' + dataArray[count]["Date"] + '</p><p class="card-text">' + dataArray[count]["Description"].substring(0, 70) + '<button class="btn" style="color:red;text-decoration: underline;"><a href=./FullEvent.php?eID='+dataArray[count]['eID']+'&Id='+clubID+'>Read More..</a></button></p></div><button class="btn btn-info btn-block" style="margin: 5px 0px 20px 0px" >Delete</button></td>');
