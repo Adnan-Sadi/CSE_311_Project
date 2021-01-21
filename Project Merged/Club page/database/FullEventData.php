@@ -11,11 +11,13 @@ if(strlen($userEmail)>4){
                 eventEdit($ClubID,$EventID,$_POST['newEventName'],$_POST['newDescription']);
         }
     }
-    if($_POST['function']=='followEvent'){
+    if($_POST['function'] == 'followEvent'){
         goingToEvent($UserID,$EventID);
+        // '<script> console.log("OK"); </script>';
     }
     else if($_POST['function']=='unFollowEvent'){
         NOTgoingToEvent($UserID,$EventID);
+        // echo $userEmail;
     }
     else{
         $MyArray = Array();

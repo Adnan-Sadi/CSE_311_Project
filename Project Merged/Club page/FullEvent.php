@@ -65,7 +65,7 @@ if(isset($_SESSION["userEmail"])){
             <div id="onlyText">
                 <button id="editEventButton" onclick="OnEditEvent()" style="display: none;" type="button" class="btn btn-outline-primary">Edit</button>
                 <button id="interested" style="display: none;" onclick="goingToEvent()" type="button" class="btn btn-outline-primary">Interested</button>
-                <button id="notInterested" onclick="NOTgoingToEvent()" type="button" class="btn btn-danger" style="display: none;">set to not Interested</button>
+                <button id="notInterested" onclick="notgoingToEvent()" type="button" class="btn btn-danger" style="display: none;">set to not Interested</button>
                 <!-- <button >Save</button> -->
                 <h1 style="text-align:center;margin-top:10px;" id="eventName"></h1>
                 <!-- <textarea  id="eventNameTextArea"></textarea> -->
@@ -268,8 +268,9 @@ if(isset($_SESSION["userEmail"])){
         success: function(result) {
             // $("#saveEventButton").hide();
             if(result[3]['isFollowing']){
-                $("#interested").toggle();
-                $("#notInterested").toggle();
+                $("#notInterested").show();
+            }else{
+                $("#interested").show();
             }
             // console.log(result);
             // console.log(result[3]['isFollowing']);
@@ -316,7 +317,7 @@ if(isset($_SESSION["userEmail"])){
                 'function': 'f',
                 'newEventName': newName,
                 'newDescription': newDescription,
-                'userEmail': userEmail,
+                'userEmail': UserEmail,
             }),
             dataType: 'json',
             error: function(xhr, status, error) {
@@ -328,6 +329,7 @@ if(isset($_SESSION["userEmail"])){
     function goingToEvent(){
         // $("#interested").css('background', 'red');
         // $("#interested").css('color', 'white');
+        console.log(clubID,eventID,UserEmail);
         $("#interested").toggle();
         $("#notInterested").toggle();
         $.ajax({
@@ -337,7 +339,7 @@ if(isset($_SESSION["userEmail"])){
                 'clubID': clubID,
                 'eventID': eventID,
                 'function': 'followEvent',
-                'userEmail': userEmail,
+                'userEmail': UserEmail,
             }),
             dataType: 'json',
             error: function(xhr, status, error) {
@@ -346,7 +348,7 @@ if(isset($_SESSION["userEmail"])){
             }
         });
     }
-    function NOTgoingToEvent(){
+    function notgoingToEvent(){
         // $("#interested").css('background', 'red');
         // $("#interested").css('color', 'white');
         $("#interested").toggle();
@@ -358,7 +360,7 @@ if(isset($_SESSION["userEmail"])){
                 'clubID': clubID,
                 'eventID': eventID,
                 'function': 'unFollowEvent',
-                'userEmail': userEmail,
+                'userEmail': UserEmail,
             }),
             dataType: 'json',
             error: function(xhr, status, error) {
